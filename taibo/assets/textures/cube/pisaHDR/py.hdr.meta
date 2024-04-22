@@ -1,0 +1,43 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "50206812-7d48-4ca1-94ab-f2e641d6fc36",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "50206812-7d48-4ca1-94ab-f2e641d6fc36@6c48a",
+      "displayName": "py",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "nearest",
+        "magfilter": "nearest",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "50206812-7d48-4ca1-94ab-f2e641d6fc36",
+        "visible": false
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": false,
+    "isRGBE": true,
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "50206812-7d48-4ca1-94ab-f2e641d6fc36@6c48a"
+  }
+}

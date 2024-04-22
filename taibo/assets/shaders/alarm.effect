@@ -1,0 +1,125 @@
+// Effect Syntax Guide: https://docs.cocos.com/creator/manual/zh/shader/index.html
+
+CCEffect %{
+  techniques:
+  - name: opaque
+    passes:
+    - vert: unlit-vs:vert
+      frag: unlit-fs:frag
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: &props
+        mainTexture:    { value: white }
+        mainColor:      { value: [1, 1, 1, 1], editor: { type: color } }
+        rotate: {value: 0}
+        alarmParams:    {value:[.1,.1,0,0]}
+}%
+
+CCProgram unlit-vs %{
+  precision highp float;
+  #include <legacy/input-standard>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/local-batch>
+  #include <legacy/input-standard>
+  #include <legacy/fog-vs>
+  #include <legacy/shadow-map-vs>
+
+  in vec4 a_color;
+  #if HAS_SECOND_UV
+    in vec2 a_texCoord1;
+  #endif
+
+  out vec3 v_position;
+  out vec3 v_normal;
+  out vec3 v_tangent;
+  out vec3 v_bitangent;
+  out vec2 v_uv;
+  out vec2 v_uv1;
+  out vec4 v_color;
+
+  uniform Constant {
+    vec4 mainColor;
+    vec4 alarmParams;
+    float rotate;
+  };
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    mat4 matWorld, matWorldIT;
+    CCGetWorldMatrixFull(matWorld, matWorldIT);
+
+    vec4 pos = matWorld * In.position;
+
+    v_position = pos.xyz;
+    v_normal = normalize((matWorldIT * vec4(In.normal, 0.0)).xyz);
+    v_tangent = normalize((matWorld * vec4(In.tangent.xyz, 0.0)).xyz);
+    v_bitangent = cross(v_normal, v_tangent) * In.tangent.w; // note the cross order
+
+    v_uv = a_texCoord;
+    #if HAS_SECOND_UV
+      v_uv1 = a_texCoord1;
+    #endif
+    v_color = a_color;
+
+    CC_TRANSFER_FOG(pos);
+    CC_TRANSFER_SHADOW(pos);
+
+    mat4 modelView = cc_matView * matWorld;
+
+    float rot = alarmParams.z;
+    float sx = alarmParams.x;
+    float sy = alarmParams.y;
+
+    float cos_rot = cos(rot);
+    float sin_rot = sin(rot);
+
+    modelView[0][0] = cos_rot * sx; 
+    modelView[0][1] = -sin_rot * sx; 
+    modelView[0][2] = 0.0; 
+    
+    modelView[1][0] = 0.0; 
+    modelView[1][1] = 0.0;
+    modelView[1][2] = 1.0; 
+
+    modelView[2][0] = -sin_rot * sy;
+    modelView[2][1] = -cos_rot * sy; 
+    modelView[2][2] = 0.0;
+
+    return cc_matProj * modelView * In.position;
+  }
+}%
+
+CCProgram unlit-fs %{
+  precision highp float;
+  #include <legacy/output>
+  #include <legacy/fog-fs>
+
+  in vec2 v_uv;
+  in vec3 v_position;
+
+  uniform sampler2D mainTexture;
+
+  uniform Constant {
+    vec4 mainColor;
+    vec4 alarmParams;
+    float rotate;
+  };
+
+  vec4 frag () {
+    vec4 col = mainColor * texture(mainTexture, v_uv);
+    vec2 alarm = v_uv;
+
+    alarm -= .5;
+    alarm *= 2.0;
+
+    col *= vec4(1.0 - length(alarm));
+    return col;
+  }
+}%
