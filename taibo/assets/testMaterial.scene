@@ -4644,11 +4644,11 @@
     "__type__": "cc.SkyboxInfo",
     "_envLightingType": 1,
     "_envmapHDR": {
-      "__uuid__": "af4b418c-fb73-4085-8c54-c287152e22e5@b47c0",
+      "__uuid__": "1a63d184-7488-42b4-8b0a-921c38fc24a8@b47c0",
       "__expectedType__": "cc.TextureCube"
     },
     "_envmap": {
-      "__uuid__": "af4b418c-fb73-4085-8c54-c287152e22e5@b47c0",
+      "__uuid__": "1a63d184-7488-42b4-8b0a-921c38fc24a8@b47c0",
       "__expectedType__": "cc.TextureCube"
     },
     "_envmapLDR": {
