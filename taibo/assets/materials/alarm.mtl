@@ -10,15 +10,27 @@
   },
   "_techIdx": 0,
   "_defines": [
-    {}
+    {
+      "USE_INSTANCING": true
+    }
   ],
   "_states": [
     {
       "rasterizerState": {},
       "depthStencilState": {},
       "blendState": {
+        "blendColor": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 0,
+          "b": 0,
+          "a": 255
+        },
         "targets": [
-          {}
+          {
+            "blendSrc": 1,
+            "blendDst": 1
+          }
         ]
       }
     }
@@ -27,10 +39,17 @@
     {
       "mainColor": {
         "__type__": "cc.Color",
-        "r": 0,
-        "g": 248,
-        "b": 248,
-        "a": 204
+        "r": 255,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      },
+      "alarmParams": {
+        "__type__": "cc.Vec4",
+        "x": 0.05,
+        "y": 0.05,
+        "z": 0,
+        "w": 0
       }
     }
   ]

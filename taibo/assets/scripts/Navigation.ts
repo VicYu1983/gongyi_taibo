@@ -1,14 +1,14 @@
-import { _decorator, CCFloat, Component, Event, EventKeyboard, EventMouse, Input, input, KeyCode, Node, Vec2, Vec3 } from 'cc';
+import { _decorator, Camera, CCFloat, Component, Event, EventKeyboard, EventMouse, Input, input, KeyCode, lerp, Node, Vec2, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Navigation')
 export class Navigation extends Component {
 
     @property(CCFloat)
-    public rotateSpeed: number = 0.1;
+    rotateSpeed: number = 0.1;
 
     @property(CCFloat)
-    public moveSpeed: number = 1.0;
+    moveSpeed: number = 1.0;
 
     private moveVelocity = new Vec3();
     private isMouseRightDown = false;
@@ -21,6 +21,8 @@ export class Navigation extends Component {
     private currentMousePos: Vec2 = null;
     private currentMousePosDiff: Vec2 = null;
     private isMouseMove = false;
+    private targetPosition: Vec3 = new Vec3();
+    private targetRotation: Vec3 = new Vec3();
 
     start() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -28,6 +30,16 @@ export class Navigation extends Component {
         input.on(Input.EventType.MOUSE_DOWN, this.onMouseDown, this);
         input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this);
 
+        this.targetPosition = this.node.getPosition();
+        this.node.getRotation().getEulerAngles(this.targetRotation);
+
+        // this.currentPosition = this.targetPosition.clone();
+        // this.currentRotation = this.targetRotation.clone();
+    }
+
+    setTargetPositionAndRotation(position: Vec3, rotation: Vec3) {
+        this.targetPosition = position;
+        this.targetRotation = rotation;
     }
 
     onMouseMove(e: EventMouse) {
@@ -102,6 +114,16 @@ export class Navigation extends Component {
         }
     }
 
+    updateCamera() {
+        const newPosition = this.targetPosition.clone().subtract(this.node.getPosition()).multiplyScalar(0.2).add(this.node.position);
+        this.node.setPosition(newPosition);
+
+        const euler = new Vec3();
+        this.node.getRotation().getEulerAngles(euler);
+        euler.lerp(this.targetRotation, .2);
+        this.node.setRotationFromEuler(euler);
+    }
+
     update(deltaTime: number) {
 
         this.moveVelocity.multiplyScalar(0);
@@ -127,18 +149,15 @@ export class Navigation extends Component {
 
         if (this.isMouseRightDown) {
 
-            const newPosition = this.node.getPosition().add(this.moveVelocity.multiplyScalar(this.moveSpeed));
-            this.node.setPosition(newPosition);
+            this.targetPosition.add(this.moveVelocity.multiplyScalar(this.moveSpeed));
 
             const isValidRotate = this.currentMousePosDiff != null && this.isMouseMove;
             if (isValidRotate) {
-                const euler = new Vec3();
-                this.node.getRotation().getEulerAngles(euler);
-
-                euler.add(new Vec3(this.currentMousePosDiff.y * this.rotateSpeed, -this.currentMousePosDiff.x * this.rotateSpeed, 0));
-                this.node.setRotationFromEuler(euler);
+                this.targetRotation.add(new Vec3(this.currentMousePosDiff.y * this.rotateSpeed, -this.currentMousePosDiff.x * this.rotateSpeed, 0));
             }
         }
+
+        this.updateCamera();
 
         this.isMouseMove = false;
     }

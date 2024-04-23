@@ -9,8 +9,8 @@ CCEffect %{
       blendState:
         targets:
         - blend: true
-          blendSrc: src_alpha
-          blendDst: one_minus_src_alpha
+          blendSrc: one
+          blendDst: one
           blendSrcAlpha: src_alpha
           blendDstAlpha: one_minus_src_alpha
       properties: &props
@@ -114,12 +114,17 @@ CCProgram unlit-fs %{
 
   vec4 frag () {
     vec4 col = mainColor * texture(mainTexture, v_uv);
-    vec2 alarm = v_uv;
+    vec2 alarm_uv = v_uv;
 
-    alarm -= .5;
-    alarm *= 2.0;
+    alarm_uv -= .5;
+    alarm_uv *= 2.0;
 
-    col *= vec4(1.0 - length(alarm));
+    float mask = 1.0 - length(alarm_uv);
+    alarm_uv *= 2.0;
+
+    float wave = fract(length(alarm_uv) - cc_time.x * .5);
+
+    col *= vec4(wave * mask);
     return col;
   }
 }%
