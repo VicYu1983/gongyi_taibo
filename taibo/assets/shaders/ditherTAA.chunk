@@ -1,0 +1,14 @@
+void ditherTAA(float screenWidth, float screenHeight, float ditherValue){
+  vec2 screenSize = vec2(screenWidth, screenHeight);
+  vec2 screenUV = gl_FragCoord.xy / screenSize;
+  screenUV = fract(screenUV * screenSize * .6);
+  screenUV -= 0.5;
+
+  float ditherMask = length(screenUV.x) + length(screenUV.y);
+  ditherMask *= 0.5;
+  ditherMask = clamp(ditherMask, 0., 1.);
+
+  if (ditherMask > ditherValue) {
+    discard;
+  }
+}

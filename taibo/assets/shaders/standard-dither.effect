@@ -294,7 +294,8 @@ CCProgram surface-fragment %{
 
     return Inverse;
   }
-
+  
+  #include <ditherTAA>
 
   vec4 SurfacesFragmentModifyBaseColorAndTransparency()
   {
@@ -329,18 +330,7 @@ CCProgram surface-fragment %{
 
     float ditherBlend = mix(1.0, scifi.a, ditherRange);
     
-    vec2 screenSize = vec2(1920.0, 1080.0);
-    vec2 screenUV = gl_FragCoord.xy / screenSize;
-    screenUV = fract(screenUV * screenSize * .6);
-    screenUV -= 0.5;
-
-    float ditherMask = length(screenUV.x) + length(screenUV.y);
-    ditherMask *= 0.5;
-    ditherMask = clamp(ditherMask, 0., 1.);
-
-    if (ditherMask > ditherBlend) {
-      discard;
-    }
+    ditherTAA(1280.0, 720.0, ditherBlend);
 
     #if USE_ALPHA_TEST
       if (baseColor.ALPHA_TEST_CHANNEL < albedoScaleAndCutoff.w) discard;
