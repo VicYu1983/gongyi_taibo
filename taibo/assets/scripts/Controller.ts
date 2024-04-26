@@ -1,4 +1,4 @@
-import { _decorator, Button, CCBoolean, Component, EventHandler, log, Node, Vec3 } from 'cc';
+import { _decorator, Button, Camera, CCBoolean, Component, director, EventHandler, log, Node, Vec3 } from 'cc';
 import { BuildingController } from './BuildingController';
 import { Navigation } from './Navigation';
 const { ccclass, property } = _decorator;
@@ -24,6 +24,9 @@ export class Controller extends Component {
     @property(Button)
     btnBackCamera: Button;
 
+    @property(Button)
+    btnScreen: Button;
+
     @property(Node)
     uiNode: Node;
 
@@ -42,6 +45,9 @@ export class Controller extends Component {
             },
             backToInit: function () {
                 self.onBackCameraClick();
+            },
+            getEquipmentScreenPos() {
+                return self.getEquipmentScreenPos();
             }
         }
 
@@ -53,8 +59,41 @@ export class Controller extends Component {
             this.btnScifi.node.on('click', this.onScifiClick, this);
             this.btnEquipment.node.on('click', this.onEquipmentClick, this);
             this.btnBackCamera.node.on('click', this.onBackCameraClick, this);
+            this.btnScreen.node.on('click', this.onScreenClick, this);
             // this.btnShowFloor.node.on('click', this.onShowFloorClick, this);
+
+            this.getEquipmentScreenPos();
         }
+    }
+
+    getEquipmentScreenPos() {
+
+        const locations:Vec3[] = [];
+        this.building.equipments.forEach((equipment, id, ary) => {
+
+            // log(equipment.node.name);
+
+            const worldPosition = equipment.node.worldPosition;
+
+            // log(worldPosition);
+
+            // 将世界坐标转换为屏幕坐标
+            const screenPosition = new Vec3();
+            // this.navigation.getComponent(Camera).convertToUINode(worldPosition, this.uiNode, screenPosition);
+            this.navigation.getComponent(Camera).worldToScreen(worldPosition, screenPosition);
+
+            // 调整屏幕坐标以匹配视图端口大小
+            // screenPosition.x = screenPosition.x * view.getVisibleSize().width / 2 + view.getVisibleSize().width / 2;
+            // screenPosition.y = screenPosition.y * view.getVisibleSize().height / 2 + view.getVisibleSize().height / 2;
+
+            locations.push(screenPosition);
+            console.log(`屏幕坐标: (${screenPosition.x}, ${screenPosition.y}, ${screenPosition.z})`);
+        });
+        return locations;
+    }
+
+    onScreenClick() {
+        this.getEquipmentScreenPos();
     }
 
     onBackCameraClick() {
