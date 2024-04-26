@@ -84,7 +84,7 @@ export class BuildingController extends Component {
 
         this.pathBuilder.node.active = false;
 
-        this.showAllEquipment(false);
+        // this.showAllEquipment(false);
     }
 
     changeToScifi() {
@@ -95,7 +95,7 @@ export class BuildingController extends Component {
 
         this.pathBuilder.node.active = true;
 
-        this.showAllEquipment(true);
+        // this.showAllEquipment(true);
     }
 
     update(deltaTime: number) {
