@@ -1053,7 +1053,7 @@
       "__type__": "cc.Vec3",
       "x": 0.325,
       "y": 0.43,
-      "z": -0.564
+      "z": -0.119
     },
     "_lrot": {
       "__type__": "cc.Quat",
@@ -1156,7 +1156,7 @@
       "__type__": "cc.Vec3",
       "x": 0.325,
       "y": 0.43,
-      "z": 0.461
+      "z": 0.177
     },
     "_lrot": {
       "__type__": "cc.Quat",
@@ -1568,6 +1568,7 @@
       "__id__": 0
     },
     "fileId": "4d3MNzSqpIMa11hj4VsYS5",
+    "instance": null,
     "targetOverrides": [
       {
         "__id__": 65
