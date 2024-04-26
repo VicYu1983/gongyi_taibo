@@ -11,7 +11,8 @@ CCEffect %{
         mainColor:                        { value: [1.0, 1.0, 1.0, 1.0], target: albedo, linear: true, editor: { displayName: Albedo, type: color } }
         albedoScale:                      { value: [1.0, 1.0, 1.0], target: albedoScaleAndCutoff.xyz }
         alphaThreshold:                   { value: 0.5, target: albedoScaleAndCutoff.w, editor: { parent: USE_ALPHA_TEST, slide: true, range: [0, 1.0], step: 0.001 } }
-        buildingHeight:                   { value: 1.0, target: ditherParams.r, editor: { slide: true, range: [0.0, 3.0], step: 0.001 } }
+        buildingHeight:                   { value: 0.0, target: ditherParams.r, editor: { slide: true, range: [0.0, 3.0], step: 0.001 } }
+        buildingFloor:                    { value: 0.0, target: ditherParams.g, editor: { slide: true, range: [-3.0, 3.0], step: 0.001 } }
         occlusion:                        { value: 0.0, target: pbrParams.x, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
         roughness:                        { value: 0.5, target: pbrParams.y, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
         metallic:                         { value: 0.0, target: pbrParams.z, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
@@ -325,7 +326,7 @@ CCProgram surface-fragment %{
     float grid = gridX + gridZ;
     vec4 scifi = vec4(vec3(0.3, 0.3, 1.0) + grid, cameraDotNormal + grid);
 
-    float ditherRange = (1.0 - (FSInput_worldPos.y / ditherParams.r));
+    float ditherRange = (1.0 - ((FSInput_worldPos.y + ditherParams.g) / (ditherParams.r + ditherParams.g)));
     ditherRange = clamp(ditherRange, 0.0, 1.0);
 
     float ditherBlend = mix(1.0, scifi.a, ditherRange);

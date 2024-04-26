@@ -23,6 +23,8 @@ export class Navigation extends Component {
     private isMouseMove = false;
     private targetPosition: Vec3 = new Vec3();
     private targetRotation: Vec3 = new Vec3();
+    private initCameraPosition;
+    private initCameraRotation;
 
     start() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -33,8 +35,16 @@ export class Navigation extends Component {
         this.targetPosition = this.node.getPosition();
         this.node.getRotation().getEulerAngles(this.targetRotation);
 
+        this.initCameraPosition = this.targetPosition.clone();
+        this.initCameraRotation = this.targetRotation.clone();
+
         // this.currentPosition = this.targetPosition.clone();
         // this.currentRotation = this.targetRotation.clone();
+    }
+
+    backToInit(){
+        this.targetPosition = this.initCameraPosition.clone();
+        this.targetRotation = this.initCameraRotation.clone();
     }
 
     setTargetPositionAndRotation(position: Vec3, rotation: Vec3) {

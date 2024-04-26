@@ -49,14 +49,28 @@ export class BuildingController extends Component {
         });
     }
 
-    getEquipment(id:number = 0){
+    hideAllFloor() {
+        this.buildingFloor.forEach((floor, id, ary) => {
+            floor.active = false;
+        });
+    }
+
+    showFloor(id: number = 0) {
+        this.hideAllFloor();
+        this.buildingFloor[id].active = true;
+    }
+
+    getEquipment(id: number = 0) {
         return this.equipments[id];
     }
 
     updateMaterialParams() {
         this.buildingFloor.forEach((node, id, ary) => {
             node.getComponent(MeshRenderer).materials.forEach((material, id, matAry) => {
-                material.setProperty("buildingHeight", this.buildingHeight);
+                // log(material.effectName)
+                if (material.effectName == "../shaders/standard-dither") {
+                    material.setProperty("buildingHeight", this.buildingHeight);
+                }
             });
         });
         this.floor.getComponent(MeshRenderer).material.setProperty("emissive", this.currentFloorEmissive);
