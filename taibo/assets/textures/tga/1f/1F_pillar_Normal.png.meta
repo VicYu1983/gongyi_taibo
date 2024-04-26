@@ -2,18 +2,18 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "6a48c4e2-57c7-4d38-9536-2333305e72f5",
+  "uuid": "28b868d9-0358-4972-ab4e-ab6f96842ed8",
   "files": [
     ".json",
     ".png"
   ],
   "subMetas": {
-    "6c48a": {
+    "3c318": {
       "importer": "texture",
-      "uuid": "6a48c4e2-57c7-4d38-9536-2333305e72f5@6c48a",
-      "displayName": "external-ground_OcclusionRoughnessMetallic",
-      "id": "6c48a",
-      "name": "texture",
+      "uuid": "28b868d9-0358-4972-ab4e-ab6f96842ed8@3c318",
+      "displayName": "1F_pillar_Normal",
+      "id": "3c318",
+      "name": "normalMap",
       "userData": {
         "wrapModeS": "repeat",
         "wrapModeT": "repeat",
@@ -22,8 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6a48c4e2-57c7-4d38-9536-2333305e72f5",
-        "visible": false
+        "imageUuidOrDatabaseUri": "28b868d9-0358-4972-ab4e-ab6f96842ed8"
       },
       "ver": "1.0.22",
       "imported": true,
@@ -34,9 +33,9 @@
     }
   },
   "userData": {
-    "hasAlpha": false,
-    "type": "texture",
+    "hasAlpha": true,
+    "type": "normal map",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "6a48c4e2-57c7-4d38-9536-2333305e72f5@6c48a"
+    "redirect": "28b868d9-0358-4972-ab4e-ab6f96842ed8@3c318"
   }
 }

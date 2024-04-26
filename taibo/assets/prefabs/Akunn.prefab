@@ -145,7 +145,7 @@
       "__id__": 2
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 4
@@ -427,7 +427,7 @@
       "__id__": 2
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 14
@@ -576,7 +576,7 @@
       "__id__": 2
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 19
@@ -709,7 +709,7 @@
       "__id__": 2
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 24
@@ -1093,7 +1093,7 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 215,
+      "g": 195,
       "b": 88,
       "a": 255
     },
@@ -1196,7 +1196,7 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 215,
+      "g": 188,
       "b": 88,
       "a": 255
     },
@@ -1299,7 +1299,7 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 215,
+      "g": 188,
       "b": 88,
       "a": 255
     },
@@ -1568,7 +1568,6 @@
       "__id__": 0
     },
     "fileId": "4d3MNzSqpIMa11hj4VsYS5",
-    "instance": null,
     "targetOverrides": [
       {
         "__id__": 65
