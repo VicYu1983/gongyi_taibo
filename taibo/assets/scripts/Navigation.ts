@@ -159,7 +159,7 @@ export class Navigation extends Component {
 
         if (this.isMouseRightDown) {
 
-            this.targetPosition.add(this.moveVelocity.multiplyScalar(this.moveSpeed));
+            this.targetPosition.add(this.moveVelocity.multiplyScalar(deltaTime * this.moveSpeed));
 
             const isValidRotate = this.currentMousePosDiff != null && this.isMouseMove;
             if (isValidRotate) {

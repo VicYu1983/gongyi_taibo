@@ -68,7 +68,7 @@ export class Controller extends Component {
 
     getEquipmentScreenPos() {
 
-        const locations:Vec3[] = [];
+        const locations: Vec3[] = [];
         this.building.equipments.forEach((equipment, id, ary) => {
 
             // log(equipment.node.name);
@@ -87,7 +87,7 @@ export class Controller extends Component {
             // screenPosition.y = screenPosition.y * view.getVisibleSize().height / 2 + view.getVisibleSize().height / 2;
 
             locations.push(screenPosition);
-            console.log(`屏幕坐标: (${screenPosition.x}, ${screenPosition.y}, ${screenPosition.z})`);
+            // console.log(`屏幕坐标: (${screenPosition.x}, ${screenPosition.y}, ${screenPosition.z})`);
         });
         return locations;
     }
@@ -122,7 +122,11 @@ export class Controller extends Component {
     }
 
     update(deltaTime: number) {
-
+        if (window["html"] != undefined && window["html"]["update"] != undefined) {
+            window["html"]["update"]({
+                equipments: this.getEquipmentScreenPos()
+            });
+        }
     }
 }
 
