@@ -8,12 +8,12 @@
     ".png"
   ],
   "subMetas": {
-    "6c48a": {
+    "3c318": {
       "importer": "texture",
-      "uuid": "fcb8e334-a94b-4418-bddf-c32b783a00a1@6c48a",
+      "uuid": "fcb8e334-a94b-4418-bddf-c32b783a00a1@3c318",
       "displayName": "1F_stair_Normal",
-      "id": "6c48a",
-      "name": "texture",
+      "id": "3c318",
+      "name": "normalMap",
       "userData": {
         "wrapModeS": "repeat",
         "wrapModeT": "repeat",
@@ -22,8 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "fcb8e334-a94b-4418-bddf-c32b783a00a1",
-        "visible": false
+        "imageUuidOrDatabaseUri": "fcb8e334-a94b-4418-bddf-c32b783a00a1"
       },
       "ver": "1.0.22",
       "imported": true,
@@ -35,8 +34,8 @@
   },
   "userData": {
     "hasAlpha": false,
-    "type": "texture",
+    "type": "normal map",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "fcb8e334-a94b-4418-bddf-c32b783a00a1@6c48a"
+    "redirect": "fcb8e334-a94b-4418-bddf-c32b783a00a1@3c318"
   }
 }
