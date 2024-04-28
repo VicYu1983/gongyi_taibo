@@ -16,7 +16,6 @@ export class Equipment extends Component {
     @property(MeshRenderer)
     alarmIcon: MeshRenderer;
 
-
     alarmColor: Color = new Color(255, 0, 0, 255);
     normalColor: Color = new Color(0, 255, 0, 255);
     warnColor: Color = new Color(255, 255, 0, 255);

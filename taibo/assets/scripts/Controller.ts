@@ -1,6 +1,8 @@
 import { _decorator, Button, Camera, CCBoolean, Component, director, EventHandler, log, Node, Vec3 } from 'cc';
 import { BuildingController } from './BuildingController';
 import { Navigation } from './Navigation';
+import { EquipmentIcon } from './EquipmentIcon';
+import { EquipmentModel } from './EquipmentModel';
 const { ccclass, property } = _decorator;
 
 @ccclass('Controller')
@@ -26,6 +28,12 @@ export class Controller extends Component {
 
     @property(Button)
     btnScreen: Button;
+
+    @property([Node])
+    btnEquipmentIcon: Node[] = [];
+
+
+
 
     @property(Node)
     uiNode: Node;
@@ -55,15 +63,26 @@ export class Controller extends Component {
             this.uiNode.active = false;
             this.building.showFloor(0);
         } else {
+
+
             this.btnNormal.node.on('click', this.onNormalClick, this);
             this.btnScifi.node.on('click', this.onScifiClick, this);
             this.btnEquipment.node.on('click', this.onEquipmentClick, this);
             this.btnBackCamera.node.on('click', this.onBackCameraClick, this);
             this.btnScreen.node.on('click', this.onScreenClick, this);
+
+            this.btnEquipmentIcon.forEach((icon, id, ary) => {
+                icon.on("onEqupimentIconClick", this.onBtnEquipmentIconClick, this);
+            });
+
             // this.btnShowFloor.node.on('click', this.onShowFloorClick, this);
 
-            this.getEquipmentScreenPos();
+            // this.getEquipmentScreenPos();
         }
+    }
+
+    onBtnEquipmentIconClick(model:EquipmentModel) {
+        log(model.id);
     }
 
     getEquipmentScreenPos() {
@@ -122,11 +141,11 @@ export class Controller extends Component {
     }
 
     update(deltaTime: number) {
-        if (window["html"] != undefined && window["html"]["update"] != undefined) {
-            window["html"]["update"]({
-                equipments: this.getEquipmentScreenPos()
-            });
-        }
+        // if (window["html"] != undefined && window["html"]["update"] != undefined) {
+        //     window["html"]["update"]({
+        //         equipments: this.getEquipmentScreenPos()
+        //     });
+        // }
     }
 }
 
