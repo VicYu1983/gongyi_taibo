@@ -2,15 +2,15 @@
   "ver": "2.3.12",
   "importer": "fbx",
   "imported": true,
-  "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d",
+  "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a",
   "files": [],
   "subMetas": {
-    "c9523": {
+    "bf62e": {
       "importer": "gltf-mesh",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@c9523",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@bf62e",
       "displayName": "",
-      "id": "c9523",
-      "name": "物件_37.010.mesh",
+      "id": "bf62e",
+      "name": "物件_196.001.mesh",
       "userData": {
         "gltfIndex": 0,
         "triangleCount": 38305
@@ -23,12 +23,12 @@
       ],
       "subMetas": {}
     },
-    "e1393": {
+    "9c99d": {
       "importer": "gltf-material",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@e1393",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@9c99d",
       "displayName": "",
-      "id": "e1393",
-      "name": "floor.001.material",
+      "id": "9c99d",
+      "name": "indoor wall 01.001.material",
       "userData": {
         "gltfIndex": 0
       },
@@ -39,12 +39,12 @@
       ],
       "subMetas": {}
     },
-    "9c99d": {
+    "52eea": {
       "importer": "gltf-material",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@9c99d",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@52eea",
       "displayName": "",
-      "id": "9c99d",
-      "name": "indoor wall 01.001.material",
+      "id": "52eea",
+      "name": "材质_4.material",
       "userData": {
         "gltfIndex": 1
       },
@@ -55,12 +55,12 @@
       ],
       "subMetas": {}
     },
-    "52eea": {
+    "e1393": {
       "importer": "gltf-material",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@52eea",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@e1393",
       "displayName": "",
-      "id": "52eea",
-      "name": "材质_4.material",
+      "id": "e1393",
+      "name": "floor.001.material",
       "userData": {
         "gltfIndex": 2
       },
@@ -73,7 +73,7 @@
     },
     "4aa32": {
       "importer": "gltf-material",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@4aa32",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@4aa32",
       "displayName": "",
       "id": "4aa32",
       "name": "out wall.001.material",
@@ -89,7 +89,7 @@
     },
     "dfae8": {
       "importer": "gltf-material",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@dfae8",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@dfae8",
       "displayName": "",
       "id": "dfae8",
       "name": "door_wood.001.material",
@@ -105,7 +105,7 @@
     },
     "c68fc": {
       "importer": "gltf-material",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@c68fc",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@c68fc",
       "displayName": "",
       "id": "c68fc",
       "name": "metal.001.material",
@@ -121,7 +121,7 @@
     },
     "67ae3": {
       "importer": "gltf-material",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@67ae3",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@67ae3",
       "displayName": "",
       "id": "67ae3",
       "name": "glass.001.material",
@@ -137,7 +137,7 @@
     },
     "9605b": {
       "importer": "gltf-scene",
-      "uuid": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@9605b",
+      "uuid": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@9605b",
       "displayName": "",
       "id": "9605b",
       "name": "XU02.prefab",
@@ -157,7 +157,7 @@
     "fbx": {
       "smartMaterialEnabled": true
     },
-    "redirect": "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@9605b",
+    "redirect": "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@9605b",
     "lods": {
       "enable": false,
       "hasBuiltinLOD": false,
@@ -178,21 +178,21 @@
     },
     "assetFinder": {
       "meshes": [
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@c9523"
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@bf62e"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@e1393",
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@9c99d",
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@52eea",
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@4aa32",
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@dfae8",
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@c68fc",
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@67ae3"
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@9c99d",
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@52eea",
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@e1393",
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@4aa32",
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@dfae8",
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@c68fc",
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@67ae3"
       ],
       "scenes": [
-        "a8a96b9e-4249-4dd1-874d-1c79f607fa9d@9605b"
+        "bdee1ad0-d72f-49b1-b5ff-3ee12a2b723a@9605b"
       ]
     }
   }

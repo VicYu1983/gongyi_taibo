@@ -2,17 +2,17 @@
   "ver": "2.3.12",
   "importer": "fbx",
   "imported": true,
-  "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e",
+  "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b",
   "files": [],
   "subMetas": {
     "52860": {
       "importer": "gltf-material",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@52860",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@52860",
       "displayName": "",
       "id": "52860",
       "name": "out wall.material",
       "userData": {
-        "gltfIndex": 2
+        "gltfIndex": 0
       },
       "ver": "1.0.14",
       "imported": true,
@@ -21,12 +21,12 @@
       ],
       "subMetas": {}
     },
-    "e800b": {
+    "60144": {
       "importer": "gltf-mesh",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@e800b",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@60144",
       "displayName": "",
-      "id": "e800b",
-      "name": "物件_144.009.mesh",
+      "id": "60144",
+      "name": "物件_78.mesh",
       "userData": {
         "gltfIndex": 0,
         "triangleCount": 106927
@@ -39,25 +39,9 @@
       ],
       "subMetas": {}
     },
-    "16ef1": {
-      "importer": "gltf-material",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@16ef1",
-      "displayName": "",
-      "id": "16ef1",
-      "name": "metal.material",
-      "userData": {
-        "gltfIndex": 0
-      },
-      "ver": "1.0.14",
-      "imported": true,
-      "files": [
-        ".json"
-      ],
-      "subMetas": {}
-    },
     "737b6": {
       "importer": "gltf-material",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@737b6",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@737b6",
       "displayName": "",
       "id": "737b6",
       "name": "indoor wall 01.material",
@@ -71,9 +55,25 @@
       ],
       "subMetas": {}
     },
+    "16ef1": {
+      "importer": "gltf-material",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@16ef1",
+      "displayName": "",
+      "id": "16ef1",
+      "name": "metal.material",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
     "56ce1": {
       "importer": "gltf-material",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@56ce1",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@56ce1",
       "displayName": "",
       "id": "56ce1",
       "name": "glass.material",
@@ -89,7 +89,7 @@
     },
     "ba6c0": {
       "importer": "gltf-material",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@ba6c0",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@ba6c0",
       "displayName": "",
       "id": "ba6c0",
       "name": "floor.material",
@@ -105,7 +105,7 @@
     },
     "7674a": {
       "importer": "gltf-material",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@7674a",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@7674a",
       "displayName": "",
       "id": "7674a",
       "name": "door_wood.material",
@@ -121,7 +121,7 @@
     },
     "9b29c": {
       "importer": "gltf-material",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@9b29c",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@9b29c",
       "displayName": "",
       "id": "9b29c",
       "name": "材质_226.material",
@@ -137,7 +137,7 @@
     },
     "10fda": {
       "importer": "gltf-scene",
-      "uuid": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@10fda",
+      "uuid": "5f6060b1-9389-40a2-b107-c94fe844961b@10fda",
       "displayName": "",
       "id": "10fda",
       "name": "XU01.prefab",
@@ -157,7 +157,7 @@
     "fbx": {
       "smartMaterialEnabled": true
     },
-    "redirect": "c2441b63-222a-4155-9ebb-0ff19b55bc9e@10fda",
+    "redirect": "5f6060b1-9389-40a2-b107-c94fe844961b@10fda",
     "lods": {
       "enable": false,
       "hasBuiltinLOD": false,
@@ -178,21 +178,21 @@
     },
     "assetFinder": {
       "meshes": [
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@e800b"
+        "5f6060b1-9389-40a2-b107-c94fe844961b@60144"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@16ef1",
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@737b6",
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@52860",
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@56ce1",
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@ba6c0",
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@7674a",
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@9b29c"
+        "5f6060b1-9389-40a2-b107-c94fe844961b@52860",
+        "5f6060b1-9389-40a2-b107-c94fe844961b@737b6",
+        "5f6060b1-9389-40a2-b107-c94fe844961b@16ef1",
+        "5f6060b1-9389-40a2-b107-c94fe844961b@56ce1",
+        "5f6060b1-9389-40a2-b107-c94fe844961b@ba6c0",
+        "5f6060b1-9389-40a2-b107-c94fe844961b@7674a",
+        "5f6060b1-9389-40a2-b107-c94fe844961b@9b29c"
       ],
       "scenes": [
-        "c2441b63-222a-4155-9ebb-0ff19b55bc9e@10fda"
+        "5f6060b1-9389-40a2-b107-c94fe844961b@10fda"
       ]
     }
   }

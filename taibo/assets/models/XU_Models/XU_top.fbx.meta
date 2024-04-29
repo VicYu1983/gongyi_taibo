@@ -2,15 +2,31 @@
   "ver": "2.3.12",
   "importer": "fbx",
   "imported": true,
-  "uuid": "8db594ee-16ff-432c-828f-e269255ba13a",
+  "uuid": "9020967b-7f1f-4ce5-bdfe-01f28319ef4f",
   "files": [],
   "subMetas": {
-    "89bcd": {
-      "importer": "gltf-mesh",
-      "uuid": "8db594ee-16ff-432c-828f-e269255ba13a@89bcd",
+    "52860": {
+      "importer": "gltf-material",
+      "uuid": "9020967b-7f1f-4ce5-bdfe-01f28319ef4f@52860",
       "displayName": "",
-      "id": "89bcd",
-      "name": "物件_208.014.mesh",
+      "id": "52860",
+      "name": "out wall.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3d097": {
+      "importer": "gltf-mesh",
+      "uuid": "9020967b-7f1f-4ce5-bdfe-01f28319ef4f@3d097",
+      "displayName": "",
+      "id": "3d097",
+      "name": "物件_11.mesh",
       "userData": {
         "gltfIndex": 0,
         "triangleCount": 39788
@@ -23,25 +39,9 @@
       ],
       "subMetas": {}
     },
-    "a692c": {
-      "importer": "gltf-material",
-      "uuid": "8db594ee-16ff-432c-828f-e269255ba13a@a692c",
-      "displayName": "",
-      "id": "a692c",
-      "name": "out wall.005.material",
-      "userData": {
-        "gltfIndex": 0
-      },
-      "ver": "1.0.14",
-      "imported": true,
-      "files": [
-        ".json"
-      ],
-      "subMetas": {}
-    },
     "53f43": {
       "importer": "gltf-scene",
-      "uuid": "8db594ee-16ff-432c-828f-e269255ba13a@53f43",
+      "uuid": "9020967b-7f1f-4ce5-bdfe-01f28319ef4f@53f43",
       "displayName": "",
       "id": "53f43",
       "name": "XU_top.prefab",
@@ -61,7 +61,7 @@
     "fbx": {
       "smartMaterialEnabled": true
     },
-    "redirect": "8db594ee-16ff-432c-828f-e269255ba13a@53f43",
+    "redirect": "9020967b-7f1f-4ce5-bdfe-01f28319ef4f@53f43",
     "lods": {
       "enable": false,
       "hasBuiltinLOD": false,
@@ -82,15 +82,15 @@
     },
     "assetFinder": {
       "meshes": [
-        "8db594ee-16ff-432c-828f-e269255ba13a@89bcd"
+        "9020967b-7f1f-4ce5-bdfe-01f28319ef4f@3d097"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [
-        "8db594ee-16ff-432c-828f-e269255ba13a@a692c"
+        "9020967b-7f1f-4ce5-bdfe-01f28319ef4f@52860"
       ],
       "scenes": [
-        "8db594ee-16ff-432c-828f-e269255ba13a@53f43"
+        "9020967b-7f1f-4ce5-bdfe-01f28319ef4f@53f43"
       ]
     }
   }
