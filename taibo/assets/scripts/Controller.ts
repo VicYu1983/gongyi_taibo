@@ -2,38 +2,24 @@ import { _decorator, Button, Camera, CCBoolean, Component, director, EventHandle
 import { BuildingController } from './BuildingController';
 import { Navigation } from './Navigation';
 import { EquipmentIcon } from './EquipmentIcon';
-import { EquipmentModel } from './EquipmentModel';
+import { EquipmentBelong, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
+import { Equipment } from './Equipment';
+import { Model } from './Model';
 const { ccclass, property } = _decorator;
+const { requireComponent } = _decorator;
 
 @ccclass('Controller')
+@requireComponent(Model)
 export class Controller extends Component {
 
     @property(BuildingController)
-    building: BuildingController;
+    buildingTaibo: BuildingController;
+
+    @property(BuildingController)
+    buildingXuku: BuildingController;
 
     @property(Navigation)
     navigation: Navigation;
-
-    @property(Button)
-    btnNormal: Button;
-
-    @property(Button)
-    btnScifi: Button;
-
-    @property(Button)
-    btnEquipment: Button;
-
-    @property(Button)
-    btnBackCamera: Button;
-
-    @property(Button)
-    btnScreen: Button;
-
-    @property([Node])
-    btnEquipmentIcon: Node[] = [];
-
-
-
 
     @property(Node)
     uiNode: Node;
@@ -41,18 +27,23 @@ export class Controller extends Component {
     @property(CCBoolean)
     isBuild: Boolean = false;
 
-    // @property(Button)
-    // btnShowFloor:Button;
+    private building: BuildingController;
 
     start() {
 
+        this.building = this.buildingTaibo;
+
         const self = this;
+
         window["cocos"] = {
             openFloor: function (id = 0) {
-                self.building.showFloor(id);
+                this.building.openBuilding(id);
             },
             backToInit: function () {
                 self.onBackCameraClick();
+            },
+            showAirEquipment() {
+                self.building.showAllEquipment(true);
             },
             getEquipmentScreenPos() {
                 return self.getEquipmentScreenPos();
@@ -61,28 +52,51 @@ export class Controller extends Component {
 
         if (this.isBuild) {
             this.uiNode.active = false;
-            this.building.showFloor(0);
+            this.callWeb("cocosReady", null);
         } else {
 
-
-            this.btnNormal.node.on('click', this.onNormalClick, this);
-            this.btnScifi.node.on('click', this.onScifiClick, this);
-            this.btnEquipment.node.on('click', this.onEquipmentClick, this);
-            this.btnBackCamera.node.on('click', this.onBackCameraClick, this);
-            this.btnScreen.node.on('click', this.onScreenClick, this);
-
-            this.btnEquipmentIcon.forEach((icon, id, ary) => {
-                icon.on("onEqupimentIconClick", this.onBtnEquipmentIconClick, this);
-            });
-
-            // this.btnShowFloor.node.on('click', this.onShowFloorClick, this);
-
-            // this.getEquipmentScreenPos();
+            this.changeToTaibo();
         }
     }
 
-    onBtnEquipmentIconClick(model:EquipmentModel) {
-        log(model.id);
+    changeToCarbon() {
+        this.building.changeEquipmentType(EquipmentType.CARBON);
+    }
+
+    changeToAir() {
+        this.building.changeEquipmentType(EquipmentType.AIR);
+    }
+
+    changeFloorB1F(floor: number) {
+        this.building.openBuilding(0);
+    }
+
+    changeFloorN1F(floor: number) {
+        this.building.openBuilding(1);
+    }
+
+    changeFloorN2F(floor: number) {
+        this.building.openBuilding(2);
+    }
+
+    changeToTaibo() {
+        this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.TAIBO);
+        this.buildingXuku.changeEquipmentBelong(EquipmentBelong.TAIBO);
+
+        this.buildingTaibo.openBuilding(1);
+        this.buildingXuku.closeBuilding();
+
+        this.building = this.buildingTaibo;
+    }
+
+    changeToXuku() {
+        this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.XUKU);
+        this.buildingXuku.changeEquipmentBelong(EquipmentBelong.XUKU);
+
+        this.buildingXuku.openBuilding(0);
+        this.buildingTaibo.closeBuilding();
+
+        this.building = this.buildingXuku;
     }
 
     getEquipmentScreenPos() {
@@ -111,6 +125,7 @@ export class Controller extends Component {
         return locations;
     }
 
+
     onScreenClick() {
         this.getEquipmentScreenPos();
     }
@@ -124,7 +139,7 @@ export class Controller extends Component {
     }
 
     onEquipmentClick() {
-        const equipment = this.building.getEquipment(1);
+        const equipment = this.building.getEquipment(0);
 
         const pos = equipment.node.getPosition();
         const rot = new Vec3();
@@ -146,6 +161,12 @@ export class Controller extends Component {
         //         equipments: this.getEquipmentScreenPos()
         //     });
         // }
+    }
+
+    callWeb(method, params) {
+        if (window["html"] != undefined && window["html"][method] != undefined) {
+            window["html"][method](params);
+        }
     }
 }
 

@@ -4,6 +4,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Navigation')
 export class Navigation extends Component {
 
+    static ON_NAVIGATION_CHANGE = "ON_NAVIGATION_CHANGE";
+
     @property(CCFloat)
     rotateSpeed: number = 0.1;
 
@@ -37,12 +39,13 @@ export class Navigation extends Component {
 
         this.initCameraPosition = this.targetPosition.clone();
         this.initCameraRotation = this.targetRotation.clone();
-
-        // this.currentPosition = this.targetPosition.clone();
-        // this.currentRotation = this.targetRotation.clone();
     }
 
-    backToInit(){
+    isNavigation() {
+        return this.isMouseRightDown;
+    }
+
+    backToInit() {
         this.targetPosition = this.initCameraPosition.clone();
         this.targetRotation = this.initCameraRotation.clone();
     }
@@ -66,15 +69,26 @@ export class Navigation extends Component {
         if (isRightClick) {
             input.on(Input.EventType.MOUSE_MOVE, this.onMouseMove, this);
             this.isMouseRightDown = true;
+
+            this.node.emit(Navigation.ON_NAVIGATION_CHANGE, true);
         }
     }
 
     onMouseUp(e: EventMouse) {
         const isRightClick = e.getButton() === EventMouse.BUTTON_RIGHT;
         if (isRightClick) {
+            this.currentMousePos = null;
+
             input.off(Input.EventType.MOUSE_MOVE, this.onMouseMove, this);
             this.isMouseRightDown = false;
-            this.currentMousePos = null;
+            this.isForward = false;
+            this.isLeft = false;
+            this.isBack = false;
+            this.isRight = false;
+            this.isUp = false;
+            this.isDown = false;
+
+            this.node.emit(Navigation.ON_NAVIGATION_CHANGE, false);
         }
     }
 

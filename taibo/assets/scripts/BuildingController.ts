@@ -1,6 +1,10 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
+import { FloorController } from './FloorController';
+import { PPController } from './PPController';
+import { EquipmentIcon } from './EquipmentIcon';
+import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -13,40 +17,79 @@ export class BuildingController extends Component {
     @property([Equipment])
     equipments: Equipment[] = [];
 
-    @property(CCFloat)
-    buildingTargetHeight = 0.0;
+    @property([Node])
+    btnEquipmentIcon: Node[] = [];
 
-    @property(Node)
-    postProcess: Node = null;
+    @property(PPController)
+    postProcess: PPController = null;
 
     @property(ParticleSystem)
     particle: ParticleSystem;
 
-    @property(Node)
-    floor: Node;
+    @property(FloorController)
+    floor: FloorController;
 
-    @property(PathMeshBuilder)
-    pathBuilder: PathMeshBuilder;
+    @property(CCFloat)
+    buildingTargetHeight = 0.0;
 
-    buildingHeight: number = 0;
-    targetBloom: number = .3;
-    currentBloom: number = .3;
+    @property({ type: Enum(EquipmentType) })
+    currentType: EquipmentType;
 
-    targetFloorEmissive = 0.0;
-    currentFloorEmissive = 0.0;
+    @property({ type: Enum(EquipmentFloor) })
+    currentFloor: EquipmentFloor;
+
+    @property({ type: Enum(EquipmentBelong) })
+    currentBelong: EquipmentBelong;
+
+    private buildingHeight: number = 0;
 
     start() {
         this.changeToNormal();
+
+        this.btnEquipmentIcon.forEach((icon, id, ary) => {
+            icon.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
+        });
+
+        // this.updateEquipmentShow();
+    }
+
+    onBtnEquipmentIconClick(model: EquipmentModel) {
+        model.setState(EquipmentState.ALARM);
     }
 
     // protected onLoad(): void {
     //     BatchingUtility.batchStaticModel(this.node, this.node);
     // }
 
+    openBuilding(floor: number = 0) {
+        this.showFloor(floor);
+        this.changeEquipmentFloor(floor);
+    }
+
+    closeBuilding() {
+        this.hideAllFloor();
+        this.showAllEquipment(false);
+    }
+
     showAllEquipment(show: boolean) {
         this.equipments.forEach((equipment, id, ary) => {
-            equipment.node.active = show;
+            equipment.getModel().setShow(show);
         });
+    }
+
+    changeEquipmentType(type: EquipmentType) {
+        this.currentType = type;
+        this.updateEquipmentShow();
+    }
+
+    changeEquipmentFloor(floor: EquipmentFloor) {
+        this.currentFloor = floor;
+        this.updateEquipmentShow();
+    }
+
+    changeEquipmentBelong(belong: EquipmentBelong) {
+        this.currentBelong = belong;
+        this.updateEquipmentShow();
     }
 
     hideAllFloor() {
@@ -60,51 +103,56 @@ export class BuildingController extends Component {
         this.buildingFloor[id].active = true;
     }
 
+    // showEquipment(floor: number = 0) {
+    //     this.equipments.forEach((equipment, id, ary) => {
+    //         if (equipment.getModel().floor === floor) {
+    //             equipment.getModel().setShow(true);
+    //         } else {
+    //             equipment.getModel().setShow(false);
+    //         }
+    //     });
+    // }
+
     getEquipment(id: number = 0) {
         return this.equipments[id];
     }
 
-    updateMaterialParams() {
+    private updateMaterialParams() {
         this.buildingFloor.forEach((node, id, ary) => {
             node.getComponent(MeshRenderer).materials.forEach((material, id, matAry) => {
-                // log(material.effectName)
                 if (material.effectName == "../shaders/standard-dither") {
                     material.setProperty("buildingHeight", this.buildingHeight);
                 }
             });
         });
-        this.floor.getComponent(MeshRenderer).material.setProperty("emissive", this.currentFloorEmissive);
+    }
+
+    private updateEquipmentShow() {
+        this.equipments.forEach((equipment, id, ary) => {
+            const isBelong = equipment.getModel().belong === this.currentBelong;
+            const isFloor = equipment.getModel().floor === this.currentFloor;
+            const isType = equipment.getModel().type === this.currentType;
+            equipment.getModel().setShow(isBelong && isFloor && isType);
+        });
     }
 
     changeToNormal() {
         this.buildingTargetHeight = 0;
-        this.targetBloom = .0;
-        this.targetFloorEmissive = 0.5;
+        this.postProcess.targetBloom = 0;
+        this.floor.targetFloorEmissive = 0.5;
         this.particle.stopEmitting();
-
-        this.pathBuilder.node.active = false;
-
-        // this.showAllEquipment(false);
     }
 
     changeToScifi() {
         this.buildingTargetHeight = 3;
-        this.targetBloom = 1;
-        this.targetFloorEmissive = 1;
+        this.postProcess.targetBloom = 1;
+        this.floor.targetFloorEmissive = 1;
         this.particle.play();
-
-        this.pathBuilder.node.active = true;
-
-        // this.showAllEquipment(true);
     }
 
     update(deltaTime: number) {
 
         this.buildingHeight += (this.buildingTargetHeight - this.buildingHeight) * .2;
-        this.currentBloom += (this.targetBloom - this.currentBloom) * .2;
-        this.currentFloorEmissive += (this.targetFloorEmissive - this.currentFloorEmissive) * .2;
-
-        this.postProcess.getComponent(Bloom).intensity = this.currentBloom;
         this.updateMaterialParams();
     }
 }
