@@ -6,6 +6,8 @@ const { ccclass, property } = _decorator;
 @ccclass('EquipmentIcon')
 export class EquipmentIcon extends Component {
 
+    static ON_CLICK = "ON_CLICK";
+
     @property(Navigation)
     navigation: Navigation;
 
@@ -17,9 +19,17 @@ export class EquipmentIcon extends Component {
 
     start() {
 
+        this.model.node.on(EquipmentModel.ON_CHANGE, this.onModelChange, this);
+
         this.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
         this.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
         this.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+
+        this.onModelChange();
+    }
+
+    onModelChange() {
+        this.node.active = this.model.showOnScreen;
     }
 
     syncPosition() {
@@ -31,7 +41,7 @@ export class EquipmentIcon extends Component {
     }
 
     onBtnClick() {
-        this.node.emit("onEqupimentIconClick", this.model);
+        this.node.emit(EquipmentIcon.ON_CLICK, this.model);
     }
 
     onBtnHover() {

@@ -16,11 +16,12 @@ export class Equipment extends Component {
     currentColor: Color = this.normalColor;
 
     start() {
-        this.getModel().node.on(EquipmentModel.ON_STATE_CHANGE, this.onModelStateChange, this);
-        this.setState();
+        this.getModel().node.on(EquipmentModel.ON_CHANGE, this.onModelStateChange, this);
+        this.onModelStateChange(this.getModel());
     }
 
-    onModelStateChange(data) {
+    onModelStateChange(data: EquipmentModel) {
+        this.node.active = data.showOnScreen;
         this.setState();
     }
 

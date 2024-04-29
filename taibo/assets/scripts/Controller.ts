@@ -2,11 +2,14 @@ import { _decorator, Button, Camera, CCBoolean, Component, director, EventHandle
 import { BuildingController } from './BuildingController';
 import { Navigation } from './Navigation';
 import { EquipmentIcon } from './EquipmentIcon';
-import { EquipmentModel, EquipmentState } from './EquipmentModel';
+import { EquipmentBelong, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Equipment } from './Equipment';
+import { Model } from './Model';
 const { ccclass, property } = _decorator;
+const { requireComponent } = _decorator;
 
 @ccclass('Controller')
+@requireComponent(Model)
 export class Controller extends Component {
 
     @property(BuildingController)
@@ -18,9 +21,6 @@ export class Controller extends Component {
     @property(Navigation)
     navigation: Navigation;
 
-    @property([Node])
-    btnEquipmentIcon: Node[] = [];
-
     @property(Node)
     uiNode: Node;
 
@@ -28,9 +28,6 @@ export class Controller extends Component {
     isBuild: Boolean = false;
 
     private building: BuildingController;
-
-    // @property(Button)
-    // btnShowFloor:Button;
 
     start() {
 
@@ -59,10 +56,15 @@ export class Controller extends Component {
         } else {
 
             this.changeToTaibo();
-            this.btnEquipmentIcon.forEach((icon, id, ary) => {
-                icon.on("onEqupimentIconClick", this.onBtnEquipmentIconClick, this);
-            });
         }
+    }
+
+    changeToCarbon() {
+        this.building.changeEquipmentType(EquipmentType.CARBON);
+    }
+
+    changeToAir() {
+        this.building.changeEquipmentType(EquipmentType.AIR);
     }
 
     changeFloorB1F(floor: number) {
@@ -78,6 +80,9 @@ export class Controller extends Component {
     }
 
     changeToTaibo() {
+        this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.TAIBO);
+        this.buildingXuku.changeEquipmentBelong(EquipmentBelong.TAIBO);
+
         this.buildingTaibo.openBuilding(1);
         this.buildingXuku.closeBuilding();
 
@@ -85,16 +90,13 @@ export class Controller extends Component {
     }
 
     changeToXuku() {
+        this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.XUKU);
+        this.buildingXuku.changeEquipmentBelong(EquipmentBelong.XUKU);
+
         this.buildingXuku.openBuilding(0);
         this.buildingTaibo.closeBuilding();
 
         this.building = this.buildingXuku;
-    }
-
-    onBtnEquipmentIconClick(model: EquipmentModel) {
-        log(model.id);
-
-        model.setState(EquipmentState.ALARM);
     }
 
     getEquipmentScreenPos() {

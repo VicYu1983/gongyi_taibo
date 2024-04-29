@@ -31,7 +31,9 @@ export enum EquipmentFloor {
 @ccclass('EquipmentModel')
 export class EquipmentModel extends Component {
 
-    static ON_STATE_CHANGE = "ON_STATE_CHANGE";
+    // static ON_STATE_CHANGE = "ON_STATE_CHANGE";
+    // static ON_VISIBLE_CHANGE = "ON_VISIBLE_CHANGE";
+    static ON_CHANGE = "ON_CHANGE";
 
     @property(CCInteger)
     id: number;
@@ -48,14 +50,21 @@ export class EquipmentModel extends Component {
     @property({ type: Enum(EquipmentType) })
     type: EquipmentType = EquipmentType.AIR;
 
+    showOnScreen = true;
+
     start() {
 
+    }
+
+    setShow(show: boolean) {
+        this.showOnScreen = show;
+        this.node.emit(EquipmentModel.ON_CHANGE, this);
     }
 
     setState(state: EquipmentState) {
         if (this.state != state) {
             this.state = state;
-            this.node.emit(EquipmentModel.ON_STATE_CHANGE, this.state);
+            this.node.emit(EquipmentModel.ON_CHANGE, this);
         }
     }
 
