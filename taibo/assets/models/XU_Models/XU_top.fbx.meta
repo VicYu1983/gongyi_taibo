@@ -1,0 +1,97 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "8db594ee-16ff-432c-828f-e269255ba13a",
+  "files": [],
+  "subMetas": {
+    "89bcd": {
+      "importer": "gltf-mesh",
+      "uuid": "8db594ee-16ff-432c-828f-e269255ba13a@89bcd",
+      "displayName": "",
+      "id": "89bcd",
+      "name": "物件_208.014.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 39788
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a692c": {
+      "importer": "gltf-material",
+      "uuid": "8db594ee-16ff-432c-828f-e269255ba13a@a692c",
+      "displayName": "",
+      "id": "a692c",
+      "name": "out wall.005.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "53f43": {
+      "importer": "gltf-scene",
+      "uuid": "8db594ee-16ff-432c-828f-e269255ba13a@53f43",
+      "displayName": "",
+      "id": "53f43",
+      "name": "XU_top.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "8db594ee-16ff-432c-828f-e269255ba13a@53f43",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "8db594ee-16ff-432c-828f-e269255ba13a@89bcd"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "8db594ee-16ff-432c-828f-e269255ba13a@a692c"
+      ],
+      "scenes": [
+        "8db594ee-16ff-432c-828f-e269255ba13a@53f43"
+      ]
+    }
+  }
+}
