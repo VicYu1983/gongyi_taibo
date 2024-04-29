@@ -1,17 +1,11 @@
 import { _decorator, CCBoolean, Color, Component, Enum, log, MeshRenderer, Node, Vec4 } from 'cc';
+import { EquipmentModel, EquipmentState } from './EquipmentModel';
 const { ccclass, property } = _decorator;
-
-enum EquipmentState {
-    ALARM,
-    NORMAL,
-    WARN
-}
+const { requireComponent } = _decorator;
 
 @ccclass('Equipment')
+@requireComponent(EquipmentModel)
 export class Equipment extends Component {
-
-    @property({ type: Enum(EquipmentState) })
-    equipmentState: EquipmentState = EquipmentState.ALARM;
 
     @property(MeshRenderer)
     alarmIcon: MeshRenderer;
@@ -22,11 +16,16 @@ export class Equipment extends Component {
     currentColor: Color = this.normalColor;
 
     start() {
-        this.setState(this.equipmentState);
+        this.getModel().node.on(EquipmentModel.ON_STATE_CHANGE, this.onModelStateChange, this);
+        this.setState();
     }
 
-    setState(state: EquipmentState) {
-        switch (this.equipmentState) {
+    onModelStateChange(data) {
+        this.setState();
+    }
+
+    setState() {
+        switch (this.getModel().state) {
             case EquipmentState.ALARM:
                 this.changeToAlarm();
                 break;
@@ -53,6 +52,10 @@ export class Equipment extends Component {
 
     update(deltaTime: number) {
 
+    }
+
+    getModel() {
+        return this.getComponent(EquipmentModel);
     }
 }
 

@@ -1,6 +1,8 @@
 import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
+import { FloorController } from './FloorController';
+import { PPController } from './PPController';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -13,27 +15,19 @@ export class BuildingController extends Component {
     @property([Equipment])
     equipments: Equipment[] = [];
 
-    @property(CCFloat)
-    buildingTargetHeight = 0.0;
-
-    @property(Node)
-    postProcess: Node = null;
+    @property(PPController)
+    postProcess: PPController = null;
 
     @property(ParticleSystem)
     particle: ParticleSystem;
 
-    @property(Node)
-    floor: Node;
+    @property(FloorController)
+    floor: FloorController;
 
-    @property(PathMeshBuilder)
-    pathBuilder: PathMeshBuilder;
+    @property(CCFloat)
+    buildingTargetHeight = 0.0;
 
-    buildingHeight: number = 0;
-    targetBloom: number = .3;
-    currentBloom: number = .3;
-
-    targetFloorEmissive = 0.0;
-    currentFloorEmissive = 0.0;
+    private buildingHeight: number = 0;
 
     start() {
         this.changeToNormal();
@@ -42,6 +36,16 @@ export class BuildingController extends Component {
     // protected onLoad(): void {
     //     BatchingUtility.batchStaticModel(this.node, this.node);
     // }
+
+    openBuilding(floor: number = 0) {
+        this.showFloor(floor);
+        this.showEquipment(floor);
+    }
+
+    closeBuilding() {
+        this.hideAllFloor();
+        this.showAllEquipment(false);
+    }
 
     showAllEquipment(show: boolean) {
         this.equipments.forEach((equipment, id, ary) => {
@@ -60,6 +64,16 @@ export class BuildingController extends Component {
         this.buildingFloor[id].active = true;
     }
 
+    showEquipment(floor: number = 0) {
+        this.equipments.forEach((equipment, id, ary) => {
+            if (equipment.getModel().floor === floor) {
+                equipment.node.active = true;
+            } else {
+                equipment.node.active = false;
+            }
+        });
+    }
+
     getEquipment(id: number = 0) {
         return this.equipments[id];
     }
@@ -67,44 +81,30 @@ export class BuildingController extends Component {
     updateMaterialParams() {
         this.buildingFloor.forEach((node, id, ary) => {
             node.getComponent(MeshRenderer).materials.forEach((material, id, matAry) => {
-                // log(material.effectName)
                 if (material.effectName == "../shaders/standard-dither") {
                     material.setProperty("buildingHeight", this.buildingHeight);
                 }
             });
         });
-        this.floor.getComponent(MeshRenderer).material.setProperty("emissive", this.currentFloorEmissive);
     }
 
     changeToNormal() {
         this.buildingTargetHeight = 0;
-        this.targetBloom = .0;
-        this.targetFloorEmissive = 0.5;
+        this.postProcess.targetBloom = 0;
+        this.floor.targetFloorEmissive = 0.5;
         this.particle.stopEmitting();
-
-        this.pathBuilder.node.active = false;
-
-        // this.showAllEquipment(false);
     }
 
     changeToScifi() {
         this.buildingTargetHeight = 3;
-        this.targetBloom = 1;
-        this.targetFloorEmissive = 1;
+        this.postProcess.targetBloom = 1;
+        this.floor.targetFloorEmissive = 1;
         this.particle.play();
-
-        this.pathBuilder.node.active = true;
-
-        // this.showAllEquipment(true);
     }
 
     update(deltaTime: number) {
 
         this.buildingHeight += (this.buildingTargetHeight - this.buildingHeight) * .2;
-        this.currentBloom += (this.targetBloom - this.currentBloom) * .2;
-        this.currentFloorEmissive += (this.targetFloorEmissive - this.currentFloorEmissive) * .2;
-
-        this.postProcess.getComponent(Bloom).intensity = this.currentBloom;
         this.updateMaterialParams();
     }
 }

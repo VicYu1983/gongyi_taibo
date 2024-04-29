@@ -9,9 +9,6 @@ export class EquipmentIcon extends Component {
     @property(Navigation)
     navigation: Navigation;
 
-    @property(Button)
-    button: Button;
-
     @property(Node)
     info: Node;
 
@@ -20,9 +17,9 @@ export class EquipmentIcon extends Component {
 
     start() {
 
-        this.button.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
-        this.button.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
-        this.button.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+        this.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
+        this.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
+        this.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
     }
 
     syncPosition() {
