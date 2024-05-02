@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -6,11 +6,14 @@ import { PPController } from './PPController';
 import { EquipmentIcon } from './EquipmentIcon';
 import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Navigation } from './Navigation';
+import { BackgroundController } from './BackgroundController';
+import { IEnviromentChanger } from './IEnviromentChanger';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
 @ccclass('BuildingController')
-export class BuildingController extends Component {
+export class BuildingController extends Component implements IEnviromentChanger {
+
 
     @property([Node])
     buildingFloor: Node[] = [];
@@ -29,6 +32,12 @@ export class BuildingController extends Component {
 
     @property(Navigation)
     navigation: Navigation;
+
+    @property(BackgroundController)
+    background: BackgroundController;
+
+    @property(Light)
+    light:Light;
 
     @property(CCFloat)
     buildingTargetHeight = 0.0;
@@ -57,7 +66,7 @@ export class BuildingController extends Component {
     btnEquipmentIcon: Node[] = [];
 
     start() {
-        this.changeToNormal();
+        this.toNormal();
 
         this.buildingFloor.forEach((floor, id, ary) => {
             this.buildingFloorTargetOpacity.push((floor.active === true) ? 1 : 0);
@@ -80,7 +89,7 @@ export class BuildingController extends Component {
             iconNode.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
             this.btnEquipmentIcon.push(iconNode);
         });
-        
+
         this.navigation.node.on(Navigation.ON_NAVIGATION_CHANGE, this.onNavigationChange, this);
     }
 
@@ -93,7 +102,7 @@ export class BuildingController extends Component {
     }
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
-        model.setState(EquipmentState.ALARM);
+        model.setState(EquipmentState.ALARM1);
     }
 
     // protected onLoad(): void {
@@ -152,16 +161,6 @@ export class BuildingController extends Component {
         this.buildingFloor[id].active = true;
     }
 
-    // showEquipment(floor: number = 0) {
-    //     this.equipments.forEach((equipment, id, ary) => {
-    //         if (equipment.getModel().floor === floor) {
-    //             equipment.getModel().setShow(true);
-    //         } else {
-    //             equipment.getModel().setShow(false);
-    //         }
-    //     });
-    // }
-
     getEquipment(id: number = 0) {
         return this.equipments[id];
     }
@@ -189,18 +188,25 @@ export class BuildingController extends Component {
         });
     }
 
-    changeToNormal() {
+    toNormal() {
         this.buildingTargetHeight = 0;
         this.postProcess.targetBloom = 0;
         this.floor.targetFloorEmissive = 0.5;
         this.particle.stopEmitting();
-    }
 
-    changeToScifi() {
+        this.background.toNormal();
+
+        this.light.node.active = true;
+    }
+    toScifi() {
         this.buildingTargetHeight = 3;
         this.postProcess.targetBloom = 1;
         this.floor.targetFloorEmissive = 1;
         this.particle.play();
+
+        this.background.toScifi();
+
+        this.light.node.active = false;
     }
 
     update(deltaTime: number) {

@@ -2,9 +2,12 @@ import { _decorator, CCInteger, CCString, Component, Enum, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 export enum EquipmentState {
-    ALARM,
+    ALARM1,
+    ALARM2,
+    ALARM3,
+    ALARM4,
     NORMAL,
-    WARN,
+    NOT_ACTIVE,
     NONE
 }
 
@@ -56,7 +59,7 @@ export class EquipmentModel extends Component {
     floor: EquipmentFloor = EquipmentFloor.B1F;
 
     @property({ type: Enum(EquipmentState) })
-    state: EquipmentState = EquipmentState.ALARM;
+    state: EquipmentState = EquipmentState.NORMAL;
 
     @property({ type: Enum(EquipmentType) })
     type: EquipmentType = EquipmentType.AIR;

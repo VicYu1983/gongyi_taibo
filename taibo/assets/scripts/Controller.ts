@@ -113,7 +113,7 @@ export class Controller extends Component {
 
     changeToAirAlarm() {
         this.building.changeEquipmentType(EquipmentType.AIR);
-        this.building.changeEquipmentState(EquipmentState.ALARM);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
     }
 
     changeToAirCondition() {
@@ -123,7 +123,7 @@ export class Controller extends Component {
 
     changeToAirConditionAlarm() {
         this.building.changeEquipmentType(EquipmentType.AIRCONDITION);
-        this.building.changeEquipmentState(EquipmentState.ALARM);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
     }
 
     changeToEnviroment() {
@@ -133,7 +133,7 @@ export class Controller extends Component {
 
     changeToEnviromentAlarm() {
         this.building.changeEquipmentType(EquipmentType.ENVIROMENT);
-        this.building.changeEquipmentState(EquipmentState.ALARM);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
     }
 
     changeToFire() {
@@ -143,7 +143,7 @@ export class Controller extends Component {
 
     changeToFireAlarm() {
         this.building.changeEquipmentType(EquipmentType.FIRE);
-        this.building.changeEquipmentState(EquipmentState.ALARM);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
     }
 
     changeToSecurity() {
@@ -153,7 +153,7 @@ export class Controller extends Component {
 
     changeToSecurityAlarm() {
         this.building.changeEquipmentType(EquipmentType.SECURITY);
-        this.building.changeEquipmentState(EquipmentState.ALARM);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
     }
 
     changeToCCTV() {
@@ -163,7 +163,7 @@ export class Controller extends Component {
 
     changeToCCTVAlarm() {
         this.building.changeEquipmentType(EquipmentType.CCTV);
-        this.building.changeEquipmentState(EquipmentState.ALARM);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
     }
 
     changeToElectric() {
@@ -173,7 +173,7 @@ export class Controller extends Component {
 
     changeToElectricAlarm() {
         this.building.changeEquipmentType(EquipmentType.ELECTRIC);
-        this.building.changeEquipmentState(EquipmentState.ALARM);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
     }
 
     changeToEarthquake() {
@@ -183,7 +183,7 @@ export class Controller extends Component {
 
     changeToEarthquakeAlarm() {
         this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);
-        this.building.changeEquipmentState(EquipmentState.ALARM);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
     }
 
 
@@ -279,12 +279,12 @@ export class Controller extends Component {
     }
 
     onNormalClick() {
-        this.building.changeToNormal();
+        this.building.toNormal();
         this.isScifi = false;
     }
 
     onScifiClick() {
-        this.building.changeToScifi();
+        this.building.toScifi();
         this.isScifi = true;
     }
 

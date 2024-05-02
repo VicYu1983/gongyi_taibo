@@ -10,45 +10,83 @@ export class Equipment extends Component {
     @property(MeshRenderer)
     alarmIcon: MeshRenderer;
 
-    alarmColor: Color = new Color(255, 0, 0, 255);
-    normalColor: Color = new Color(0, 255, 0, 255);
-    warnColor: Color = new Color(255, 255, 0, 255);
+    @property(Color)
+    normalColor: Color = new Color(0, 224, 255, 255);
+
+    @property(Color)
+    notActiveColor: Color = new Color(144, 144, 144, 255);
+
+    @property(Color)
+    alarm1Color: Color = new Color(255, 55, 55, 255);
+
+    @property(Color)
+    alarm2Color: Color = new Color(245, 166, 47, 255);
+
+    @property(Color)
+    alarm3Color: Color = new Color(70, 249, 88, 255);
+
+    @property(Color)
+    alarm4Color: Color = new Color(22, 94, 255, 255);
+
     currentColor: Color = this.normalColor;
 
     start() {
+        this.currentColor = this.normalColor.clone();
         this.getModel().node.on(EquipmentModel.ON_CHANGE, this.onModelStateChange, this);
         this.onModelStateChange(this.getModel());
     }
 
     onModelStateChange(data: EquipmentModel) {
-        this.node.active = data.showOnScreen;
+        this.node.active = data.getShow();
         this.setState();
     }
 
     setState() {
         switch (this.getModel().state) {
-            case EquipmentState.ALARM:
-                this.changeToAlarm();
+            case EquipmentState.ALARM4:
+                this.changeToAlarm4();
+                break;
+            case EquipmentState.ALARM3:
+                this.changeToAlarm3();
+                break;
+            case EquipmentState.ALARM2:
+                this.changeToAlarm2();
+                break;
+            case EquipmentState.ALARM1:
+                this.changeToAlarm1();
                 break;
             case EquipmentState.NORMAL:
                 this.changeToNormal();
                 break;
-            case EquipmentState.WARN:
-                this.changeToWarn();
+            case EquipmentState.NOT_ACTIVE:
+                this.changeToNotActive();
                 break;
+
         }
     }
 
-    changeToAlarm() {
-        this.alarmIcon.material.setProperty("mainColor", this.alarmColor);
+    changeToAlarm1() {
+        this.alarmIcon.material.setProperty("mainColor", this.alarm1Color);
+    }
+
+    changeToAlarm2() {
+        this.alarmIcon.material.setProperty("mainColor", this.alarm2Color);
+    }
+
+    changeToAlarm3() {
+        this.alarmIcon.material.setProperty("mainColor", this.alarm3Color);
+    }
+
+    changeToAlarm4() {
+        this.alarmIcon.material.setProperty("mainColor", this.alarm4Color);
+    }
+
+    changeToNotActive() {
+        this.alarmIcon.material.setProperty("mainColor", this.notActiveColor);
     }
 
     changeToNormal() {
         this.alarmIcon.material.setProperty("mainColor", this.normalColor);
-    }
-
-    changeToWarn() {
-        this.alarmIcon.material.setProperty("mainColor", this.warnColor);
     }
 
     update(deltaTime: number) {
