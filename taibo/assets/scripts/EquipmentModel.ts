@@ -18,6 +18,7 @@ export enum EquipmentBelong {
 }
 
 export enum EquipmentFloor {
+    B2F,
     B1F,
     N1F,
     N2F,

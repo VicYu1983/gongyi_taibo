@@ -33,30 +33,56 @@ export class Controller extends Component {
 
         this.building = this.buildingTaibo;
 
-        const self = this;
+        this.buildingTaibo.btnEquipmentIcon.forEach((icon, id, ary) => {
+            icon.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
+        });
 
+        this.buildingXuku.btnEquipmentIcon.forEach((icon, id, ary) => {
+            icon.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
+        });
+
+        const self = this;
         window["cocos"] = {
             openFloor: function (id = 0) {
-                this.building.openBuilding(id);
+                self.building.openBuilding(id);
             },
             backToInit: function () {
                 self.onBackCameraClick();
             },
             showAirEquipment() {
-                self.building.showAllEquipment(true);
+                self.changeToAir();
             },
-            getEquipmentScreenPos() {
-                return self.getEquipmentScreenPos();
+            showCarbonEquipment() {
+                self.changeToCarbon();
+            },
+            changeToTaibo() {
+                self.changeToTaibo();
+            },
+            changeToXuku() {
+                self.changeToXuku();
             }
+            // getEquipmentScreenPos() {
+            //     return self.getEquipmentScreenPos();
+            // }
         }
+
+
 
         if (this.isBuild) {
             this.uiNode.active = false;
+
+            this.buildingTaibo.closeBuilding();
+            this.buildingXuku.closeBuilding();
+
             this.callWeb("cocosReady", null);
         } else {
 
             this.changeToTaibo();
         }
+    }
+
+    onBtnEquipmentIconClick(model: EquipmentModel) {
+        this.callWeb("onClickEquipment", model.id);
     }
 
     changeToCarbon() {
@@ -99,36 +125,36 @@ export class Controller extends Component {
         this.building = this.buildingXuku;
     }
 
-    getEquipmentScreenPos() {
+    // getEquipmentScreenPos() {
 
-        const locations: Vec3[] = [];
-        this.building.equipments.forEach((equipment, id, ary) => {
+    //     const locations: Vec3[] = [];
+    //     this.building.equipments.forEach((equipment, id, ary) => {
 
-            // log(equipment.node.name);
+    //         // log(equipment.node.name);
 
-            const worldPosition = equipment.node.worldPosition;
+    //         const worldPosition = equipment.node.worldPosition;
 
-            // log(worldPosition);
+    //         // log(worldPosition);
 
-            // 将世界坐标转换为屏幕坐标
-            const screenPosition = new Vec3();
-            // this.navigation.getComponent(Camera).convertToUINode(worldPosition, this.uiNode, screenPosition);
-            this.navigation.getComponent(Camera).worldToScreen(worldPosition, screenPosition);
+    //         // 将世界坐标转换为屏幕坐标
+    //         const screenPosition = new Vec3();
+    //         // this.navigation.getComponent(Camera).convertToUINode(worldPosition, this.uiNode, screenPosition);
+    //         this.navigation.getComponent(Camera).worldToScreen(worldPosition, screenPosition);
 
-            // 调整屏幕坐标以匹配视图端口大小
-            // screenPosition.x = screenPosition.x * view.getVisibleSize().width / 2 + view.getVisibleSize().width / 2;
-            // screenPosition.y = screenPosition.y * view.getVisibleSize().height / 2 + view.getVisibleSize().height / 2;
+    //         // 调整屏幕坐标以匹配视图端口大小
+    //         // screenPosition.x = screenPosition.x * view.getVisibleSize().width / 2 + view.getVisibleSize().width / 2;
+    //         // screenPosition.y = screenPosition.y * view.getVisibleSize().height / 2 + view.getVisibleSize().height / 2;
 
-            locations.push(screenPosition);
-            // console.log(`屏幕坐标: (${screenPosition.x}, ${screenPosition.y}, ${screenPosition.z})`);
-        });
-        return locations;
-    }
+    //         locations.push(screenPosition);
+    //         // console.log(`屏幕坐标: (${screenPosition.x}, ${screenPosition.y}, ${screenPosition.z})`);
+    //     });
+    //     return locations;
+    // }
 
 
-    onScreenClick() {
-        this.getEquipmentScreenPos();
-    }
+    // onScreenClick() {
+    //     this.getEquipmentScreenPos();
+    // }
 
     onBackCameraClick() {
         this.navigation.backToInit();
