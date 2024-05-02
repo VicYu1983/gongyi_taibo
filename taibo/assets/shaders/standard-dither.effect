@@ -13,6 +13,7 @@ CCEffect %{
         alphaThreshold:                   { value: 0.5, target: albedoScaleAndCutoff.w, editor: { parent: USE_ALPHA_TEST, slide: true, range: [0, 1.0], step: 0.001 } }
         buildingHeight:                   { value: 0.0, target: ditherParams.r, editor: { slide: true, range: [0.0, 3.0], step: 0.001 } }
         buildingFloor:                    { value: 0.0, target: ditherParams.g, editor: { slide: true, range: [-3.0, 3.0], step: 0.001 } }
+        opacity:                          { value: 1.0, target: ditherParams.b, editor: { slide: true, range: [0.0, 1.0], step: 0.001 } }
         occlusion:                        { value: 0.0, target: pbrParams.x, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
         roughness:                        { value: 0.5, target: pbrParams.y, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
         metallic:                         { value: 0.0, target: pbrParams.z, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
@@ -331,7 +332,7 @@ CCProgram surface-fragment %{
 
     float ditherBlend = mix(1.0, scifi.a, ditherRange);
     
-    ditherTAA(1280.0, 720.0, ditherBlend);
+    ditherTAA(1280.0, 720.0, ditherBlend * ditherParams.b);
 
     #if USE_ALPHA_TEST
       if (baseColor.ALPHA_TEST_CHANNEL < albedoScaleAndCutoff.w) discard;

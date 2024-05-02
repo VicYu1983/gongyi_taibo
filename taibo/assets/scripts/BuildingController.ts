@@ -42,12 +42,20 @@ export class BuildingController extends Component {
     currentBelong: EquipmentBelong;
 
     private buildingHeight: number = 0;
+    private buildingFloorTargetOpacity: number[] = [];
+    private buildingFloorCurrentOpacity: number[] = [];
+    // private buildingFloorCurrentOpacity: number[] = [];
 
     start() {
         this.changeToNormal();
 
         this.btnEquipmentIcon.forEach((icon, id, ary) => {
             icon.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
+        });
+
+        this.buildingFloor.forEach((floor, id, ary) => {
+            this.buildingFloorTargetOpacity.push((floor.active === true) ? 1 : 0);
+            this.buildingFloorCurrentOpacity.push((floor.active === true) ? 1 : 0);
         });
 
         // this.updateEquipmentShow();
@@ -151,6 +159,14 @@ export class BuildingController extends Component {
     }
 
     update(deltaTime: number) {
+
+        this.buildingFloor.forEach((floor, id, ary) => {
+            const current = this.buildingFloorCurrentOpacity[id];
+            const target = this.buildingFloorTargetOpacity[id];
+            this.buildingFloorCurrentOpacity[id] = current + (target - current) * .2;
+
+            // floor.
+        });
 
         this.buildingHeight += (this.buildingTargetHeight - this.buildingHeight) * .2;
         this.updateMaterialParams();
