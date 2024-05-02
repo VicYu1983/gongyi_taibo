@@ -1,4 +1,4 @@
-import { _decorator, Button, Camera, CCBoolean, Component, director, EventHandler, log, Node, Vec3 } from 'cc';
+import { _decorator, Button, Camera, CCBoolean, Component, director, EventHandler, EventKeyboard, input, Input, KeyCode, log, Node, Vec3 } from 'cc';
 import { BuildingController } from './BuildingController';
 import { Navigation } from './Navigation';
 import { EquipmentIcon } from './EquipmentIcon';
@@ -28,6 +28,13 @@ export class Controller extends Component {
     isBuild: Boolean = false;
 
     private building: BuildingController;
+    private isScifi = false;
+    isForward: boolean;
+    isLeft: boolean;
+    isBack: boolean;
+    isRight: boolean;
+    isUp: boolean;
+    isDown: boolean;
 
     start() {
 
@@ -52,21 +59,24 @@ export class Controller extends Component {
             showAirEquipment() {
                 self.changeToAir();
             },
-            showCarbonEquipment() {
-                self.changeToCarbon();
-            },
+            // showCarbonEquipment() {
+            //     self.changeToCarbon();
+            // },
             changeToTaibo() {
                 self.changeToTaibo();
             },
             changeToXuku() {
                 self.changeToXuku();
+            },
+            toggleScifi() {
+                self.toggleScifi();
             }
             // getEquipmentScreenPos() {
             //     return self.getEquipmentScreenPos();
             // }
         }
 
-
+        input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
 
         if (this.isBuild) {
             this.uiNode.active = false;
@@ -81,17 +91,105 @@ export class Controller extends Component {
         }
     }
 
+    onKeyUp(e: EventKeyboard) {
+        switch (e.keyCode) {
+            case KeyCode.KEY_R:
+                this.toggleScifi();
+        }
+    }
+
     onBtnEquipmentIconClick(model: EquipmentModel) {
         this.callWeb("onClickEquipment", model.id);
     }
 
-    changeToCarbon() {
-        this.building.changeEquipmentType(EquipmentType.CARBON);
-    }
+    // changeToCarbon() {
+    //     this.building.changeEquipmentType(EquipmentType.CARBON);
+    // }
 
     changeToAir() {
         this.building.changeEquipmentType(EquipmentType.AIR);
+        this.building.changeEquipmentState(EquipmentState.NONE);
     }
+
+    changeToAirAlarm() {
+        this.building.changeEquipmentType(EquipmentType.AIR);
+        this.building.changeEquipmentState(EquipmentState.ALARM);
+    }
+
+    changeToAirCondition() {
+        this.building.changeEquipmentType(EquipmentType.AIRCONDITION);
+        this.building.changeEquipmentState(EquipmentState.NONE);
+    }
+
+    changeToAirConditionAlarm() {
+        this.building.changeEquipmentType(EquipmentType.AIRCONDITION);
+        this.building.changeEquipmentState(EquipmentState.ALARM);
+    }
+
+    changeToEnviroment() {
+        this.building.changeEquipmentType(EquipmentType.ENVIROMENT);
+        this.building.changeEquipmentState(EquipmentState.NONE);
+    }
+
+    changeToEnviromentAlarm() {
+        this.building.changeEquipmentType(EquipmentType.ENVIROMENT);
+        this.building.changeEquipmentState(EquipmentState.ALARM);
+    }
+
+    changeToFire() {
+        this.building.changeEquipmentType(EquipmentType.FIRE);
+        this.building.changeEquipmentState(EquipmentState.NONE);
+    }
+
+    changeToFireAlarm() {
+        this.building.changeEquipmentType(EquipmentType.FIRE);
+        this.building.changeEquipmentState(EquipmentState.ALARM);
+    }
+
+    changeToSecurity() {
+        this.building.changeEquipmentType(EquipmentType.SECURITY);
+        this.building.changeEquipmentState(EquipmentState.NONE);
+    }
+
+    changeToSecurityAlarm() {
+        this.building.changeEquipmentType(EquipmentType.SECURITY);
+        this.building.changeEquipmentState(EquipmentState.ALARM);
+    }
+
+    changeToCCTV() {
+        this.building.changeEquipmentType(EquipmentType.CCTV);
+        this.building.changeEquipmentState(EquipmentState.NONE);
+    }
+
+    changeToCCTVAlarm() {
+        this.building.changeEquipmentType(EquipmentType.CCTV);
+        this.building.changeEquipmentState(EquipmentState.ALARM);
+    }
+
+    changeToElectric() {
+        this.building.changeEquipmentType(EquipmentType.ELECTRIC);
+        this.building.changeEquipmentState(EquipmentState.NONE);
+    }
+
+    changeToElectricAlarm() {
+        this.building.changeEquipmentType(EquipmentType.ELECTRIC);
+        this.building.changeEquipmentState(EquipmentState.ALARM);
+    }
+
+    changeToEarthquake() {
+        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);
+        this.building.changeEquipmentState(EquipmentState.NONE);
+    }
+
+    changeToEarthquakeAlarm() {
+        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);
+        this.building.changeEquipmentState(EquipmentState.ALARM);
+    }
+
+
+    // changeToAir() {
+    //     this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);
+    // }
 
     changeFloorB1F(floor: number) {
         this.building.openBuilding(0);
@@ -125,6 +223,13 @@ export class Controller extends Component {
         this.building = this.buildingXuku;
     }
 
+    toggleScifi() {
+        if (this.isScifi) {
+            this.onNormalClick();
+        } else {
+            this.onScifiClick();
+        }
+    }
     // getEquipmentScreenPos() {
 
     //     const locations: Vec3[] = [];
@@ -175,10 +280,12 @@ export class Controller extends Component {
 
     onNormalClick() {
         this.building.changeToNormal();
+        this.isScifi = false;
     }
 
     onScifiClick() {
         this.building.changeToScifi();
+        this.isScifi = true;
     }
 
     update(deltaTime: number) {

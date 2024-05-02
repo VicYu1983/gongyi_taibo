@@ -1,15 +1,22 @@
-import { _decorator, CCInteger, Component, Enum, Node } from 'cc';
+import { _decorator, CCInteger, CCString, Component, Enum, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 export enum EquipmentState {
     ALARM,
     NORMAL,
-    WARN
+    WARN,
+    NONE
 }
 
 export enum EquipmentType {
-    AIR,
-    CARBON
+    AIR, // 空品
+    AIRCONDITION, // 空調
+    ENVIROMENT, // 微環境
+    FIRE, // 消防
+    SECURITY, // 連綫保全
+    EARTHQUAKE, // 地震
+    CCTV, // cctv
+    ELECTRIC // 電力
 }
 
 export enum EquipmentBelong {
@@ -39,6 +46,9 @@ export class EquipmentModel extends Component {
     @property(CCInteger)
     id: number;
 
+    @property(CCString)
+    code:String;
+
     @property({ type: Enum(EquipmentBelong) })
     belong: EquipmentBelong = EquipmentBelong.TAIBO;
 
@@ -51,15 +61,35 @@ export class EquipmentModel extends Component {
     @property({ type: Enum(EquipmentType) })
     type: EquipmentType = EquipmentType.AIR;
 
-    showOnScreen = true;
+    private alarmable = [
+        EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.CCTV, EquipmentType.ELECTRIC
+    ];
+
+    private electable = [
+        EquipmentType.AIRCONDITION, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.ELECTRIC
+    ];
+
+    private showOnScreen = true;
 
     start() {
 
     }
 
+    isAlarmable() {
+        return this.alarmable.indexOf(this.type) >= 0;
+    }
+
+    isElectable() {
+        return this.electable.indexOf(this.type) >= 0;
+    }
+
     setShow(show: boolean) {
         this.showOnScreen = show;
         this.node.emit(EquipmentModel.ON_CHANGE, this);
+    }
+
+    getShow(){
+        return this.showOnScreen;
     }
 
     setState(state: EquipmentState) {
