@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -44,7 +44,7 @@ export class BuildingController extends Component {
     private buildingHeight: number = 0;
     private buildingFloorTargetOpacity: number[] = [];
     private buildingFloorCurrentOpacity: number[] = [];
-    // private buildingFloorCurrentOpacity: number[] = [];
+    private buildingFloorMesh: MeshRenderer[] = [];
 
     start() {
         this.changeToNormal();
@@ -56,6 +56,7 @@ export class BuildingController extends Component {
         this.buildingFloor.forEach((floor, id, ary) => {
             this.buildingFloorTargetOpacity.push((floor.active === true) ? 1 : 0);
             this.buildingFloorCurrentOpacity.push((floor.active === true) ? 1 : 0);
+            this.buildingFloorMesh.push(floor.getComponent(MeshRenderer));
         });
 
         // this.updateEquipmentShow();
@@ -101,14 +102,19 @@ export class BuildingController extends Component {
     }
 
     hideAllFloor() {
-        this.buildingFloor.forEach((floor, id, ary) => {
-            floor.active = false;
-        });
+        // this.buildingFloor.forEach((floor, id, ary) => {
+        //     floor.active = false;
+        // });
+
+        for(let i = 0; i < this.buildingFloorTargetOpacity.length; ++i){
+            this.buildingFloorTargetOpacity[i] = 0;
+        }
     }
 
     showFloor(id: number = 0) {
         this.hideAllFloor();
-        this.buildingFloor[id].active = true;
+        this.buildingFloorTargetOpacity[id] = 1;
+        // this.buildingFloor[id].active = true;
     }
 
     // showEquipment(floor: number = 0) {
@@ -126,8 +132,8 @@ export class BuildingController extends Component {
     }
 
     private updateMaterialParams() {
-        this.buildingFloor.forEach((node, id, ary) => {
-            node.getComponent(MeshRenderer).materials.forEach((material, id, matAry) => {
+        this.buildingFloorMesh.forEach((mesh, id, ary) => {
+            mesh.materials.forEach((material, id, matAry) => {
                 if (material.effectName == "../shaders/standard-dither") {
                     material.setProperty("buildingHeight", this.buildingHeight);
                 }
@@ -160,12 +166,16 @@ export class BuildingController extends Component {
 
     update(deltaTime: number) {
 
-        this.buildingFloor.forEach((floor, id, ary) => {
+        this.buildingFloorMesh.forEach((mesh, id, ary) => {
             const current = this.buildingFloorCurrentOpacity[id];
             const target = this.buildingFloorTargetOpacity[id];
             this.buildingFloorCurrentOpacity[id] = current + (target - current) * .2;
 
-            // floor.
+            mesh.materials.forEach((mat, id, ary) => {
+                if (mat.effectName == "../shaders/standard-dither") {
+                    mat.setProperty("opacity", current);
+                }
+            });
         });
 
         this.buildingHeight += (this.buildingTargetHeight - this.buildingHeight) * .2;
