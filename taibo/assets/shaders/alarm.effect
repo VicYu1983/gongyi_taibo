@@ -99,7 +99,6 @@ CCProgram unlit-vs %{
 CCProgram unlit-fs %{
   precision highp float;
   #include <legacy/output>
-  #include <legacy/fog-fs>
 
   in vec2 v_uv;
   in vec3 v_position;
@@ -129,7 +128,7 @@ CCProgram unlit-fs %{
     col *= vec4(wave * mask);
 
     ditherTAA(1280.0, 720.0, col.a);
-    
+
     return col;
   }
 }%
