@@ -37,7 +37,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     background: BackgroundController;
 
     @property(Light)
-    light:Light;
+    light: Light;
 
     @property(CCFloat)
     buildingTargetHeight = 0.0;
@@ -57,6 +57,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property(Node)
     uiNode: Node;
 
+    @property(CCFloat)
+    speed: number = 1.0;
+
     private buildingHeight: number = 0;
     private buildingFloorTargetOpacity: number[] = [];
     private buildingFloorCurrentOpacity: number[] = [];
@@ -66,11 +69,15 @@ export class BuildingController extends Component implements IEnviromentChanger 
     btnEquipmentIcon: Node[] = [];
 
     start() {
+        this.buildingFloorTargetOpacity = [];
+        this.buildingFloorCurrentOpacity = [];
+        this.buildingFloorMesh = [];
+
         this.toNormal();
 
         this.buildingFloor.forEach((floor, id, ary) => {
-            this.buildingFloorTargetOpacity.push((floor.active === true) ? 1 : 0);
-            this.buildingFloorCurrentOpacity.push((floor.active === true) ? 1 : 0);
+            this.buildingFloorTargetOpacity.push((floor.active == true) ? 1 : 0);
+            this.buildingFloorCurrentOpacity.push((floor.active == true) ? 1 : 0);
             this.buildingFloorMesh.push(floor.getComponent(MeshRenderer));
         });
 
@@ -146,18 +153,18 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     hideAllFloor() {
-        this.buildingFloor.forEach((floor, id, ary) => {
-            floor.active = false;
-        });
+        // this.buildingFloor.forEach((floor, id, ary) => {
+        //     floor.active = false;
+        // });
 
-        // for(let i = 0; i < this.buildingFloorTargetOpacity.length; ++i){
-        //     this.buildingFloorTargetOpacity[i] = 0;
-        // }
+        for (let i = 0; i < this.buildingFloorTargetOpacity.length; ++i) {
+            this.buildingFloorTargetOpacity[i] = 0;
+        }
     }
 
     showFloor(id: number = 0) {
         this.hideAllFloor();
-        // this.buildingFloorTargetOpacity[id] = 1;
+        this.buildingFloorTargetOpacity[id] = 1;
         this.buildingFloor[id].active = true;
     }
 
@@ -165,10 +172,14 @@ export class BuildingController extends Component implements IEnviromentChanger 
         return this.equipments[id];
     }
 
+    private checkIsDither(material) {
+        return material.effectName == "../shaders/standard-dither" || material.effectName == "../shaders/glass-dither";
+    }
+
     private updateMaterialParams() {
         this.buildingFloorMesh.forEach((mesh, id, ary) => {
             mesh.materials.forEach((material, id, matAry) => {
-                if (material.effectName == "../shaders/standard-dither") {
+                if (this.checkIsDither(material)) {
                     material.setProperty("buildingHeight", this.buildingHeight);
                 }
             });
@@ -211,19 +222,26 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     update(deltaTime: number) {
 
-        // this.buildingFloorMesh.forEach((mesh, id, ary) => {
-        //     const current = this.buildingFloorCurrentOpacity[id];
-        //     const target = this.buildingFloorTargetOpacity[id];
-        //     this.buildingFloorCurrentOpacity[id] = current + (target - current) * .2;
+        this.buildingFloorMesh.forEach((mesh, id, ary) => {
 
-        //     mesh.materials.forEach((mat, id, ary) => {
-        //         if (mat.effectName == "../shaders/standard-dither") {
-        //             mat.setProperty("opacity", current);
-        //         }
-        //     });
-        // });
+            const current = this.buildingFloorCurrentOpacity[id];
+            const target = this.buildingFloorTargetOpacity[id];
 
-        this.buildingHeight += (this.buildingTargetHeight - this.buildingHeight) * .2;
+            this.buildingFloorCurrentOpacity[id] = current + (target - current) * deltaTime * this.speed * 1.5;
+
+            mesh.materials.forEach((material, id, ary) => {
+                if (this.checkIsDither(material)) {
+                    material.setProperty("opacity", current);
+                }
+            });
+
+            // 正在消失的目標。消失到盡頭時隱藏
+            if (target == 0 && current < .1) {
+                mesh.node.active = false;
+            }
+        });
+
+        this.buildingHeight += (this.buildingTargetHeight - this.buildingHeight) * deltaTime * this.speed;
         this.updateMaterialParams();
 
     }

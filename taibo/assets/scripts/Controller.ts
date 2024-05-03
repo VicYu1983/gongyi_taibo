@@ -1,4 +1,4 @@
-import { _decorator, Button, Camera, CCBoolean, Component, director, EventHandler, EventKeyboard, input, Input, KeyCode, log, Node, Vec3 } from 'cc';
+import { _decorator, Button, Camera, CCBoolean, Component, director, Enum, EventHandler, EventKeyboard, input, Input, KeyCode, log, Node, Vec3 } from 'cc';
 import { BuildingController } from './BuildingController';
 import { Navigation } from './Navigation';
 import { EquipmentIcon } from './EquipmentIcon';
@@ -7,6 +7,12 @@ import { Equipment } from './Equipment';
 import { Model } from './Model';
 const { ccclass, property } = _decorator;
 const { requireComponent } = _decorator;
+
+export enum BUILDTYPE {
+    DEBUG,
+    PREVIEW,
+    RELEASE
+}
 
 @ccclass('Controller')
 @requireComponent(Model)
@@ -24,8 +30,8 @@ export class Controller extends Component {
     @property(Node)
     uiNode: Node;
 
-    @property(CCBoolean)
-    isBuild: Boolean = false;
+    @property({ type: Enum(BUILDTYPE) })
+    buildType = BUILDTYPE.DEBUG;
 
     private building: BuildingController;
     private isScifi = false;
@@ -78,16 +84,21 @@ export class Controller extends Component {
 
         input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
 
-        if (this.isBuild) {
-            this.uiNode.active = false;
+        switch (this.buildType) {
+            case BUILDTYPE.DEBUG:
+                break;
+            case BUILDTYPE.PREVIEW:
+                this.uiNode.active = false;
+                break;
+            case BUILDTYPE.RELEASE:
+                this.uiNode.active = false;
 
-            this.buildingTaibo.closeBuilding();
-            this.buildingXuku.closeBuilding();
+                this.buildingTaibo.closeBuilding();
+                this.buildingXuku.closeBuilding();
 
-            this.callWeb("cocosReady", null);
-        } else {
+                this.callWeb("cocosReady", null);
+                break;
 
-            this.changeToTaibo();
         }
     }
 
