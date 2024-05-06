@@ -25,8 +25,9 @@ CCEffect %{
         albedoScale:                      { value: [1.0, 1.0, 1.0], target: albedoScaleAndCutoff.xyz }
         roughness:                        { value: 0.0, target: pbrParams.y, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
         specularIntensity:                { value: 0.5, target: pbrParams.w, editor: { slide: true, range: [0.0, 1.0], step: 0.001 } }
-        buildingHeight:                   { value: 0.0, target: ditherParams.r, editor: { slide: true, range: [0.0, 3.0], step: 0.001 } }
-        buildingFloor:                    { value: 0.0, target: ditherParams.g, editor: { slide: true, range: [-3.0, 3.0], step: 0.001 } }
+        blendRange:                       { value: 0.3, target: ditherParams.r, editor: { slide: true, range: [0.001, 5.0], step: 0.001 } }
+        blendFloorY:                      { value: 0.0, target: ditherParams.g, editor: { slide: true, range: [-5.0, 5.0], step: 0.001 } }
+        blendValue:                       { value: -0.3, target: ditherParams.a, editor: { slide: true, range: [-5.0, 5.0], step: 0.001 } }
         opacity:                          { value: 1.0, target: ditherParams.b, editor: { slide: true, range: [0.0, 1.0], step: 0.001 } }
         F0:                               { value: 0.5, target: emissiveScaleParam.x, editor: { slide: true, range: [0, 1.0], step: 0.001 } }
         F90:                              { value: 0.9, target: emissiveScaleParam.y, editor: { slide: true, range: [0.0, 1.0], step: 0.001 } }
@@ -274,6 +275,7 @@ CCProgram surface-fragment %{
     #endif
 
     vec4 localPos = inverse_mat4(cc_matWorld) * vec4(FSInput_worldPos, 1.0);
+    vec4 worldPos = cc_matWorld[3];
 
     vec3 cameraDir = normalize(cc_cameraPos.xyz - FSInput_worldPos);
     float cameraDotNormal = 1.0 - dot(cameraDir, FSInput_worldNormal);
@@ -284,13 +286,15 @@ CCProgram surface-fragment %{
     float grid = gridX + gridZ;
     vec4 scifi = vec4(vec3(0.3, 0.3, 1.0) + grid, cameraDotNormal + grid);
 
-    float ditherRange = (1.0 - ((FSInput_worldPos.y + ditherParams.g) / (ditherParams.r + ditherParams.g)));
-    ditherRange = clamp(ditherRange, 0.0, 1.0);
+    float staticY = -ditherParams.g;
+    float dynamicY = -ditherParams.a;
+    float height = ditherParams.r;
+    float ditherRange = ((FSInput_worldPos.y + staticY + dynamicY) / height);
+    ditherRange = 1.0 - clamp(ditherRange, 0.0, 1.0);
 
     float ditherBlend = mix(1.0, scifi.a, ditherRange);
     
     ditherTAA(1280.0, 720.0, ditherBlend * ditherParams.b);
-
 
     baseColor.rgb *= albedoScaleAndCutoff.xyz;
     return baseColor;

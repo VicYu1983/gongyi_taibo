@@ -18,6 +18,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property([Node])
     buildingFloor: Node[] = [];
 
+    @property([CCFloat])
+    buildingFloorHeight: number[] = [];
+
     @property(Node)
     prefabEquipmentIcon: Node;
 
@@ -39,9 +42,6 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property(Light)
     light: Light;
 
-    @property(CCFloat)
-    buildingTargetHeight = 0.0;
-
     @property({ type: Enum(EquipmentState) })
     currentState: EquipmentState = EquipmentState.NORMAL;
 
@@ -60,7 +60,8 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property(CCFloat)
     speed: number = 1.0;
 
-    private buildingHeight: number = 0;
+    private bulidingTargetBlendValue = -0.3;
+    private bulidingBlendValue: number = -0.3;
     private buildingFloorTargetOpacity: number[] = [];
     private buildingFloorCurrentOpacity: number[] = [];
     private buildingFloorMesh: MeshRenderer[] = [];
@@ -79,6 +80,17 @@ export class BuildingController extends Component implements IEnviromentChanger 
             this.buildingFloorTargetOpacity.push((floor.active == true) ? 1 : 0);
             this.buildingFloorCurrentOpacity.push((floor.active == true) ? 1 : 0);
             this.buildingFloorMesh.push(floor.getComponent(MeshRenderer));
+        });
+
+        this.buildingFloorMesh.forEach((mesh, id, ary) => {
+            const height = this.buildingFloorHeight[id];
+            mesh.materials.forEach((material, mid, ary) => {
+                if (this.checkIsDither(material)) {
+                    material.setProperty("blendRange", 0.3);
+                    material.setProperty("blendValue", 0);
+                    material.setProperty("blendFloorY", height);
+                }
+            })
         });
 
         // 自動抓取equipment
@@ -180,7 +192,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.buildingFloorMesh.forEach((mesh, id, ary) => {
             mesh.materials.forEach((material, id, matAry) => {
                 if (this.checkIsDither(material)) {
-                    material.setProperty("buildingHeight", this.buildingHeight);
+                    material.setProperty("blendValue", this.bulidingBlendValue);
                 }
             });
         });
@@ -200,7 +212,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     toNormal() {
-        this.buildingTargetHeight = 0;
+        this.bulidingTargetBlendValue = -0.3;
         this.postProcess.targetBloom = 0;
         this.floor.targetFloorEmissive = 0.5;
         this.particle.stopEmitting();
@@ -210,7 +222,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.light.node.active = true;
     }
     toScifi() {
-        this.buildingTargetHeight = 3;
+        this.bulidingTargetBlendValue = .5;
         this.postProcess.targetBloom = 1;
         this.floor.targetFloorEmissive = 1;
         this.particle.play();
@@ -241,7 +253,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
             }
         });
 
-        this.buildingHeight += (this.buildingTargetHeight - this.buildingHeight) * deltaTime * this.speed;
+        this.bulidingBlendValue += (this.bulidingTargetBlendValue - this.bulidingBlendValue) * deltaTime * this.speed;
         this.updateMaterialParams();
 
     }

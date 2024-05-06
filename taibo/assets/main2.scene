@@ -1515,7 +1515,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": false
+    "value": true
   },
   {
     "__type__": "cc.TargetInfo",
@@ -1547,7 +1547,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": false
+    "value": true
   },
   {
     "__type__": "cc.TargetInfo",
@@ -11872,6 +11872,13 @@
       null,
       null
     ],
+    "buildingFloorHeight": [
+      -0.2,
+      0,
+      0.5,
+      1,
+      1.5
+    ],
     "prefabEquipmentIcon": {
       "__id__": 336
     },
@@ -11893,7 +11900,6 @@
     "light": {
       "__id__": 3
     },
-    "buildingTargetHeight": 0,
     "currentState": 1,
     "currentType": 0,
     "currentFloor": 1,
@@ -16929,6 +16935,7 @@
         "__id__": 733
       }
     ],
+    "buildingFloorHeight": [],
     "prefabEquipmentIcon": {
       "__id__": 336
     },
@@ -16950,7 +16957,6 @@
     "light": {
       "__id__": 3
     },
-    "buildingTargetHeight": 0,
     "currentState": 1,
     "currentType": 0,
     "currentFloor": 0,
