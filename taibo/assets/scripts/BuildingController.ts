@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3 } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -8,6 +8,7 @@ import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, Equipm
 import { Navigation } from './Navigation';
 import { BackgroundController } from './BackgroundController';
 import { IEnviromentChanger } from './IEnviromentChanger';
+import { Controller } from './Controller';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -126,7 +127,13 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
-        model.setState(EquipmentState.ALARM1);
+        // model.setState(EquipmentState.ALARM1);
+        const equipment = model.node;
+
+        const pos = equipment.getPosition();
+        const rot = new Vec3();
+        equipment.getRotation().getEulerAngles(rot);
+        this.navigation.setTargetPositionAndRotation(pos, rot);
     }
 
     // protected onLoad(): void {
