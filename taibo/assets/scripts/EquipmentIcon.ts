@@ -1,4 +1,4 @@
-import { _decorator, Animation, Button, Camera, Color, Component, Label, log, Node, NodeEventType, Size, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
+import { _decorator, animation, Animation, Button, Camera, Color, Component, Label, log, Node, NodeEventType, Size, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
 import { EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Navigation } from './Navigation';
 const { ccclass, property } = _decorator;
@@ -45,10 +45,14 @@ export class EquipmentIcon extends Component {
     hovers: Node[] = [];
 
     private bubbleNormalSize = new Size(200, 89);
+    private bubbleSizeCurrent = this.bubbleNormalSize.clone();
+    private bubbleSizeTarget = this.bubbleNormalSize.clone();
 
     private isHover = false;
 
     private iconBackNormalLocation = new Vec3(42, 51, 0);
+    private iconBackLocationCurrent = this.iconBackNormalLocation.clone();
+    private iconBackLocationTarget = this.iconBackNormalLocation.clone();
 
     private nameNormalLocaiton = new Vec3(20, 0, 0);
     private nameHoverLocaiton = new Vec3(20, 7, 0);
@@ -56,7 +60,13 @@ export class EquipmentIcon extends Component {
     private locationNormalLocaiton = new Vec3(20, 0, 0);
     private locationHoverLocaiton = new Vec3(20, -14, 0);
 
+    private animationComponent;
+    private camera;
+    private screenPosition: Vec3 = new Vec3();
+
     start() {
+        this.animationComponent = this.getComponent(Animation);
+        this.camera = this.navigation.getComponent(Camera);
 
         this.model.node.on(EquipmentModel.ON_CHANGE, this.onModelChange, this);
         this.onModelChange();
@@ -66,9 +76,9 @@ export class EquipmentIcon extends Component {
 
     addListener() {
         this.removeListener();
-        this.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
-        this.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
-        this.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+        this.bubble.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
+        this.bubble.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
+        this.bubble.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
     }
 
     removeListener() {
@@ -78,6 +88,15 @@ export class EquipmentIcon extends Component {
     }
 
     onModelChange() {
+
+        if (!this.node.active && this.model.getShow()) {
+            this.animationComponent.play(this.animationComponent.clips[0].name);
+        }
+
+        // if (this.node.active && !this.model.getShow()) {
+        //     log("play close");
+        // }
+
         this.node.active = this.model.getShow();
 
         this.txtName.string = this.model.code;
@@ -133,9 +152,9 @@ export class EquipmentIcon extends Component {
     syncPosition() {
         if (this.model == null) return;
         const worldPosition = this.model.node.worldPosition;
-        const screenPosition = new Vec3();
-        this.navigation.getComponent(Camera).convertToUINode(worldPosition, this.node.parent, screenPosition);
-        this.node.position = screenPosition;
+
+        this.camera.convertToUINode(worldPosition, this.node.parent, this.screenPosition);
+        this.node.position = this.screenPosition;
     }
 
     onBtnClick() {
@@ -152,9 +171,13 @@ export class EquipmentIcon extends Component {
             case EquipmentType.AIR:
                 this.txtName.node.position = this.nameHoverLocaiton.clone();
                 this.txtLocation.node.position = this.locationHoverLocaiton.clone();
-                this.iconBackSprite.node.position = this.iconBackLocation[0].clone();
+                
                 this.hovers[0].active = true;
-                this.bubble.setContentSize(this.bubbleSizes[0]);
+                this.animationComponent.play(this.animationComponent.clips[1].name);
+
+                this.iconBackLocationTarget = this.iconBackLocation[0].clone();
+                this.bubbleSizeTarget = this.bubbleSizes[0].clone();
+                // this.bubble.setContentSize(this.bubbleSizes[0]);
                 break;
             case EquipmentType.AIRCONDITION:
                 this.bubble.setContentSize(this.bubbleSizes[0]);
@@ -188,8 +211,10 @@ export class EquipmentIcon extends Component {
 
         this.txtName.node.position = this.nameNormalLocaiton.clone();
         this.txtLocation.node.position = this.locationNormalLocaiton.clone();
-        this.iconBackSprite.node.position = this.iconBackNormalLocation.clone();
-        this.bubble.setContentSize(this.bubbleNormalSize);
+        this.iconBackLocationTarget = this.iconBackNormalLocation.clone();
+        // this.bubble.setContentSize(this.bubbleNormalSize);
+
+        this.bubbleSizeTarget = this.bubbleNormalSize.clone();
 
         this.hovers.forEach((node, id, ary) => {
             node.active = false;
@@ -217,6 +242,12 @@ export class EquipmentIcon extends Component {
 
     update(deltaTime: number) {
         this.syncPosition();
+        
+        this.iconBackLocationCurrent = this.iconBackLocationCurrent.lerp(this.iconBackLocationTarget, deltaTime * 10.0);
+        this.iconBackSprite.node.position = this.iconBackLocationCurrent;
+
+        this.bubbleSizeCurrent = this.bubbleSizeCurrent.lerp(this.bubbleSizeTarget, deltaTime * 10.0);
+        this.bubble.setContentSize(this.bubbleSizeCurrent);
     }
 }
 

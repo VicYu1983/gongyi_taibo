@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -60,6 +60,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property(CCFloat)
     speed: number = 1.0;
 
+    @property(CCBoolean)
+    alwaysShowIcon = true;
+
     private bulidingTargetBlendValue = -0.3;
     private bulidingBlendValue: number = -0.3;
     private buildingFloorTargetOpacity: number[] = [];
@@ -109,7 +112,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
             this.btnEquipmentIcon.push(iconNode);
         });
 
-        this.navigation.node.on(Navigation.ON_NAVIGATION_CHANGE, this.onNavigationChange, this);
+        if (!this.alwaysShowIcon) {
+            this.navigation.node.on(Navigation.ON_NAVIGATION_CHANGE, this.onNavigationChange, this);
+        }
     }
 
     onNavigationChange(active) {
