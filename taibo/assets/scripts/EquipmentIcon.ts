@@ -1,4 +1,4 @@
-import { _decorator, Animation, Button, Camera, Color, Component, Label, log, Node, NodeEventType, Sprite, SpriteFrame, Vec3 } from 'cc';
+import { _decorator, Animation, Button, Camera, Color, Component, Label, log, Node, NodeEventType, Size, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
 import { EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Navigation } from './Navigation';
 const { ccclass, property } = _decorator;
@@ -11,17 +11,23 @@ export class EquipmentIcon extends Component {
     @property(Navigation)
     navigation: Navigation;
 
-    @property(Node)
-    info: Node;
+    @property(UITransform)
+    bubble: UITransform;
 
     @property(Label)
     txtName: Label;
+
+    @property(Label)
+    txtLocation: Label;
 
     @property(EquipmentModel)
     model: EquipmentModel;
 
     @property(Sprite)
     iconBackSprite: Sprite;
+
+    @property(Vec3)
+    iconBackLocation: Vec3[] = [];
 
     @property(Sprite)
     iconSprite: Sprite;
@@ -31,6 +37,24 @@ export class EquipmentIcon extends Component {
 
     @property([Color])
     iconBackColor: Color[] = [];
+
+    @property([Size])
+    bubbleSizes: Size[] = [];
+
+    @property([Node])
+    hovers: Node[] = [];
+
+    private bubbleNormalSize = new Size(200, 89);
+
+    private isHover = false;
+
+    private iconBackNormalLocation = new Vec3(42, 51, 0);
+
+    private nameNormalLocaiton = new Vec3(20, 0, 0);
+    private nameHoverLocaiton = new Vec3(20, 7, 0);
+
+    private locationNormalLocaiton = new Vec3(20, 0, 0);
+    private locationHoverLocaiton = new Vec3(20, -14, 0);
 
     start() {
 
@@ -119,14 +143,76 @@ export class EquipmentIcon extends Component {
     }
 
     onBtnHover() {
-        // if (this.info.active) return;
-        // this.info.active = true;
-        // this.node.getComponent(Animation).play(this.node.getComponent(Animation).clips[0].name);
+        if (this.isHover) return;
+        this.isHover = true;
+
+        this.txtLocation.node.active = true;
+
+        switch (this.model.type) {
+            case EquipmentType.AIR:
+                this.txtName.node.position = this.nameHoverLocaiton.clone();
+                this.txtLocation.node.position = this.locationHoverLocaiton.clone();
+                this.iconBackSprite.node.position = this.iconBackLocation[0].clone();
+                this.hovers[0].active = true;
+                this.bubble.setContentSize(this.bubbleSizes[0]);
+                break;
+            case EquipmentType.AIRCONDITION:
+                this.bubble.setContentSize(this.bubbleSizes[0]);
+                break;
+            case EquipmentType.CCTV:
+                this.bubble.setContentSize(this.bubbleSizes[0]);
+                break;
+            case EquipmentType.EARTHQUAKE:
+                this.bubble.setContentSize(this.bubbleSizes[0]);
+                break;
+            case EquipmentType.ELECTRIC:
+                this.bubble.setContentSize(this.bubbleSizes[0]);
+                break;
+            case EquipmentType.ENVIROMENT:
+                this.bubble.setContentSize(this.bubbleSizes[0]);
+                break;
+            case EquipmentType.FIRE:
+                this.bubble.setContentSize(this.bubbleSizes[0]);
+                break;
+            case EquipmentType.SECURITY:
+                this.bubble.setContentSize(this.bubbleSizes[0]);
+                break;
+        }
     }
 
     onBtnRelease() {
-        // if (!this.info.active) return;
-        // this.info.active = false;
+        if (!this.isHover) return;
+        this.isHover = false;
+
+        this.txtLocation.node.active = false;
+
+        this.txtName.node.position = this.nameNormalLocaiton.clone();
+        this.txtLocation.node.position = this.locationNormalLocaiton.clone();
+        this.iconBackSprite.node.position = this.iconBackNormalLocation.clone();
+        this.bubble.setContentSize(this.bubbleNormalSize);
+
+        this.hovers.forEach((node, id, ary) => {
+            node.active = false;
+        });
+
+        // switch (this.model.type) {
+        //     case EquipmentType.AIR:
+        //         break;
+        //     case EquipmentType.AIRCONDITION:
+        //         break;
+        //     case EquipmentType.CCTV:
+        //         break;
+        //     case EquipmentType.EARTHQUAKE:
+        //         break;
+        //     case EquipmentType.ELECTRIC:
+        //         break;
+        //     case EquipmentType.ENVIROMENT:
+        //         break;
+        //     case EquipmentType.FIRE:
+        //         break;
+        //     case EquipmentType.SECURITY:
+        //         break;
+        // }
     }
 
     update(deltaTime: number) {
