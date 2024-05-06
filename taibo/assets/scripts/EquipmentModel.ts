@@ -50,7 +50,7 @@ export class EquipmentModel extends Component {
     id: number;
 
     @property(CCString)
-    code:String;
+    code:string;
 
     @property({ type: Enum(EquipmentBelong) })
     belong: EquipmentBelong = EquipmentBelong.TAIBO;
