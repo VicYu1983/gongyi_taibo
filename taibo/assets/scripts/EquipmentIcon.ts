@@ -117,6 +117,11 @@ export class EquipmentIcon extends Component {
 
     onModelChange() {
 
+        if (this.model.getOnlyDot()) {
+            this.node.active = false;
+            return;
+        }
+
         // 播放出現動畫
         if (!this.node.active && this.model.getShow()) {
             this.animationComponent.play(this.animationComponent.clips[0].name);
@@ -201,7 +206,16 @@ export class EquipmentIcon extends Component {
         this.node.emit(EquipmentIcon.ON_CLICK, this.model);
     }
 
+    reAttach() {
+        const parent = this.node.parent;
+        this.node.removeFromParent();
+        parent.addChild(this.node);
+    }
+
     onBtnHover() {
+
+        this.reAttach();
+
         if (this.model.state == EquipmentState.ALARM1) {
             return;
         }

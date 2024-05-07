@@ -66,6 +66,8 @@ export class EquipmentModel extends Component {
 
     view: Node;
 
+    private isOnlyDot = false;
+
     private alarmable = [
         EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.CCTV, EquipmentType.ELECTRIC
     ];
@@ -93,8 +95,17 @@ export class EquipmentModel extends Component {
         this.node.emit(EquipmentModel.ON_CHANGE, this);
     }
 
+    setOnlyDot(only: boolean) {
+        this.isOnlyDot = only;
+        this.node.emit(EquipmentModel.ON_CHANGE, this);
+    }
+
     getShow() {
         return this.showOnScreen;
+    }
+
+    getOnlyDot() {
+        return this.isOnlyDot;
     }
 
     setState(state: EquipmentState) {

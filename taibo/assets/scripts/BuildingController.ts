@@ -127,8 +127,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     onNavigationChange(active) {
         if (active) {
-            this.showAllEquipment(false);
+            this.setOnlyDotAtAllEquipment(true);
         } else {
+            this.setOnlyDotAtAllEquipment(false);
             this.updateEquipmentShow();
         }
     }
@@ -160,6 +161,12 @@ export class BuildingController extends Component implements IEnviromentChanger 
     showAllEquipment(show: boolean) {
         this.equipments.forEach((equipment, id, ary) => {
             equipment.getModel().setShow(show);
+        });
+    }
+
+    setOnlyDotAtAllEquipment(only: boolean) {
+        this.equipments.forEach((equipment, id, ary) => {
+            equipment.getModel().setOnlyDot(only);
         });
     }
 
