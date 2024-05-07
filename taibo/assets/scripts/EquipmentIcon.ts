@@ -20,6 +20,28 @@ export class EquipmentIcon extends Component {
     @property(Label)
     txtLocation: Label;
 
+    // air ==========
+    @property(Label)
+    txtTemp: Label;
+
+    @property(Label)
+    txtWet: Label;
+
+    @property(Label)
+    txtCO: Label;
+
+    @property(Label)
+    txtPM: Label;
+    // air ==========
+
+    // enviroment ==========
+    @property(Label)
+    txtTemp2: Label;
+
+    @property(Label)
+    txtWet2: Label;
+    // enviroment ==========
+
     @property(EquipmentModel)
     model: EquipmentModel;
 
@@ -64,31 +86,38 @@ export class EquipmentIcon extends Component {
     private camera;
     private screenPosition: Vec3 = new Vec3();
 
-    start() {
+    protected onLoad(): void {
         this.animationComponent = this.getComponent(Animation);
         this.camera = this.navigation.getComponent(Camera);
 
         this.model.node.on(EquipmentModel.ON_CHANGE, this.onModelChange, this);
-        this.onModelChange();
-        this.addListener();
-        this.onBtnRelease();
-    }
-
-    addListener() {
-        this.removeListener();
         this.bubble.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
         this.bubble.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
         this.bubble.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
     }
 
-    removeListener() {
-        this.node.off(NodeEventType.MOUSE_UP, this.onBtnClick, this);
-        this.node.off(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
-        this.node.off(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+    start() {
+        this.onModelChange();
+        this.onBtnRelease();
+        this.closeAllHover();
     }
+
+    // addListener() {
+    //     this.removeListener();
+    //     this.bubble.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
+    //     this.bubble.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
+    //     this.bubble.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+    // }
+
+    // removeListener() {
+    //     this.node.off(NodeEventType.MOUSE_UP, this.onBtnClick, this);
+    //     this.node.off(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
+    //     this.node.off(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+    // }
 
     onModelChange() {
 
+        // 播放出現動畫
         if (!this.node.active && this.model.getShow()) {
             this.animationComponent.play(this.animationComponent.clips[0].name);
         }
@@ -98,6 +127,9 @@ export class EquipmentIcon extends Component {
         // }
 
         this.node.active = this.model.getShow();
+
+        // 這裏也需要更新hover中的東西
+        // this.onBtnHover();
 
         this.txtName.string = this.model.code;
         switch (this.model.type) {
@@ -145,7 +177,15 @@ export class EquipmentIcon extends Component {
                 break;
             case EquipmentState.NOT_ACTIVE:
                 this.iconBackSprite.color = this.iconBackColor[5];
+                this.txtTemp.string = "---";
+                this.txtWet.string = "---";
+                this.txtCO.string = "---";
+                this.txtPM.string = "---";
                 break;
+        }
+
+        if (this.model.state == EquipmentState.ALARM1) {
+            this.changeViewByModel();
         }
     }
 
@@ -162,48 +202,21 @@ export class EquipmentIcon extends Component {
     }
 
     onBtnHover() {
+        if (this.model.state == EquipmentState.ALARM1) {
+            return;
+        }
+
         if (this.isHover) return;
         this.isHover = true;
 
-        this.txtLocation.node.active = true;
-
-        switch (this.model.type) {
-            case EquipmentType.AIR:
-                this.txtName.node.position = this.nameHoverLocaiton.clone();
-                this.txtLocation.node.position = this.locationHoverLocaiton.clone();
-                
-                this.hovers[0].active = true;
-                this.animationComponent.play(this.animationComponent.clips[1].name);
-
-                this.iconBackLocationTarget = this.iconBackLocation[0].clone();
-                this.bubbleSizeTarget = this.bubbleSizes[0].clone();
-                // this.bubble.setContentSize(this.bubbleSizes[0]);
-                break;
-            case EquipmentType.AIRCONDITION:
-                this.bubble.setContentSize(this.bubbleSizes[0]);
-                break;
-            case EquipmentType.CCTV:
-                this.bubble.setContentSize(this.bubbleSizes[0]);
-                break;
-            case EquipmentType.EARTHQUAKE:
-                this.bubble.setContentSize(this.bubbleSizes[0]);
-                break;
-            case EquipmentType.ELECTRIC:
-                this.bubble.setContentSize(this.bubbleSizes[0]);
-                break;
-            case EquipmentType.ENVIROMENT:
-                this.bubble.setContentSize(this.bubbleSizes[0]);
-                break;
-            case EquipmentType.FIRE:
-                this.bubble.setContentSize(this.bubbleSizes[0]);
-                break;
-            case EquipmentType.SECURITY:
-                this.bubble.setContentSize(this.bubbleSizes[0]);
-                break;
-        }
+        this.changeViewByModel();
     }
 
     onBtnRelease() {
+        if (this.model.state == EquipmentState.ALARM1) {
+            return;
+        }
+
         if (!this.isHover) return;
         this.isHover = false;
 
@@ -212,42 +225,90 @@ export class EquipmentIcon extends Component {
         this.txtName.node.position = this.nameNormalLocaiton.clone();
         this.txtLocation.node.position = this.locationNormalLocaiton.clone();
         this.iconBackLocationTarget = this.iconBackNormalLocation.clone();
-        // this.bubble.setContentSize(this.bubbleNormalSize);
 
         this.bubbleSizeTarget = this.bubbleNormalSize.clone();
 
-        this.hovers.forEach((node, id, ary) => {
-            node.active = false;
-        });
-
-        // switch (this.model.type) {
-        //     case EquipmentType.AIR:
-        //         break;
-        //     case EquipmentType.AIRCONDITION:
-        //         break;
-        //     case EquipmentType.CCTV:
-        //         break;
-        //     case EquipmentType.EARTHQUAKE:
-        //         break;
-        //     case EquipmentType.ELECTRIC:
-        //         break;
-        //     case EquipmentType.ENVIROMENT:
-        //         break;
-        //     case EquipmentType.FIRE:
-        //         break;
-        //     case EquipmentType.SECURITY:
-        //         break;
-        // }
+        this.closeAllHover();
     }
 
     update(deltaTime: number) {
         this.syncPosition();
-        
+
         this.iconBackLocationCurrent = this.iconBackLocationCurrent.lerp(this.iconBackLocationTarget, deltaTime * 10.0);
         this.iconBackSprite.node.position = this.iconBackLocationCurrent;
 
         this.bubbleSizeCurrent = this.bubbleSizeCurrent.lerp(this.bubbleSizeTarget, deltaTime * 10.0);
         this.bubble.setContentSize(this.bubbleSizeCurrent);
+    }
+
+    private closeAllHover() {
+        this.hovers.forEach((node, id, ary) => {
+            node.active = false;
+        });
+    }
+
+    private changeViewByModel() {
+        this.closeAllHover();
+
+        this.txtLocation.node.active = true;
+        this.txtName.node.position = this.nameHoverLocaiton.clone();
+        this.txtLocation.node.position = this.locationHoverLocaiton.clone();
+
+        switch (this.model.type) {
+            case EquipmentType.AIR:
+                switch (this.model.state) {
+                    case EquipmentState.NOT_ACTIVE:
+                    case EquipmentState.NORMAL:
+                        this.showHover(0);
+                        break;
+                    case EquipmentState.ALARM1:
+                    case EquipmentState.ALARM2:
+                    case EquipmentState.ALARM3:
+                    case EquipmentState.ALARM4:
+                        this.showHover(2);
+                        break;
+                }
+                break;
+            case EquipmentType.ENVIROMENT:
+                switch (this.model.state) {
+                    case EquipmentState.NOT_ACTIVE:
+                    case EquipmentState.NORMAL:
+                        this.showHover(1);
+                        break;
+                    case EquipmentState.ALARM1:
+                    case EquipmentState.ALARM2:
+                    case EquipmentState.ALARM3:
+                    case EquipmentState.ALARM4:
+                        this.showHover(2);
+                        break;
+                }
+                break;
+            case EquipmentType.AIRCONDITION:
+            case EquipmentType.CCTV:
+            case EquipmentType.EARTHQUAKE:
+            case EquipmentType.ELECTRIC:
+            case EquipmentType.FIRE:
+            case EquipmentType.SECURITY:
+                switch (this.model.state) {
+                    case EquipmentState.NOT_ACTIVE:
+                    case EquipmentState.NORMAL:
+                        this.showHover(3);
+                        break;
+                    case EquipmentState.ALARM1:
+                    case EquipmentState.ALARM2:
+                    case EquipmentState.ALARM3:
+                    case EquipmentState.ALARM4:
+                        this.showHover(2);
+                        break;
+                }
+                break;
+        }
+    }
+
+    private showHover(id) {
+        this.hovers[id].active = true;
+        this.iconBackLocationTarget = this.iconBackLocation[id].clone();
+        this.bubbleSizeTarget = this.bubbleSizes[id].clone();
     }
 }
 

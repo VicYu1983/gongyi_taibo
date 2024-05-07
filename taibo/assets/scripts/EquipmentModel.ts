@@ -50,7 +50,7 @@ export class EquipmentModel extends Component {
     id: number;
 
     @property(CCString)
-    code:string;
+    code: string;
 
     @property({ type: Enum(EquipmentBelong) })
     belong: EquipmentBelong = EquipmentBelong.TAIBO;
@@ -63,6 +63,8 @@ export class EquipmentModel extends Component {
 
     @property({ type: Enum(EquipmentType) })
     type: EquipmentType = EquipmentType.AIR;
+
+    view: Node;
 
     private alarmable = [
         EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.CCTV, EquipmentType.ELECTRIC
@@ -91,7 +93,7 @@ export class EquipmentModel extends Component {
         this.node.emit(EquipmentModel.ON_CHANGE, this);
     }
 
-    getShow(){
+    getShow() {
         return this.showOnScreen;
     }
 

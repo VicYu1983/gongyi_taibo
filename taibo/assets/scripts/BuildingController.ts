@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3 } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -8,6 +8,7 @@ import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, Equipm
 import { Navigation } from './Navigation';
 import { BackgroundController } from './BackgroundController';
 import { IEnviromentChanger } from './IEnviromentChanger';
+import { Controller } from './Controller';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -72,6 +73,29 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private equipments: Equipment[] = [];
     btnEquipmentIcon: Node[] = [];
 
+    protected onLoad(): void {
+
+        // 自動抓取equipment
+        this.equipments = this.node.getComponentsInChildren(Equipment);
+
+        // 自動產生對應的ui
+        this.equipments.forEach((equipment, id, ary) => {
+            const iconNode = instantiate(this.prefabEquipmentIcon);
+            const icon = iconNode.getComponent(EquipmentIcon);
+            icon.navigation = this.navigation;
+            icon.model = equipment.getModel();
+            this.uiNode.addChild(iconNode);
+
+            iconNode.active = true;
+            iconNode.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
+            this.btnEquipmentIcon.push(iconNode);
+        });
+
+        if (!this.alwaysShowIcon) {
+            this.navigation.node.on(Navigation.ON_NAVIGATION_CHANGE, this.onNavigationChange, this);
+        }
+    }
+
     start() {
         this.buildingFloorTargetOpacity = [];
         this.buildingFloorCurrentOpacity = [];
@@ -96,25 +120,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
             })
         });
 
-        // 自動抓取equipment
-        this.equipments = this.node.getComponentsInChildren(Equipment);
 
-        // 自動產生對應的ui
-        this.equipments.forEach((equipment, id, ary) => {
-            const iconNode = instantiate(this.prefabEquipmentIcon);
-            const icon = iconNode.getComponent(EquipmentIcon);
-            icon.navigation = this.navigation;
-            icon.model = equipment.getModel();
-            this.uiNode.addChild(iconNode);
 
-            iconNode.active = true;
-            iconNode.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
-            this.btnEquipmentIcon.push(iconNode);
-        });
 
-        if (!this.alwaysShowIcon) {
-            this.navigation.node.on(Navigation.ON_NAVIGATION_CHANGE, this.onNavigationChange, this);
-        }
     }
 
     onNavigationChange(active) {
@@ -126,7 +134,13 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
-        model.setState(EquipmentState.ALARM1);
+        // model.setState(EquipmentState.ALARM1);
+        const equipment = model.node;
+
+        const pos = equipment.getPosition();
+        const rot = new Vec3();
+        equipment.getRotation().getEulerAngles(rot);
+        this.navigation.setTargetPositionAndRotation(pos, rot);
     }
 
     // protected onLoad(): void {

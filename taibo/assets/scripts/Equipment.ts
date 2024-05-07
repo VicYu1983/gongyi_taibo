@@ -30,9 +30,12 @@ export class Equipment extends Component {
 
     currentColor: Color = this.normalColor;
 
+    protected onLoad(): void {
+        this.getModel().node.on(EquipmentModel.ON_CHANGE, this.onModelStateChange, this);
+    }
+
     start() {
         this.currentColor = this.normalColor.clone();
-        this.getModel().node.on(EquipmentModel.ON_CHANGE, this.onModelStateChange, this);
         this.onModelStateChange(this.getModel());
     }
 
