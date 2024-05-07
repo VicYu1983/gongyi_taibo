@@ -264,6 +264,14 @@ export class Controller extends Component {
         this.building.openBuilding(2);
     }
 
+    changeFloorN3F(floor: number) {
+        this.building.openBuilding(3);
+    }
+
+    changeFloorN4F(floor: number) {
+        this.building.openBuilding(4);
+    }
+
     changeToTaibo() {
         this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.TAIBO);
         this.buildingXuku.changeEquipmentBelong(EquipmentBelong.TAIBO);
