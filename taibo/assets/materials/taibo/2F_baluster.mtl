@@ -79,6 +79,13 @@
   ],
   "_props": [
     {
+      "tilingOffset": {
+        "__type__": "cc.Vec4",
+        "x": 30,
+        "y": 30,
+        "z": 0,
+        "w": 0
+      },
       "mainColor": {
         "__type__": "cc.Color",
         "r": 223,
@@ -87,6 +94,7 @@
         "a": 255
       },
       "roughness": 0.8,
+      "normalStrength": 0.02,
       "mainTexture": {
         "__uuid__": "1954318d-d24c-4a52-8830-8955147bf83c@6c48a",
         "__expectedType__": "cc.Texture2D"
