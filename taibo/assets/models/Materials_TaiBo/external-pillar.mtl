@@ -94,7 +94,7 @@
         "a": 255
       },
       "roughness": 0.8,
-      "normalStrength": 0.8,
+      "normalStrength": 2,
       "mainTexture": {
         "__uuid__": "4df66363-5d4e-495b-b65b-4c4bdf17645f@6c48a",
         "__expectedType__": "cc.Texture2D"

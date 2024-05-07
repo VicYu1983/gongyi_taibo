@@ -93,13 +93,8 @@
         "b": 223,
         "a": 255
       },
-      "emissive": {
-        "__type__": "cc.Color",
-        "r": 255,
-        "g": 255,
-        "b": 255,
-        "a": 255
-      },
+      "roughness": 0,
+      "normalStrength": 0.4,
       "mainTexture": {
         "__uuid__": "4b1b0047-ba41-4dda-a87d-b2fa550c35d6@6c48a",
         "__expectedType__": "cc.Texture2D"
