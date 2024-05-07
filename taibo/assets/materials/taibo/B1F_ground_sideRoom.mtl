@@ -81,8 +81,8 @@
     {
       "tilingOffset": {
         "__type__": "cc.Vec4",
-        "x": 1,
-        "y": 4,
+        "x": 40,
+        "y": 20,
         "z": 0,
         "w": 0
       },
@@ -94,18 +94,17 @@
         "a": 255
       },
       "roughness": 0.8,
-      "metallic": 0.2,
-      "normalStrength": 3,
+      "specularIntensity": 0.2,
       "mainTexture": {
-        "__uuid__": "4b1b0047-ba41-4dda-a87d-b2fa550c35d6@6c48a",
+        "__uuid__": "22972539-b225-47c0-a7c1-4ab257c63a16@6c48a",
         "__expectedType__": "cc.Texture2D"
       },
       "normalMap": {
-        "__uuid__": "65693fb9-b819-46d0-812c-077e6715c88a@6c48a",
+        "__uuid__": "9bf69948-69c1-48b6-86f8-f9c2423ac752@6c48a",
         "__expectedType__": "cc.Texture2D"
       },
       "pbrMap": {
-        "__uuid__": "408c7adf-1efa-4c27-a0f8-0462a98a30b5@6c48a",
+        "__uuid__": "7b396e0b-ca8f-48ab-bbaf-c6616c4f8fa3@6c48a",
         "__expectedType__": "cc.Texture2D"
       }
     },
