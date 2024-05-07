@@ -86,29 +86,34 @@ export class EquipmentIcon extends Component {
     private camera;
     private screenPosition: Vec3 = new Vec3();
 
-    start() {
+    protected onLoad(): void {
         this.animationComponent = this.getComponent(Animation);
         this.camera = this.navigation.getComponent(Camera);
 
         this.model.node.on(EquipmentModel.ON_CHANGE, this.onModelChange, this);
-        this.onModelChange();
-        this.addListener();
-        this.onBtnRelease();
-        this.closeAllHover();
-    }
-
-    addListener() {
-        this.removeListener();
         this.bubble.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
         this.bubble.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
         this.bubble.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
     }
 
-    removeListener() {
-        this.node.off(NodeEventType.MOUSE_UP, this.onBtnClick, this);
-        this.node.off(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
-        this.node.off(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+    start() {
+        this.onModelChange();
+        this.onBtnRelease();
+        this.closeAllHover();
     }
+
+    // addListener() {
+    //     this.removeListener();
+    //     this.bubble.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
+    //     this.bubble.node.on(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
+    //     this.bubble.node.on(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+    // }
+
+    // removeListener() {
+    //     this.node.off(NodeEventType.MOUSE_UP, this.onBtnClick, this);
+    //     this.node.off(NodeEventType.MOUSE_MOVE, this.onBtnHover, this);
+    //     this.node.off(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
+    // }
 
     onModelChange() {
 

@@ -73,6 +73,29 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private equipments: Equipment[] = [];
     btnEquipmentIcon: Node[] = [];
 
+    protected onLoad(): void {
+
+        // 自動抓取equipment
+        this.equipments = this.node.getComponentsInChildren(Equipment);
+
+        // 自動產生對應的ui
+        this.equipments.forEach((equipment, id, ary) => {
+            const iconNode = instantiate(this.prefabEquipmentIcon);
+            const icon = iconNode.getComponent(EquipmentIcon);
+            icon.navigation = this.navigation;
+            icon.model = equipment.getModel();
+            this.uiNode.addChild(iconNode);
+
+            iconNode.active = true;
+            iconNode.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
+            this.btnEquipmentIcon.push(iconNode);
+        });
+
+        if (!this.alwaysShowIcon) {
+            this.navigation.node.on(Navigation.ON_NAVIGATION_CHANGE, this.onNavigationChange, this);
+        }
+    }
+
     start() {
         this.buildingFloorTargetOpacity = [];
         this.buildingFloorCurrentOpacity = [];
@@ -97,25 +120,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
             })
         });
 
-        // 自動抓取equipment
-        this.equipments = this.node.getComponentsInChildren(Equipment);
 
-        // 自動產生對應的ui
-        this.equipments.forEach((equipment, id, ary) => {
-            const iconNode = instantiate(this.prefabEquipmentIcon);
-            const icon = iconNode.getComponent(EquipmentIcon);
-            icon.navigation = this.navigation;
-            icon.model = equipment.getModel();
-            this.uiNode.addChild(iconNode);
 
-            iconNode.active = true;
-            iconNode.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
-            this.btnEquipmentIcon.push(iconNode);
-        });
 
-        if (!this.alwaysShowIcon) {
-            this.navigation.node.on(Navigation.ON_NAVIGATION_CHANGE, this.onNavigationChange, this);
-        }
     }
 
     onNavigationChange(active) {

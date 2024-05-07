@@ -42,6 +42,11 @@ export class Controller extends Component {
     isUp: boolean;
     isDown: boolean;
 
+    protected onLoad(): void {
+
+        input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
+    }
+
     start() {
 
         this.building = this.buildingTaibo;
@@ -62,12 +67,62 @@ export class Controller extends Component {
             backToInit: function () {
                 self.onBackCameraClick();
             },
-            showAirEquipment() {
-                self.changeToAir();
+            showAir(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToAirAlarm();
+                } else {
+                    self.changeToAir();
+                }
             },
-            // showCarbonEquipment() {
-            //     self.changeToCarbon();
-            // },
+            showAirCondition(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToAirConditionAlarm();
+                } else {
+                    self.changeToAirCondition();
+                }
+            },
+            showEnviroment(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToEnviromentAlarm();
+                } else {
+                    self.changeToEnviroment();
+                }
+            },
+            showSecurity(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToSecurityAlarm();
+                } else {
+                    self.changeToSecurity();
+                }
+            },
+            showCCTV(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToCCTVAlarm();
+                } else {
+                    self.changeToCCTV();
+                }
+            },
+            showEarthquake(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToEarthquakeAlarm();
+                } else {
+                    self.changeToEarthquake();
+                }
+            },
+            showElectric(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToElectricAlarm();
+                } else {
+                    self.changeToElectric();
+                }
+            },
+            showFire(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToFireAlarm();
+                } else {
+                    self.changeToFire();
+                }
+            },
             changeToTaibo() {
                 self.changeToTaibo();
             },
@@ -77,12 +132,7 @@ export class Controller extends Component {
             toggleScifi() {
                 self.toggleScifi();
             }
-            // getEquipmentScreenPos() {
-            //     return self.getEquipmentScreenPos();
-            // }
         }
-
-        input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
 
         switch (this.buildType) {
             case BUILDTYPE.DEBUG:
@@ -110,7 +160,7 @@ export class Controller extends Component {
     }
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
-        this.callWeb("onClickEquipment", model.id);
+        this.callWeb("onClickEquipment", model);
     }
 
     // changeToCarbon() {
