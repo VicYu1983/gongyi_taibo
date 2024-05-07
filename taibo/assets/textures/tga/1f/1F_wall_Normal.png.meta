@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "fa4f6160-be96-4b4e-bf09-92535e59e803",
+  "uuid": "cef07d65-3c5f-4eed-b5b9-4c55ea3ad6f0",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "3c318": {
       "importer": "texture",
-      "uuid": "fa4f6160-be96-4b4e-bf09-92535e59e803@3c318",
+      "uuid": "cef07d65-3c5f-4eed-b5b9-4c55ea3ad6f0@3c318",
       "displayName": "1F_wall_Normal",
       "id": "3c318",
       "name": "normalMap",
@@ -36,6 +36,6 @@
     "hasAlpha": false,
     "type": "normal map",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "fa4f6160-be96-4b4e-bf09-92535e59e803@3c318"
+    "redirect": "cef07d65-3c5f-4eed-b5b9-4c55ea3ad6f0@3c318"
   }
 }

@@ -1,0 +1,41 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "fcb8e334-a94b-4418-bddf-c32b783a00a1",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "3c318": {
+      "importer": "texture",
+      "uuid": "fcb8e334-a94b-4418-bddf-c32b783a00a1@3c318",
+      "displayName": "1F_stair_Normal",
+      "id": "3c318",
+      "name": "normalMap",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "fcb8e334-a94b-4418-bddf-c32b783a00a1"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": false,
+    "type": "normal map",
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "fcb8e334-a94b-4418-bddf-c32b783a00a1@3c318"
+  }
+}

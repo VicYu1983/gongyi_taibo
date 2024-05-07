@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "fcb8e334-a94b-4418-bddf-c32b783a00a1",
+  "uuid": "d6acfe28-23c2-400c-b0a9-13eedd4ad7cb",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "3c318": {
       "importer": "texture",
-      "uuid": "fcb8e334-a94b-4418-bddf-c32b783a00a1@3c318",
+      "uuid": "d6acfe28-23c2-400c-b0a9-13eedd4ad7cb@3c318",
       "displayName": "1F_stair_Normal",
       "id": "3c318",
       "name": "normalMap",
@@ -36,6 +36,6 @@
     "hasAlpha": false,
     "type": "normal map",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "fcb8e334-a94b-4418-bddf-c32b783a00a1@3c318"
+    "redirect": "d6acfe28-23c2-400c-b0a9-13eedd4ad7cb@3c318"
   }
 }

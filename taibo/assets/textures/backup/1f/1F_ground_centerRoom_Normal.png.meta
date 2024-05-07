@@ -1,0 +1,41 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "8c056a24-d5c3-472b-8aba-7c1c2aa7fa14",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "3c318": {
+      "importer": "texture",
+      "uuid": "8c056a24-d5c3-472b-8aba-7c1c2aa7fa14@3c318",
+      "displayName": "1F_ground_centerRoom_Normal",
+      "id": "3c318",
+      "name": "normalMap",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "8c056a24-d5c3-472b-8aba-7c1c2aa7fa14"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": false,
+    "type": "normal map",
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "8c056a24-d5c3-472b-8aba-7c1c2aa7fa14@3c318"
+  }
+}

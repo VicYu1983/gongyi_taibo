@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "ebc825ba-4057-4c26-84e4-428f65613375",
+  "uuid": "20e6c87b-aa77-4116-9b3f-18f8b318ff03",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ebc825ba-4057-4c26-84e4-428f65613375@6c48a",
+      "uuid": "20e6c87b-aa77-4116-9b3f-18f8b318ff03@6c48a",
       "displayName": "1F_stair_BaseColor",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ebc825ba-4057-4c26-84e4-428f65613375",
+        "imageUuidOrDatabaseUri": "20e6c87b-aa77-4116-9b3f-18f8b318ff03",
         "visible": false
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "hasAlpha": false,
     "type": "texture",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "ebc825ba-4057-4c26-84e4-428f65613375@6c48a"
+    "redirect": "20e6c87b-aa77-4116-9b3f-18f8b318ff03@6c48a"
   }
 }

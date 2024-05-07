@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "f174ddc5-e5e3-4d61-b107-2105473827d6",
+  "uuid": "9f8633e3-12d7-4833-87c2-2b618a194dfb",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "f174ddc5-e5e3-4d61-b107-2105473827d6@6c48a",
+      "uuid": "9f8633e3-12d7-4833-87c2-2b618a194dfb@6c48a",
       "displayName": "1F_stair_OcclusionRoughnessMetallic",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f174ddc5-e5e3-4d61-b107-2105473827d6",
+        "imageUuidOrDatabaseUri": "9f8633e3-12d7-4833-87c2-2b618a194dfb",
         "visible": false
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "hasAlpha": false,
     "type": "texture",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "f174ddc5-e5e3-4d61-b107-2105473827d6@6c48a"
+    "redirect": "9f8633e3-12d7-4833-87c2-2b618a194dfb@6c48a"
   }
 }

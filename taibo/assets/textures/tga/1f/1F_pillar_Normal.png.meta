@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "28b868d9-0358-4972-ab4e-ab6f96842ed8",
+  "uuid": "993408d6-abd1-4c36-b18a-e527b21addff",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "3c318": {
       "importer": "texture",
-      "uuid": "28b868d9-0358-4972-ab4e-ab6f96842ed8@3c318",
+      "uuid": "993408d6-abd1-4c36-b18a-e527b21addff@3c318",
       "displayName": "1F_pillar_Normal",
       "id": "3c318",
       "name": "normalMap",
@@ -36,6 +36,6 @@
     "hasAlpha": true,
     "type": "normal map",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "28b868d9-0358-4972-ab4e-ab6f96842ed8@3c318"
+    "redirect": "993408d6-abd1-4c36-b18a-e527b21addff@3c318"
   }
 }

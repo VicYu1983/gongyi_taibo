@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "e667d49c-6eac-48c9-9e54-d5780733b9ef",
+  "uuid": "677ff343-3981-49d6-94c7-2d3813ba74df",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "e667d49c-6eac-48c9-9e54-d5780733b9ef@6c48a",
+      "uuid": "677ff343-3981-49d6-94c7-2d3813ba74df@6c48a",
       "displayName": "external-roof_OcclusionRoughnessMetallic",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e667d49c-6eac-48c9-9e54-d5780733b9ef",
+        "imageUuidOrDatabaseUri": "677ff343-3981-49d6-94c7-2d3813ba74df",
         "visible": false
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "hasAlpha": false,
     "type": "texture",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "e667d49c-6eac-48c9-9e54-d5780733b9ef@6c48a"
+    "redirect": "677ff343-3981-49d6-94c7-2d3813ba74df@6c48a"
   }
 }

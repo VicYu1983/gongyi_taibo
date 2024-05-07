@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "3a2e69ce-2ec3-4f7c-abb0-5b2ddaa75817",
+  "uuid": "3b286bdd-28f3-4e5a-ab94-d636f6ee970c",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "3a2e69ce-2ec3-4f7c-abb0-5b2ddaa75817@6c48a",
+      "uuid": "3b286bdd-28f3-4e5a-ab94-d636f6ee970c@6c48a",
       "displayName": "external-roof_BaseColor",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "3a2e69ce-2ec3-4f7c-abb0-5b2ddaa75817",
+        "imageUuidOrDatabaseUri": "3b286bdd-28f3-4e5a-ab94-d636f6ee970c",
         "visible": false
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "hasAlpha": false,
     "type": "texture",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "3a2e69ce-2ec3-4f7c-abb0-5b2ddaa75817@6c48a"
+    "redirect": "3b286bdd-28f3-4e5a-ab94-d636f6ee970c@6c48a"
   }
 }

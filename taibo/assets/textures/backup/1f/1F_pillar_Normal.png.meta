@@ -1,0 +1,41 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "28b868d9-0358-4972-ab4e-ab6f96842ed8",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "3c318": {
+      "importer": "texture",
+      "uuid": "28b868d9-0358-4972-ab4e-ab6f96842ed8@3c318",
+      "displayName": "1F_pillar_Normal",
+      "id": "3c318",
+      "name": "normalMap",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "28b868d9-0358-4972-ab4e-ab6f96842ed8"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "normal map",
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "28b868d9-0358-4972-ab4e-ab6f96842ed8@3c318"
+  }
+}

@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "ed30b6b9-8018-4425-9a4f-fa349731a747",
+  "uuid": "5b78f202-0263-4b8a-bd17-b82e903876f0",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "3c318": {
       "importer": "texture",
-      "uuid": "ed30b6b9-8018-4425-9a4f-fa349731a747@3c318",
+      "uuid": "5b78f202-0263-4b8a-bd17-b82e903876f0@3c318",
       "displayName": "1F_pillar_Nor",
       "id": "3c318",
       "name": "normalMap",
@@ -36,6 +36,6 @@
     "hasAlpha": true,
     "type": "normal map",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "ed30b6b9-8018-4425-9a4f-fa349731a747@3c318"
+    "redirect": "5b78f202-0263-4b8a-bd17-b82e903876f0@3c318"
   }
 }
