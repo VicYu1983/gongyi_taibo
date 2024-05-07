@@ -184,10 +184,6 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     hideAllFloor() {
-        // this.buildingFloor.forEach((floor, id, ary) => {
-        //     floor.active = false;
-        // });
-
         for (let i = 0; i < this.buildingFloorTargetOpacity.length; ++i) {
             this.buildingFloorTargetOpacity[i] = 0;
         }

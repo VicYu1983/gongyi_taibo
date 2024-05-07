@@ -147,23 +147,23 @@
       "skeletons": [],
       "textures": [],
       "materials": [
-        "2beaeece-2882-4b0a-9ccb-5073686f3246",
-        "2b324035-27c5-476e-97db-142b72c9397b",
-        "b9ffb936-de2b-4c18-a035-cdb22da17364",
-        "ffe2e14f-1d55-43aa-824e-c016e345983b",
-        "14d10f2c-6d30-4819-9ed2-5d311480d8b6",
-        "245615b8-dfa0-4b33-829f-829a9fd09ed6",
-        "b3526373-6997-4854-8df0-d446f1444a6d",
-        "fb29d09d-fbdc-4ab5-b40a-d309aaf7f6f2",
-        "3787c741-5aa7-4148-aa62-3fd222fc7519",
-        "19840311-a47c-43a8-9db1-3952f37b4ef7",
-        "9af56968-657c-4dd3-b324-4aa426b5eca2",
-        "fe5d13e7-daa6-4b4b-8903-1b357f1f1195",
-        "edd3262c-ebc7-4d20-8795-ef7327e29b09",
-        "c6fe5021-4a4a-4647-b6ce-e770216de0c7",
-        "54d10a76-8d72-4ee6-8a1e-49df42c77a83",
-        "2eaa1601-6539-4b9c-8e9a-778e27a599d6",
-        "62d4723e-edcc-4cb4-b940-ba61fa56429c"
+        "3f9caff8-91e3-4f64-aa34-97e0005d165d",
+        "c880aee5-ae6f-4709-9b50-2ae3f9aecdb1",
+        "16d91281-9050-4900-bc51-35d2ef7ac1b3",
+        "96f43658-2a5b-4351-a74f-b6cb05d69390",
+        "b307c934-955e-4fed-a175-e7d485c97f74",
+        "5b133a55-9660-4e45-9716-e43f5542e702",
+        "84cfb263-8370-46be-bdbd-bcda4617f808",
+        "3396e3b8-1570-445c-b236-4cb6d36fe75e",
+        "b608356a-dde6-4219-9691-13a1c039229d",
+        "92d26459-e928-411c-afb4-48e46c23b879",
+        "3dd430b6-10ad-49a6-aeeb-7dbec105e84a",
+        "575cae11-6aba-4c72-9ed1-9fcb7d41f1b0",
+        "fb4c2d95-0fc6-4724-b86b-ede301cebca5",
+        "2141f2a3-0506-48e4-b3bd-1a226e5f5785",
+        "656821d1-019e-42f0-b2ed-ca6c25810623",
+        "59eed25f-5bde-4641-9d9e-74bf94a5fffa",
+        "199f3fe0-4970-4b0b-82af-3a8930775687"
       ],
       "scenes": [
         "59921ec2-e06b-41f6-bc78-3df574e0baab@d4125"
@@ -1634,6 +1634,22 @@
       }
     },
     "dumpMaterials": true,
-    "materialDumpDir": "db://assets/models/Materials_TaiBo"
+    "materialDumpDir": "db://assets/models/Materials_TaiBo",
+    "meshOptimize": {
+      "enable": true,
+      "vertexCache": true,
+      "vertexFetch": true,
+      "overdraw": true
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": true,
+      "compress": true,
+      "quantize": false
+    },
+    "meshSimplify": {
+      "targetRatio": 0.5,
+      "enable": false
+    }
   }
 }

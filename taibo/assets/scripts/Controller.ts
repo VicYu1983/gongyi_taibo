@@ -276,7 +276,7 @@ export class Controller extends Component {
         this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.TAIBO);
         this.buildingXuku.changeEquipmentBelong(EquipmentBelong.TAIBO);
 
-        this.buildingTaibo.openBuilding(1);
+        this.buildingTaibo.openBuilding(0);
         this.buildingXuku.closeBuilding();
 
         this.building = this.buildingTaibo;
