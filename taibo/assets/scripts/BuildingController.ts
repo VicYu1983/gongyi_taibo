@@ -22,6 +22,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property([CCFloat])
     buildingFloorHeight: number[] = [];
 
+    @property({ type: Enum(EquipmentFloor) })
+    buildingFloorEnum: EquipmentFloor[] = [];
+
     @property(Node)
     prefabEquipmentIcon: Node;
 
@@ -143,7 +146,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
-        
+
         const equipment = model.node;
 
         const pos = equipment.getPosition();
@@ -156,7 +159,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     //     BatchingUtility.batchStaticModel(this.node, this.node);
     // }
 
-    openBuilding(floor: number = 0) {
+    openBuilding(floor: EquipmentFloor) {
         this.showFloor(floor);
         this.changeEquipmentFloor(floor);
     }
@@ -204,8 +207,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
         }
     }
 
-    showFloor(id: number = 0) {
+    showFloor(floor: EquipmentFloor) {
         this.hideAllFloor();
+        const id = this.buildingFloorEnum.indexOf(floor);
         this.buildingFloorTargetOpacity[id] = 1;
         this.buildingFloor[id].active = true;
     }

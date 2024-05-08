@@ -99,9 +99,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
+      "x": 0.01,
+      "y": 0.01,
+      "z": 0.01
     },
     "_mobility": 0,
     "_layer": 1073741824,
@@ -121,7 +121,7 @@
     "node": {
       "__id__": 2
     },
-    "_enabled": false,
+    "_enabled": true,
     "__prefab": {
       "__id__": 4
     },
@@ -346,6 +346,48 @@
     "alarmIcon": {
       "__id__": 8
     },
+    "normalColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 224,
+      "b": 255,
+      "a": 255
+    },
+    "notActiveColor": {
+      "__type__": "cc.Color",
+      "r": 144,
+      "g": 144,
+      "b": 144,
+      "a": 255
+    },
+    "alarm1Color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 55,
+      "b": 55,
+      "a": 255
+    },
+    "alarm2Color": {
+      "__type__": "cc.Color",
+      "r": 245,
+      "g": 166,
+      "b": 47,
+      "a": 255
+    },
+    "alarm3Color": {
+      "__type__": "cc.Color",
+      "r": 70,
+      "g": 249,
+      "b": 88,
+      "a": 255
+    },
+    "alarm4Color": {
+      "__type__": "cc.Color",
+      "r": 22,
+      "g": 94,
+      "b": 255,
+      "a": 255
+    },
     "_id": ""
   },
   {
@@ -361,6 +403,7 @@
       "__id__": 0
     },
     "fileId": "cfA4yTRmxDNaarLO6Jxsw9",
+    "instance": null,
     "targetOverrides": null
   }
 ]

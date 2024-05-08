@@ -2,7 +2,7 @@ import { _decorator, Button, Camera, CCBoolean, Component, director, Enum, Event
 import { BuildingController } from './BuildingController';
 import { Navigation } from './Navigation';
 import { EquipmentIcon } from './EquipmentIcon';
-import { EquipmentBelong, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
+import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Equipment } from './Equipment';
 import { Model } from './Model';
 const { ccclass, property } = _decorator;
@@ -62,7 +62,13 @@ export class Controller extends Component {
         const self = this;
         window["cocos"] = {
             openFloor: function (id = 0) {
-                self.building.openBuilding(id);
+                switch (id) {
+                    case 0: self.building.openBuilding(EquipmentFloor.B1F); break;
+                    case 1: self.building.openBuilding(EquipmentFloor.N1F); break;
+                    case 2: self.building.openBuilding(EquipmentFloor.N2F); break;
+                    case 3: self.building.openBuilding(EquipmentFloor.N3F); break;
+                    case 4: self.building.openBuilding(EquipmentFloor.N4F); break;
+                }
             },
             backToInit: function () {
                 self.onBackCameraClick();
@@ -296,31 +302,31 @@ export class Controller extends Component {
     //     this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);
     // }
 
-    changeFloorB1F(floor: number) {
-        this.building.openBuilding(0);
+    changeFloorB1F() {
+        this.building.openBuilding(EquipmentFloor.B1F);
     }
 
-    changeFloorN1F(floor: number) {
-        this.building.openBuilding(1);
+    changeFloorN1F() {
+        this.building.openBuilding(EquipmentFloor.N1F);
     }
 
-    changeFloorN2F(floor: number) {
-        this.building.openBuilding(2);
+    changeFloorN2F() {
+        this.building.openBuilding(EquipmentFloor.N2F);
     }
 
-    changeFloorN3F(floor: number) {
-        this.building.openBuilding(3);
+    changeFloorN3F() {
+        this.building.openBuilding(EquipmentFloor.N3F);
     }
 
-    changeFloorN4F(floor: number) {
-        this.building.openBuilding(4);
+    changeFloorN4F() {
+        this.building.openBuilding(EquipmentFloor.N4F);
     }
 
     changeToTaibo() {
         this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.TAIBO);
         this.buildingXuku.changeEquipmentBelong(EquipmentBelong.TAIBO);
 
-        this.buildingTaibo.openBuilding(0);
+        this.buildingTaibo.openBuilding(EquipmentFloor.B1F);
         this.buildingXuku.closeBuilding();
 
         this.building = this.buildingTaibo;
@@ -330,7 +336,7 @@ export class Controller extends Component {
         this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.XUKU);
         this.buildingXuku.changeEquipmentBelong(EquipmentBelong.XUKU);
 
-        this.buildingXuku.openBuilding(0);
+        this.buildingXuku.openBuilding(EquipmentFloor.N1F);
         this.buildingTaibo.closeBuilding();
 
         this.building = this.buildingXuku;
