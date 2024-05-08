@@ -20,6 +20,14 @@ export class EquipmentIcon extends Component {
     @property(Label)
     txtLocation: Label;
 
+    // error =========
+    @property(Label)
+    txtTime: Label;
+
+    @property(Label)
+    txtMsg: Label;
+    // error =========
+
     // air ==========
     @property(Label)
     txtTemp: Label;
@@ -178,17 +186,39 @@ export class EquipmentIcon extends Component {
                 this.iconBackSprite.color = this.iconBackColor[3];
                 break;
             case EquipmentState.ALARM4:
-                this.iconBackSprite.color = this.iconBackColor[4];
                 break;
             case EquipmentState.NOT_ACTIVE:
                 this.iconBackSprite.color = this.iconBackColor[5];
+
+                // air
                 this.txtTemp.string = "---";
                 this.txtWet.string = "---";
                 this.txtCO.string = "---";
                 this.txtPM.string = "---";
+
+                // enviroment
+                this.txtTemp2.string = "---";
+                this.txtWet2.string = "---";
                 break;
         }
 
+        switch (this.model.type) {
+            case EquipmentType.AIR:
+                this.txtTemp.string = this.model.getData().temp + " °C";
+                this.txtWet.string = this.model.getData().wet + " %rH";
+                this.txtCO.string = this.model.getData().co2 + " ppm";
+                this.txtPM.string = this.model.getData().pm + " μg/m3";
+                break;
+            case EquipmentType.ENVIROMENT:
+                this.txtTemp2.string = this.model.getData().temp + " °C";
+                this.txtWet2.string = this.model.getData().wet + " %rH";
+                break;
+        }
+
+        this.txtTime.string = this.model.getTime();
+        this.txtMsg.string = this.model.getMessage();
+
+        // alarm的强制顯示展開
         if (this.model.state == EquipmentState.ALARM1) {
             this.changeViewByModel();
         }
@@ -305,8 +335,9 @@ export class EquipmentIcon extends Component {
             case EquipmentType.SECURITY:
                 switch (this.model.state) {
                     case EquipmentState.NOT_ACTIVE:
-                    case EquipmentState.NORMAL:
                         this.showHover(3);
+                    case EquipmentState.NORMAL:
+                        this.showHover(1);
                         break;
                     case EquipmentState.ALARM1:
                     case EquipmentState.ALARM2:

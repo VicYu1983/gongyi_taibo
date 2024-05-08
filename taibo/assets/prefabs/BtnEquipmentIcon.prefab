@@ -3594,7 +3594,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "TxtTemp",
+    "_name": "TxtTime",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -10644,6 +10644,12 @@
     },
     "txtLocation": {
       "__id__": 19
+    },
+    "txtTime": {
+      "__id__": 140
+    },
+    "txtMsg": {
+      "__id__": 152
     },
     "txtTemp": {
       "__id__": 62

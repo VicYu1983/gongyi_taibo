@@ -131,6 +131,12 @@ export class Controller extends Component {
             },
             toggleScifi() {
                 self.toggleScifi();
+            },
+            syncData(data: any) {
+                console.log("receive data from web");
+                console.log(data);
+
+                self.syncEquipment(data);
             }
         }
 
@@ -152,6 +158,44 @@ export class Controller extends Component {
         }
     }
 
+    testSyncEquipment() {
+        const data = [{ id: "AIR001", belong: 0, state: 2, msg: "異常信號", time: "02-01 20:00", data: { temp: 20, wet: 10, co2: 33, pm: 23 } }, { id: "AIR002", belong: 0, state: 3, msg: "異常信號2", time: "01-01 00:00", data: { temp: 20, wet: 10, co2: 33, pm: 23 } }];
+        this.syncEquipment(data);
+    }
+
+    private syncEquipment(data) {
+        const self = this;
+        data.forEach((data, id, ary) => {
+            const eid = data.id;
+            const belong = data.belong;
+            const msg = data.msg;
+            const time = data.time;
+            const eData = data.data;
+
+            var state;
+            switch (data.state) {
+                case 0: state = EquipmentState.NORMAL; break;
+                case 1: state = EquipmentState.NOT_ACTIVE; break;
+                case 2: state = EquipmentState.ALARM1; break;
+                case 3: state = EquipmentState.ALARM2; break;
+                case 4: state = EquipmentState.ALARM3; break;
+                case 5: state = EquipmentState.ALARM4; break;
+                default:
+                    state = EquipmentState.NORMAL;
+                    console.log("state值域為0~5");
+            }
+
+            switch (belong) {
+                case 0:
+                    self.buildingTaibo.syncEquipment(eid, state, time, msg, eData);
+                    break;
+                case 1:
+                    self.buildingXuku.syncEquipment(eid, state, time, msg, eData);
+                    break;
+            }
+        });
+    }
+
     onKeyUp(e: EventKeyboard) {
         switch (e.keyCode) {
             case KeyCode.KEY_R:
@@ -160,7 +204,7 @@ export class Controller extends Component {
     }
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
-        this.callWeb("onClickEquipment", model);
+        this.callWeb("onClickEquipment", model.id);
     }
 
     // changeToCarbon() {

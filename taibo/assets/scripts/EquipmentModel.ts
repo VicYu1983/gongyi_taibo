@@ -67,6 +67,15 @@ export class EquipmentModel extends Component {
     view: Node;
 
     private isOnlyDot = false;
+    private message: string = "異常信號";
+    private time: string = "10-08 10:15";
+
+    private data = {
+        temp: 0,
+        wet: 54,
+        co2: 0.5,
+        pm: 10
+    }
 
     private alarmable = [
         EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.CCTV, EquipmentType.ELECTRIC
@@ -108,12 +117,36 @@ export class EquipmentModel extends Component {
         return this.isOnlyDot;
     }
 
-    setState(state: EquipmentState) {
-        if (this.state != state) {
-            this.state = state;
-            this.node.emit(EquipmentModel.ON_CHANGE, this);
-        }
+    getMessage() {
+        return this.message;
     }
+
+    setData(state, msg, time, data) {
+        this.state = state;
+        this.message = msg;
+        this.time = time;
+        this.data = data;
+        this.node.emit(EquipmentModel.ON_CHANGE, this);
+    }
+
+    getData() {
+        return this.data;
+    }
+
+    getTime() {
+        return this.time;
+    }
+
+    getMsg() {
+        return this.message;
+    }
+
+    // setState(state: EquipmentState) {
+    //     if (this.state != state) {
+    //         this.state = state;
+    //         this.node.emit(EquipmentModel.ON_CHANGE, this);
+    //     }
+    // }
 
     update(deltaTime: number) {
 

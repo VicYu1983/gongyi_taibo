@@ -125,6 +125,14 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     }
 
+    syncEquipment(code: string, state: EquipmentState, time: string, msg: string, data: any) {
+        this.equipments.forEach((equipment, id, ary) => {
+            if (equipment.getModel().code == code) {
+                equipment.getModel().setData(state, msg, time, data);
+            }
+        });
+    }
+
     onNavigationChange(active) {
         if (active) {
             this.setOnlyDotAtAllEquipment(true);
@@ -135,7 +143,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
-        // model.setState(EquipmentState.ALARM1);
+        
         const equipment = model.node;
 
         const pos = equipment.getPosition();
