@@ -74,7 +74,7 @@ export class EquipmentIcon extends Component {
     @property([Node])
     hovers: Node[] = [];
 
-    private bubbleNormalSize = new Size(200, 89);
+    private bubbleNormalSize = new Size(150, 89);
     private bubbleSizeCurrent = this.bubbleNormalSize.clone();
     private bubbleSizeTarget = this.bubbleNormalSize.clone();
 
@@ -335,9 +335,8 @@ export class EquipmentIcon extends Component {
             case EquipmentType.SECURITY:
                 switch (this.model.state) {
                     case EquipmentState.NOT_ACTIVE:
-                        this.showHover(3);
                     case EquipmentState.NORMAL:
-                        this.showHover(1);
+                        this.showHover(3);
                         break;
                     case EquipmentState.ALARM1:
                     case EquipmentState.ALARM2:
