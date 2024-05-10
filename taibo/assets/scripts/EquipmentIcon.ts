@@ -91,12 +91,9 @@ export class EquipmentIcon extends Component {
     private locationHoverLocaiton = new Vec3(20, -14, 0);
 
     private animationComponent;
-    private camera;
-    private screenPosition: Vec3 = new Vec3();
 
     protected onLoad(): void {
         this.animationComponent = this.getComponent(Animation);
-        this.camera = this.navigation.getComponent(Camera);
 
         this.model.node.on(EquipmentModel.ON_CHANGE, this.onModelChange, this);
         this.bubble.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
@@ -224,14 +221,6 @@ export class EquipmentIcon extends Component {
         }
     }
 
-    syncPosition() {
-        if (this.model == null) return;
-        const worldPosition = this.model.node.worldPosition;
-
-        this.camera.convertToUINode(worldPosition, this.node.parent, this.screenPosition);
-        this.node.position = this.screenPosition;
-    }
-
     onBtnClick() {
         this.node.emit(EquipmentIcon.ON_CLICK, this.model);
     }
@@ -276,7 +265,6 @@ export class EquipmentIcon extends Component {
     }
 
     update(deltaTime: number) {
-        this.syncPosition();
 
         this.iconBackLocationCurrent = this.iconBackLocationCurrent.lerp(this.iconBackLocationTarget, deltaTime * 10.0);
         this.iconBackSprite.node.position = this.iconBackLocationCurrent;

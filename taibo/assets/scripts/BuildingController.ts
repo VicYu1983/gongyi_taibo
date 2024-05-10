@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3 } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3, Camera } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -9,6 +9,7 @@ import { Navigation } from './Navigation';
 import { BackgroundController } from './BackgroundController';
 import { IEnviromentChanger } from './IEnviromentChanger';
 import { Controller } from './Controller';
+import { UiFollow3D } from './UiFollow3D';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -87,6 +88,11 @@ export class BuildingController extends Component implements IEnviromentChanger 
             const icon = iconNode.getComponent(EquipmentIcon);
             icon.navigation = this.navigation;
             icon.model = equipment.getModel();
+
+            const follow = iconNode.getComponent(UiFollow3D);
+            follow.camera = this.navigation.getComponent(Camera);
+            follow.followObject = icon.model.node;
+
             this.uiNode.addChild(iconNode);
 
             iconNode.active = true;

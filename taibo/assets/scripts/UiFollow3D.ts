@@ -21,6 +21,9 @@ export class UiFollow3D extends Component {
     }
 
     private syncPosition() {
+        if (this.followObject == null || this.camera == null) {
+            return;
+        }
         const worldPosition = this.followObject.worldPosition;
 
         this.camera.convertToUINode(worldPosition, this.node.parent, this.screenPosition);
