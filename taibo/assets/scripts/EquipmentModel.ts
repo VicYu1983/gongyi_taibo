@@ -69,6 +69,7 @@ export class EquipmentModel extends Component {
     private isOnlyDot = false;
     private message: string = "異常信號";
     private time: string = "10-08 10:15";
+    private groupMode = false;
 
     private data = {
         temp: 0,
@@ -127,6 +128,15 @@ export class EquipmentModel extends Component {
         this.time = time;
         this.data = data;
         this.node.emit(EquipmentModel.ON_CHANGE, this);
+    }
+
+    setGroupMode(group) {
+        this.groupMode = group;
+        this.node.emit(EquipmentModel.ON_CHANGE, this);
+    }
+
+    getGroupMode() {
+        return this.groupMode;
     }
 
     getData() {

@@ -10,6 +10,8 @@ import { BackgroundController } from './BackgroundController';
 import { IEnviromentChanger } from './IEnviromentChanger';
 import { Controller } from './Controller';
 import { UiFollow3D } from './UiFollow3D';
+import { EquipmentGroupModel } from './EquipmentGroupModel';
+import { EquipmentGroupIcon } from './EquipmentGroupIcon';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -28,6 +30,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     @property(Node)
     prefabEquipmentIcon: Node;
+
+    @property(Node)
+    prefabEquipmentGroupIcon: Node;
 
     @property(PPController)
     postProcess: PPController = null;
@@ -77,6 +82,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private equipments: Equipment[] = [];
     btnEquipmentIcon: Node[] = [];
 
+    private equipmentGroups: EquipmentGroupModel[] = [];
+    private btnEquipmentGroupIcon: Node[] = [];
+
     protected onLoad(): void {
 
         // 自動抓取equipment
@@ -84,6 +92,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
         // 自動產生對應的ui
         this.equipments.forEach((equipment, id, ary) => {
+            if (equipment.node.active == false) return;
             const iconNode = instantiate(this.prefabEquipmentIcon);
             const icon = iconNode.getComponent(EquipmentIcon);
             icon.navigation = this.navigation;
@@ -91,13 +100,33 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
             const follow = iconNode.getComponent(UiFollow3D);
             follow.camera = this.navigation.getComponent(Camera);
-            follow.followObject = icon.model.node;
+            follow.followObject = equipment.node;
 
             this.uiNode.addChild(iconNode);
 
             iconNode.active = true;
             iconNode.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
             this.btnEquipmentIcon.push(iconNode);
+        });
+
+        // 自動搜集group model
+        this.equipmentGroups = this.node.getComponentsInChildren(EquipmentGroupModel);
+        this.equipmentGroups.forEach((group, id, ary) => {
+            if (group.node.active == false) return;
+
+            const iconNode = instantiate(this.prefabEquipmentGroupIcon);
+            const icon = iconNode.getComponent(EquipmentGroupIcon);
+            icon.model = group;
+
+            const follow = iconNode.getComponent(UiFollow3D);
+            follow.camera = this.navigation.getComponent(Camera);
+            follow.followObject = group.node;
+
+            this.uiNode.addChild(iconNode);
+
+            iconNode.active = true;
+            iconNode.on(EquipmentGroupIcon.ON_CLICK, this.onBtnEquipmentGroupIconClick, this);
+            this.btnEquipmentGroupIcon.push(iconNode);
         });
 
         if (!this.alwaysShowIcon) {
@@ -128,10 +157,6 @@ export class BuildingController extends Component implements IEnviromentChanger 
                 }
             })
         });
-
-
-
-
     }
 
     syncEquipment(code: string, state: EquipmentState, time: string, msg: string, data: any) {
@@ -148,6 +173,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         } else {
             this.setOnlyDotAtAllEquipment(false);
             this.updateEquipmentShow();
+            this.updateEquipmentIconShow();
         }
     }
 
@@ -157,13 +183,29 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
         const pos = equipment.getPosition();
         const rot = new Vec3();
-        equipment.getRotation().getEulerAngles(rot);
-        this.navigation.setTargetPositionAndRotation(pos, rot);
+
+        const cameraPos = this.navigation.node.getPosition();
+        const zoomTo = cameraPos.clone().subtract(pos).normalize().multiplyScalar(1).add(pos);
+
+        this.navigation.node.getRotation().getEulerAngles(rot);
+        this.navigation.setTargetPositionAndRotation(zoomTo, rot);
     }
 
-    // protected onLoad(): void {
-    //     BatchingUtility.batchStaticModel(this.node, this.node);
-    // }
+    onBtnEquipmentGroupIconClick(model: EquipmentGroupModel) {
+        const equipment = model.node;
+
+        const pos = equipment.getPosition();
+        const rot = new Vec3();
+
+        const cameraPos = this.navigation.node.getPosition();
+        const zoomTo = cameraPos.clone().subtract(pos).normalize().multiplyScalar(.9).add(pos);
+
+        this.navigation.node.getRotation().getEulerAngles(rot);
+        this.navigation.setTargetPositionAndRotation(zoomTo, rot);
+
+        // model.setShow(false);
+        // this.updateEquipmentShow();
+    }
 
     openBuilding(floor: EquipmentFloor) {
         this.showFloor(floor);
@@ -185,26 +227,33 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.equipments.forEach((equipment, id, ary) => {
             equipment.getModel().setOnlyDot(only);
         });
+        this.equipmentGroups.forEach((group, id, ary) => {
+            group.setOnlyDot(only);
+        });
     }
 
     changeEquipmentState(state: EquipmentState) {
         this.currentState = state;
         this.updateEquipmentShow();
+        this.updateEquipmentIconShow();
     }
 
     changeEquipmentType(type: EquipmentType) {
         this.currentType = type;
         this.updateEquipmentShow();
+        this.updateEquipmentIconShow();
     }
 
     changeEquipmentFloor(floor: EquipmentFloor) {
         this.currentFloor = floor;
         this.updateEquipmentShow();
+        this.updateEquipmentIconShow();
     }
 
     changeEquipmentBelong(belong: EquipmentBelong) {
         this.currentBelong = belong;
         this.updateEquipmentShow();
+        this.updateEquipmentIconShow();
     }
 
     hideAllFloor() {
@@ -248,6 +297,15 @@ export class BuildingController extends Component implements IEnviromentChanger 
                 isState = true;
             }
             equipment.getModel().setShow(isBelong && isFloor && isType && isState);
+        });
+    }
+
+    private updateEquipmentIconShow() {
+        this.equipmentGroups.forEach((group, id, ary) => {
+            const isBelong = group.belong === this.currentBelong;
+            const isFloor = group.floor === this.currentFloor;
+            const isType = group.type === this.currentType;
+            group.setShow(isBelong && isFloor && isType);
         });
     }
 

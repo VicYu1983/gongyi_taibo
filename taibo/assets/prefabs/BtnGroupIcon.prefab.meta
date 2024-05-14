@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "0a40c1b9-00ad-4990-bfd8-ca73b2c206ba",
+  "uuid": "4bc3b2e5-2eea-48a3-8923-d2556c9c6c85",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Group"
+    "syncNodeName": "BtnGroupIcon"
   }
 }

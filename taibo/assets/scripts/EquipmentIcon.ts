@@ -127,8 +127,10 @@ export class EquipmentIcon extends Component {
             return;
         }
 
+        const show = this.model.getShow() && !this.model.getGroupMode();
+
         // 播放出現動畫
-        if (!this.node.active && this.model.getShow()) {
+        if (!this.node.active && show) {
             this.animationComponent.play(this.animationComponent.clips[0].name);
         }
 
@@ -136,10 +138,7 @@ export class EquipmentIcon extends Component {
         //     log("play close");
         // }
 
-        this.node.active = this.model.getShow();
-
-        // 這裏也需要更新hover中的東西
-        // this.onBtnHover();
+        this.node.active = show;
 
         this.txtName.string = this.model.code;
         switch (this.model.type) {
