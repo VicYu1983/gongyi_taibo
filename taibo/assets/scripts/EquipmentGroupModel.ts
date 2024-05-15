@@ -1,4 +1,4 @@
-import { _decorator, Camera, CCFloat, Component, Enum, log, Node } from 'cc';
+import { _decorator, Camera, CCFloat, Component, Enum, error, log, Node, Vec3 } from 'cc';
 import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentType } from './EquipmentModel';
 const { ccclass, property } = _decorator;
 
@@ -26,7 +26,7 @@ export class EquipmentGroupModel extends Component {
     camera: Camera;
 
     @property(CCFloat)
-    detectDistance = 1.0;
+    detectDistance = 3.0;
 
     private showOnScreen = true;
     private isOnlyDot = false;
@@ -40,11 +40,6 @@ export class EquipmentGroupModel extends Component {
             const modelData = equ.node.name.split("_");
             const hasGroup = modelData.length > 5;
             if (hasGroup) {
-
-                // const belong = modelData[1];
-                // const floor = modelData[2];
-                // const type = modelData[3];
-                // const code = modelData[4];
                 const group = modelData[5];
                 log(group, groupName);
                 if (group == groupName) {
@@ -52,11 +47,53 @@ export class EquipmentGroupModel extends Component {
                 }
             }
         });
+
+        const center = new Vec3();
+        this.equipments.forEach((equ, id, ary) => {
+            center.add(equ.node.getWorldPosition());
+        });
+        center.multiplyScalar(1 / this.equipments.length);
+        this.node.setWorldPosition(center);
+
+        const modelData = this.node.name.split("_");
+        const belong = modelData[1];
+        const floor = modelData[2];
+        const type = modelData[3];
+
+        switch (belong) {
+            case "Taibo": this.belong = EquipmentBelong.TAIBO; break;
+            case "Xuku": this.belong = EquipmentBelong.TAIBO; break;
+            default: error("should not be here!", this.node.name, belong);
+        }
+
+        switch (floor) {
+            case "B2F": this.floor = EquipmentFloor.B2F; break;
+            case "B1F": this.floor = EquipmentFloor.B1F; break;
+            case "1F": this.floor = EquipmentFloor.N1F; break;
+            case "2F": this.floor = EquipmentFloor.N2F; break;
+            case "3F": this.floor = EquipmentFloor.N3F; break;
+            case "4F": this.floor = EquipmentFloor.N4F; break;
+            case "5F": this.floor = EquipmentFloor.N5F; break;
+            case "6F": this.floor = EquipmentFloor.N6F; break;
+            case "7F": this.floor = EquipmentFloor.N7F; break;
+            default: error("should not be here!", this.node.name, floor);
+        }
+
+        switch (type) {
+            case "Air": this.type = EquipmentType.AIR; break;
+            case "AirCon": this.type = EquipmentType.AIRCONDITION; break;
+            case "CCTV": this.type = EquipmentType.CCTV; break;
+            case "Earth": this.type = EquipmentType.EARTHQUAKE; break;
+            case "Elec": this.type = EquipmentType.ELECTRIC; break;
+            case "Enviro": this.type = EquipmentType.ENVIROMENT; break;
+            case "Fire": this.type = EquipmentType.FIRE; break;
+            case "Secu": this.type = EquipmentType.SECURITY; break;
+            default: error("should not be here!", this.node.name, type);
+        }
     }
 
     start() {
 
-        log(this.equipments.length);
     }
 
     update(deltaTime: number) {

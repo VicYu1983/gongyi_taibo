@@ -72,8 +72,9 @@ export class Orbit extends Component implements ICamera {
     }
 
     setTargetPositionAndRotation(position: Vec3, rotation: Vec3): void {
-        this.distance = .09;
+
         this.setTarget(position);
+        this.distance = .0;
     }
 
     onKeyDown(e: EventKeyboard) {
@@ -102,10 +103,10 @@ export class Orbit extends Component implements ICamera {
             const result: Mat4 = this.calculateMatrix();
 
             const up = new Vec3(result.m04, result.m05, result.m06);
-            up.multiplyScalar(e.getDeltaY() * -.01);
+            up.multiplyScalar(e.getDeltaY() * -.001);
 
             const right = new Vec3(result.m00, result.m01, result.m02);
-            right.multiplyScalar(e.getDeltaX() * -.01);
+            right.multiplyScalar(e.getDeltaX() * -.001);
 
             const pos = new Vec3();
             this.lookAtMat.getTranslation(pos);
@@ -137,7 +138,8 @@ export class Orbit extends Component implements ICamera {
     }
 
     onMouseWheel(e: EventMouse) {
-        this.distance += e.getScrollY() * 0.0005;
+        this.distance += e.getScrollY() * -0.0005;
+        this.distance = Math.max(0, this.distance);
     }
 
     calculateMatrix() {

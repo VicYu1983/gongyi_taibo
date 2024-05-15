@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, CCString, Component, Enum, Node } from 'cc';
+import { _decorator, CCInteger, CCString, Component, Enum, error, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 export enum EquipmentState {
@@ -87,6 +87,47 @@ export class EquipmentModel extends Component {
     ];
 
     private showOnScreen = true;
+
+    protected onLoad(): void {
+        const modelData = this.node.name.split("_");
+        const belong = modelData[1];
+        const floor = modelData[2];
+        const type = modelData[3];
+        const code = modelData[4];
+
+        this.code = code;
+
+        switch (belong) {
+            case "Taibo": this.belong = EquipmentBelong.TAIBO; break;
+            case "Xuku": this.belong = EquipmentBelong.TAIBO; break;
+            default: error("should not be here!", this.node.name, belong);
+        }
+
+        switch (floor) {
+            case "B2F": this.floor = EquipmentFloor.B2F; break;
+            case "B1F": this.floor = EquipmentFloor.B1F; break;
+            case "1F": this.floor = EquipmentFloor.N1F; break;
+            case "2F": this.floor = EquipmentFloor.N2F; break;
+            case "3F": this.floor = EquipmentFloor.N3F; break;
+            case "4F": this.floor = EquipmentFloor.N4F; break;
+            case "5F": this.floor = EquipmentFloor.N5F; break;
+            case "6F": this.floor = EquipmentFloor.N6F; break;
+            case "7F": this.floor = EquipmentFloor.N7F; break;
+            default: error("should not be here!", this.node.name, floor);
+        }
+
+        switch (type) {
+            case "Air": this.type = EquipmentType.AIR; break;
+            case "AirCon": this.type = EquipmentType.AIRCONDITION; break;
+            case "CCTV": this.type = EquipmentType.CCTV; break;
+            case "Earth": this.type = EquipmentType.EARTHQUAKE; break;
+            case "Elec": this.type = EquipmentType.ELECTRIC; break;
+            case "Enviro": this.type = EquipmentType.ENVIROMENT; break;
+            case "Fire": this.type = EquipmentType.FIRE; break;
+            case "Secu": this.type = EquipmentType.SECURITY; break;
+            default: error("should not be here!", this.node.name, type);
+        }
+    }
 
     start() {
 
