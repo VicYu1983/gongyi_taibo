@@ -1,12 +1,11 @@
 import { _decorator, CCFloat, Component, EventKeyboard, EventMouse, input, Input, KeyCode, log, Mat4, Node, Quat, Vec2, Vec3 } from 'cc';
+import { ICamera } from './ICamera';
 const { ccclass, property } = _decorator;
 
-@ccclass('NewComponent')
-export class NewComponent extends Component {
-    currentMousePos: Vec2;
-    currentMousePosDiff: Vec2;
-    isMouseMove: boolean;
-    isMouseRightDown: boolean;
+@ccclass('Orbit')
+export class Orbit extends Component implements ICamera {
+
+    static ON_NAVIGATION_CHANGE = "ON_NAVIGATION_CHANGE";
 
     @property(Node)
     lookAt: Node;
@@ -21,6 +20,7 @@ export class NewComponent extends Component {
     roll: number = 0;
 
     private isShiftDown = false;
+    private isMouseDown = false;
 
     private lookAtMat = new Mat4();
     private yawMat = new Mat4();
@@ -37,6 +37,8 @@ export class NewComponent extends Component {
     private targetPosition = new Vec3();
     private currentPosition = new Vec3();
 
+    private initLootAtPosition;
+
     start() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
@@ -49,6 +51,19 @@ export class NewComponent extends Component {
 
         this.currentMat = this.calculateMatrix();
         this.targetMat = this.currentMat.clone();
+
+        this.initLootAtPosition = this.lookAt.getWorldPosition();
+    }
+
+    isNavigation(): boolean {
+        return this.isMouseDown;
+    }
+    backToInit(): void {
+        this.setTarget(this.initLootAtPosition);
+    }
+
+    setTargetPositionAndRotation(position: Vec3, rotation: Vec3): void {
+        this.setTarget(position);
     }
 
     onKeyDown(e: EventKeyboard) {
@@ -87,27 +102,27 @@ export class NewComponent extends Component {
 
             pos.add(right).add(up);
             this.setTarget(pos);
-
         } else {
             this.yaw += e.getDeltaX() * -.005;
             this.roll += e.getDeltaY() * -.005;
         }
-        this.isMouseMove = true;
     }
 
     onMouseDown(e: EventMouse) {
-        const isRightClick = e.getButton() === EventMouse.BUTTON_LEFT;
-        if (isRightClick) {
+        const isLeftClick = e.getButton() === EventMouse.BUTTON_LEFT;
+        if (isLeftClick) {
             input.on(Input.EventType.MOUSE_MOVE, this.onMouseMove, this);
-            this.isMouseRightDown = true;
+            this.isMouseDown = true;
+            this.node.emit(Orbit.ON_NAVIGATION_CHANGE, true);
         }
     }
 
     onMouseUp(e: EventMouse) {
-        const isRightClick = e.getButton() === EventMouse.BUTTON_LEFT;
-        if (isRightClick) {
+        const isLeftClick = e.getButton() === EventMouse.BUTTON_LEFT;
+        if (isLeftClick) {
             input.off(Input.EventType.MOUSE_MOVE, this.onMouseMove, this);
-            this.isMouseRightDown = false;
+            this.isMouseDown = false;
+            this.node.emit(Orbit.ON_NAVIGATION_CHANGE, false);
         }
     }
 

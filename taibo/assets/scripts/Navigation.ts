@@ -1,8 +1,9 @@
 import { _decorator, Camera, CCFloat, Component, Event, EventKeyboard, EventMouse, Input, input, KeyCode, lerp, Node, Vec2, Vec3 } from 'cc';
+import { ICamera } from './ICamera';
 const { ccclass, property } = _decorator;
 
 @ccclass('Navigation')
-export class Navigation extends Component {
+export class Navigation extends Component implements ICamera {
 
     static ON_NAVIGATION_CHANGE = "ON_NAVIGATION_CHANGE";
 
