@@ -12,6 +12,8 @@ import { Controller } from './Controller';
 import { UiFollow3D } from './UiFollow3D';
 import { EquipmentGroupModel } from './EquipmentGroupModel';
 import { EquipmentGroupIcon } from './EquipmentGroupIcon';
+import { ICamera } from './ICamera';
+import { Orbit } from './Orbit';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -43,8 +45,8 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property(FloorController)
     floor: FloorController;
 
-    @property(Navigation)
-    navigation: Navigation;
+    @property(Orbit)
+    navigation: Orbit;
 
     @property(BackgroundController)
     background: BackgroundController;

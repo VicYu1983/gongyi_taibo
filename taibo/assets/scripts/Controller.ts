@@ -5,6 +5,7 @@ import { EquipmentIcon } from './EquipmentIcon';
 import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Equipment } from './Equipment';
 import { Model } from './Model';
+import { Orbit } from './Orbit';
 const { ccclass, property } = _decorator;
 const { requireComponent } = _decorator;
 
@@ -24,8 +25,8 @@ export class Controller extends Component {
     @property(BuildingController)
     buildingXuku: BuildingController;
 
-    @property(Navigation)
-    navigation: Navigation;
+    @property(Orbit)
+    navigation: Orbit;
 
     @property(Node)
     uiNode: Node;

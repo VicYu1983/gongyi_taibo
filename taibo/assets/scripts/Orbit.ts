@@ -17,7 +17,7 @@ export class Orbit extends Component implements ICamera {
     yaw: number = 0;
 
     @property(CCFloat)
-    roll: number = 0;
+    pitch: number = 0;
 
     private isShiftDown = false;
     private isMouseDown = false;
@@ -38,6 +38,9 @@ export class Orbit extends Component implements ICamera {
     private currentPosition = new Vec3();
 
     private initLootAtPosition;
+    private initDistance;
+    private initYaw;
+    private initPitch;
 
     start() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -53,16 +56,23 @@ export class Orbit extends Component implements ICamera {
         this.targetMat = this.currentMat.clone();
 
         this.initLootAtPosition = this.lookAt.getWorldPosition();
+        this.initDistance = this.distance;
+        this.initYaw = this.yaw;
+        this.initPitch = this.pitch;
     }
 
     isNavigation(): boolean {
         return this.isMouseDown;
     }
     backToInit(): void {
+        this.distance = this.initDistance;
+        this.yaw = this.initYaw;
+        this.pitch = this.initPitch;
         this.setTarget(this.initLootAtPosition);
     }
 
     setTargetPositionAndRotation(position: Vec3, rotation: Vec3): void {
+        this.distance = .09;
         this.setTarget(position);
     }
 
@@ -103,8 +113,8 @@ export class Orbit extends Component implements ICamera {
             pos.add(right).add(up);
             this.setTarget(pos);
         } else {
-            this.yaw += e.getDeltaX() * -.005;
-            this.roll += e.getDeltaY() * -.005;
+            this.yaw += e.getDeltaX() * -.003;
+            this.pitch += e.getDeltaY() * -.003;
         }
     }
 
@@ -127,7 +137,7 @@ export class Orbit extends Component implements ICamera {
     }
 
     onMouseWheel(e: EventMouse) {
-        this.distance += e.getScrollY() * -0.001;
+        this.distance += e.getScrollY() * 0.0005;
     }
 
     calculateMatrix() {
@@ -135,7 +145,7 @@ export class Orbit extends Component implements ICamera {
         this.yawMat.rotate(this.yaw, new Vec3(0, 1, 0));
 
         this.rollMat.identity();
-        this.rollMat.rotate(this.roll, new Vec3(0, 0, 1));
+        this.rollMat.rotate(this.pitch, new Vec3(0, 0, 1));
 
         this.offsetMat.identity();
         this.offsetMat.transform(new Vec3(this.distance, 0, 0));

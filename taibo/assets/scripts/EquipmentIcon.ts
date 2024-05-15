@@ -1,6 +1,7 @@
 import { _decorator, animation, Animation, Button, Camera, Color, Component, Label, log, Node, NodeEventType, Size, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
 import { EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Navigation } from './Navigation';
+import { Orbit } from './Orbit';
 const { ccclass, property } = _decorator;
 
 @ccclass('EquipmentIcon')
@@ -8,8 +9,8 @@ export class EquipmentIcon extends Component {
 
     static ON_CLICK = "ON_CLICK";
 
-    @property(Navigation)
-    navigation: Navigation;
+    @property(Orbit)
+    navigation: Orbit;
 
     @property(UITransform)
     bubble: UITransform;
