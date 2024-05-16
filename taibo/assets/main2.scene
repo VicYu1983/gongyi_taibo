@@ -23853,7 +23853,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 5
+    "value": 0
   },
   {
     "__type__": "cc.TargetInfo",
@@ -85967,7 +85967,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 4
+    "value": 0
   },
   {
     "__type__": "cc.TargetInfo",

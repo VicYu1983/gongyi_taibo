@@ -303,10 +303,16 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     private updateEquipmentIconShow() {
+        const isAlarm = (this.currentState == EquipmentState.ALARM1);
+        this.equipmentGroups.forEach((group, id, ary) => {
+            group.setAtAlarm(isAlarm);
+        });
+        
         this.equipmentGroups.forEach((group, id, ary) => {
             const isBelong = group.belong === this.currentBelong;
             const isFloor = group.floor === this.currentFloor;
             const isType = group.type === this.currentType;
+
             group.setShow(isBelong && isFloor && isType);
         });
     }

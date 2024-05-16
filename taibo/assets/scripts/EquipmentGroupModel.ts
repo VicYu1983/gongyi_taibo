@@ -30,6 +30,7 @@ export class EquipmentGroupModel extends Component {
 
     private showOnScreen = true;
     private isOnlyDot = false;
+    private isAlarm = false;
     private groupMode = false;
 
     protected onLoad(): void {
@@ -119,6 +120,11 @@ export class EquipmentGroupModel extends Component {
         return this.isOnlyDot;
     }
 
+    setAtAlarm(alarm: boolean) {
+        this.isAlarm = alarm;
+        this.node.emit(EquipmentGroupModel.ON_GROUP_CHANGE, this);
+    }
+
     getGroupMode() {
         return this.groupMode;
     }
@@ -128,21 +134,33 @@ export class EquipmentGroupModel extends Component {
         this.node.emit(EquipmentGroupModel.ON_GROUP_CHANGE, this);
     }
 
+    private turnToGroupMode() {
+        this.setGroupMode(true);
+        this.equipments.forEach((equpment, id, ary) => {
+            equpment.setGroupMode(true);
+        });
+        this.node.emit(EquipmentGroupModel.ON_MERGEMODE_ON);
+    }
+
+    private turnToNoneGroupMode() {
+        this.setGroupMode(false);
+        this.equipments.forEach((equpment, id, ary) => {
+            equpment.setGroupMode(false);
+        });
+        this.node.emit(EquipmentGroupModel.ON_MERGEMODE_OFF);
+    }
+
     private checkDistance() {
-        const distanceFromCamera = this.camera.node.getPosition().subtract(this.node.getPosition()).length();
-        if (distanceFromCamera > this.detectDistance && !this.groupMode) {
-            this.setGroupMode(true);
-            this.equipments.forEach((equpment, id, ary) => {
-                equpment.setGroupMode(true);
-            });
-            this.node.emit(EquipmentGroupModel.ON_MERGEMODE_ON);
-        }
-        if (distanceFromCamera <= this.detectDistance && this.groupMode) {
-            this.setGroupMode(false);
-            this.equipments.forEach((equpment, id, ary) => {
-                equpment.setGroupMode(false);
-            });
-            this.node.emit(EquipmentGroupModel.ON_MERGEMODE_OFF);
+        if (this.isAlarm) {
+            this.turnToNoneGroupMode();
+        } else {
+            const distanceFromCamera = this.camera.node.getPosition().subtract(this.node.getPosition()).length();
+            if (distanceFromCamera > this.detectDistance && !this.groupMode) {
+                this.turnToGroupMode();
+            }
+            if (distanceFromCamera <= this.detectDistance && this.groupMode) {
+                this.turnToNoneGroupMode();
+            }
         }
     }
 }
