@@ -223,6 +223,10 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.equipments.forEach((equipment, id, ary) => {
             equipment.getModel().setShow(show);
         });
+
+        this.equipmentGroups.forEach((group, id, ary) => {
+            group.setShow(show);
+        });
     }
 
     setOnlyDotAtAllEquipment(only: boolean) {
@@ -307,7 +311,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.equipmentGroups.forEach((group, id, ary) => {
             group.setAtAlarm(isAlarm);
         });
-        
+
         this.equipmentGroups.forEach((group, id, ary) => {
             const isBelong = group.belong === this.currentBelong;
             const isFloor = group.floor === this.currentFloor;
