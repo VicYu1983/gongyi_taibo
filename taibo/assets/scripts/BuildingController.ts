@@ -75,6 +75,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property(CCBoolean)
     alwaysShowIcon = true;
 
+    @property(CCBoolean)
+    debugAlarm = false;
+
     private bulidingTargetBlendValue = -0.3;
     private bulidingBlendValue: number = -0.3;
     private buildingFloorTargetOpacity: number[] = [];
@@ -109,6 +112,10 @@ export class BuildingController extends Component implements IEnviromentChanger 
             iconNode.active = true;
             iconNode.on(EquipmentIcon.ON_CLICK, this.onBtnEquipmentIconClick, this);
             this.btnEquipmentIcon.push(iconNode);
+
+            if (this.debugAlarm) {
+                icon.model.state = Math.random() > .95 ? EquipmentState.ALARM1 : EquipmentState.NORMAL;
+            }
         });
 
         // 自動搜集group model

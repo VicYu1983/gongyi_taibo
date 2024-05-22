@@ -12631,6 +12631,7 @@
     },
     "speed": 5,
     "alwaysShowIcon": false,
+    "debugAlarm": true,
     "_id": "dezBQnvF9DdKGnAFtruhn2"
   },
   {
@@ -23853,7 +23854,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 0
+    "value": 4
   },
   {
     "__type__": "cc.TargetInfo",
@@ -24581,7 +24582,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 0
+    "value": 4
   },
   {
     "__type__": "cc.TargetInfo",
@@ -101221,6 +101222,7 @@
     },
     "speed": 5,
     "alwaysShowIcon": true,
+    "debugAlarm": false,
     "_id": "951EkxThJOfb5el1WTTctP"
   },
   {
