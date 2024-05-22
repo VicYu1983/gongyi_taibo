@@ -49,7 +49,7 @@
       "name": "Plane.003.mesh",
       "userData": {
         "gltfIndex": 2,
-        "triangleCount": 12816
+        "triangleCount": 12808
       },
       "ver": "1.1.1",
       "imported": true,
@@ -67,7 +67,7 @@
       "name": "25_mm_???.048.mesh",
       "userData": {
         "gltfIndex": 3,
-        "triangleCount": 15796
+        "triangleCount": 15710
       },
       "ver": "1.1.1",
       "imported": true,
@@ -85,7 +85,7 @@
       "name": "TWM_0001_rvt.001.mesh",
       "userData": {
         "gltfIndex": 4,
-        "triangleCount": 4255
+        "triangleCount": 4245
       },
       "ver": "1.1.1",
       "imported": true,
