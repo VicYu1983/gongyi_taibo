@@ -14,6 +14,12 @@ export class Orbit extends Component implements ICamera {
     distance: number = 5;
 
     @property(CCFloat)
+    distanceMax: number = 20;
+
+    @property(CCFloat)
+    distanceMin: number = .1;
+
+    @property(CCFloat)
     yaw: number = 0;
 
     @property(CCFloat)
@@ -139,7 +145,8 @@ export class Orbit extends Component implements ICamera {
 
     onMouseWheel(e: EventMouse) {
         this.distance += e.getScrollY() * -0.0005;
-        this.distance = Math.max(0, this.distance);
+        this.distance = Math.max(this.distanceMin, this.distance);
+        this.distance = Math.min(this.distanceMax, this.distance);
     }
 
     calculateMatrix() {
