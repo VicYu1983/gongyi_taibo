@@ -14,6 +14,7 @@ import { EquipmentGroupModel } from './EquipmentGroupModel';
 import { EquipmentGroupIcon } from './EquipmentGroupIcon';
 import { ICamera } from './ICamera';
 import { Orbit } from './Orbit';
+import { Area } from './Area';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -89,8 +90,11 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     private equipmentGroups: EquipmentGroupModel[] = [];
     private btnEquipmentGroupIcon: Node[] = [];
+    private areas: Area[] = [];
 
     protected onLoad(): void {
+
+        this.areas = this.node.getComponentsInChildren(Area);
 
         // 自動抓取equipment
         this.equipments = this.node.getComponentsInChildren(Equipment);
@@ -337,6 +341,10 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.background.toNormal();
 
         this.light.node.active = true;
+
+        this.areas.forEach((area, id, ary) => {
+            area.toNormal();
+        })
     }
     toScifi() {
         this.bulidingTargetBlendValue = .5;
@@ -347,6 +355,10 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.background.toScifi();
 
         this.light.node.active = false;
+
+        this.areas.forEach((area, id, ary) => {
+            area.toScifi();
+        })
     }
 
     update(deltaTime: number) {

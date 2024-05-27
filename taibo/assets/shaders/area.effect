@@ -50,12 +50,12 @@ CCProgram unlit-fs %{
     vec4 local_verts = inverse_mat4(cc_matWorld) * vec4(v_position, 1.0);
     float mask = 1.0 - (local_verts.y + 0.5);
     col *= mask;
-    col *= opacity;
     
     float sin_wave_x = local_verts.y + sin((local_verts.x + local_verts.z) * waveParams.x + cc_time.x * waveParams.a) * waveParams.y + waveParams.z;
     sin_wave_x = 1.0 - smoothstep(.5, .51, sin_wave_x);
     
     col += sin_wave_x * .2;
+    col *= opacity;
 
     return CCFragOutput(col);
   }

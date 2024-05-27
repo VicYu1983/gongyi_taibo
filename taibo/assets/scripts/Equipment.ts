@@ -1,5 +1,6 @@
 import { _decorator, CCBoolean, Color, Component, Enum, error, log, MeshRenderer, Node, Vec4 } from 'cc';
 import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
+import { Area } from './Area';
 const { ccclass, property } = _decorator;
 const { requireComponent } = _decorator;
 
