@@ -1,0 +1,62 @@
+// Effect Syntax Guide: https://docs.cocos.com/creator/manual/zh/shader/index.html
+
+CCEffect %{
+  techniques:
+  - name: opaque
+    passes:
+    - vert: legacy/main-functions/general-vs:vert # builtin header
+      frag: unlit-fs:frag
+      properties: &props
+        mainColor:      { value: [1, 1, 1, 1], editor: { type: color } }
+        opacity:  { value: .2, editor: { slide: true, range: [0.001, 1.0], step: 0.01 } }
+        waveFrequence:  { value: 20, target: waveParams.x, editor: { slide: true, range: [0.001, 100.0], step: 0.01 } }
+        waveHeight:  { value: 1, target: waveParams.y, editor: { slide: true, range: [0.001, 1.0], step: 0.001 } }
+        wavePosition:  { value: 0.5, target: waveParams.z, editor: { slide: true, range: [0.001, 1.0], step: 0.001 } }
+        waveSpeed:  { value: 1.0, target: waveParams.a, editor: { slide: true, range: [-10, 10.0], step: 0.01 } }
+  - name: transparent
+    passes:
+    - vert: general-vs:vert # builtin header
+      frag: unlit-fs:frag
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: *props
+}%
+
+CCProgram unlit-fs %{
+  precision highp float;
+  #include <legacy/output>
+  #include <legacy/fog-fs>
+  #include <cc-local.chunk>
+  #include <math>
+
+  in vec2 v_uv;
+  in vec3 v_position;
+  uniform Constant {
+    vec4 mainColor;
+    vec4 waveParams;
+    float opacity;
+  };
+
+  vec4 frag () {
+    vec4 col = mainColor;
+    vec4 local_verts = inverse_mat4(cc_matWorld) * vec4(v_position, 1.0);
+    float mask = 1.0 - (local_verts.y + 0.5);
+    col *= mask;
+    col *= opacity;
+    
+    float sin_wave_x = local_verts.y + sin((local_verts.x + local_verts.z) * waveParams.x + cc_time.x * waveParams.a) * waveParams.y + waveParams.z;
+    sin_wave_x = 1.0 - smoothstep(.5, .51, sin_wave_x);
+    
+    col += sin_wave_x * .2;
+
+    return CCFragOutput(col);
+  }
+}%

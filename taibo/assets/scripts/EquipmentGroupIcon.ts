@@ -27,8 +27,7 @@ export class EquipmentGroupIcon extends Component {
     }
 
     onModelChange(model: EquipmentGroupModel) {
-
-        log("onGroupModelChange");
+        
         if (model.getOnlyDot()) {
             this.node.active = false;
             return;

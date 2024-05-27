@@ -42,7 +42,6 @@ export class EquipmentGroupModel extends Component {
             const hasGroup = modelData.length > 5;
             if (hasGroup) {
                 const group = modelData[5];
-                log(group, groupName);
                 if (group == groupName) {
                     this.equipments.push(equ);
                 }
