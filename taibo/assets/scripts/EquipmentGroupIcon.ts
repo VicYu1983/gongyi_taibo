@@ -1,5 +1,6 @@
 import { _decorator, Component, Animation, Label, log, Node, NodeEventType } from 'cc';
 import { EquipmentGroupModel } from './EquipmentGroupModel';
+import { EquipmentModel } from './EquipmentModel';
 const { ccclass, property } = _decorator;
 
 @ccclass('EquipmentGroupIcon')
@@ -18,7 +19,7 @@ export class EquipmentGroupIcon extends Component {
     protected onLoad(): void {
         this.animationComponent = this.getComponent(Animation);
 
-        this.model.node.on(EquipmentGroupModel.ON_GROUP_CHANGE, this.onModelChange, this);
+        this.model.node.on(EquipmentModel.ON_CHANGE, this.onModelChange, this);
         this.node.on(NodeEventType.MOUSE_UP, this.onBtnClick, this);
     }
 

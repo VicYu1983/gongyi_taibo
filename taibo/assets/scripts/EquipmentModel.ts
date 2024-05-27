@@ -69,7 +69,7 @@ export class EquipmentModel extends Component {
     private isOnlyDot = false;
     private message: string = "異常信號";
     private time: string = "10-08 10:15";
-    private groupMode = false;
+    protected groupMode = false;
 
     private data = {
         temp: 0,
@@ -86,7 +86,7 @@ export class EquipmentModel extends Component {
         EquipmentType.AIRCONDITION, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.ELECTRIC
     ];
 
-    private showOnScreen = true;
+    protected showOnScreen = true;
 
     protected onLoad(): void {
         const modelData = this.node.name.split("_");

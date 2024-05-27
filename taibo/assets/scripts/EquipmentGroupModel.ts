@@ -3,12 +3,7 @@ import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentType } from '
 const { ccclass, property } = _decorator;
 
 @ccclass('EquipmentGroupModel')
-export class EquipmentGroupModel extends Component {
-
-    static ON_GROUP_CHANGE = "ON_GROUP_CHANGE";
-
-    static ON_MERGEMODE_ON = "ON_MERGEMODE_ON";
-    static ON_MERGEMODE_OFF = "ON_MERGEMODE_OFF";
+export class EquipmentGroupModel extends EquipmentModel {
 
     @property([EquipmentModel])
     equipments: EquipmentModel[] = [];
@@ -28,10 +23,7 @@ export class EquipmentGroupModel extends Component {
     @property(CCFloat)
     detectDistance = 3.0;
 
-    private showOnScreen = true;
-    private isOnlyDot = false;
     private isAlarm = false;
-    private groupMode = false;
 
     protected onLoad(): void {
         const groupName = this.node.name.split("_")[4];
@@ -101,36 +93,9 @@ export class EquipmentGroupModel extends Component {
         this.checkDistance();
     }
 
-    setShow(show: boolean) {
-        this.showOnScreen = show;
-        this.node.emit(EquipmentGroupModel.ON_GROUP_CHANGE, this);
-    }
-
-    getShow() {
-        return this.showOnScreen;
-    }
-
-    setOnlyDot(only: boolean) {
-        this.isOnlyDot = only;
-        this.node.emit(EquipmentGroupModel.ON_GROUP_CHANGE, this);
-    }
-
-    getOnlyDot() {
-        return this.isOnlyDot;
-    }
-
     setAtAlarm(alarm: boolean) {
         this.isAlarm = alarm;
-        this.node.emit(EquipmentGroupModel.ON_GROUP_CHANGE, this);
-    }
-
-    getGroupMode() {
-        return this.groupMode;
-    }
-
-    setGroupMode(mode) {
-        this.groupMode = mode;
-        this.node.emit(EquipmentGroupModel.ON_GROUP_CHANGE, this);
+        this.node.emit(EquipmentModel.ON_CHANGE, this);
     }
 
     private turnToGroupMode() {
@@ -138,7 +103,6 @@ export class EquipmentGroupModel extends Component {
         this.equipments.forEach((equpment, id, ary) => {
             equpment.setGroupMode(true);
         });
-        this.node.emit(EquipmentGroupModel.ON_MERGEMODE_ON);
     }
 
     private turnToNoneGroupMode() {
@@ -146,7 +110,6 @@ export class EquipmentGroupModel extends Component {
         this.equipments.forEach((equpment, id, ary) => {
             equpment.setGroupMode(false);
         });
-        this.node.emit(EquipmentGroupModel.ON_MERGEMODE_OFF);
     }
 
     private checkDistance() {
