@@ -62,7 +62,7 @@ export class EquipmentGroupModel extends Component {
 
         switch (belong) {
             case "Taibo": this.belong = EquipmentBelong.TAIBO; break;
-            case "Xuku": this.belong = EquipmentBelong.TAIBO; break;
+            case "Xuku": this.belong = EquipmentBelong.XUKU; break;
             default: error("should not be here!", this.node.name, belong);
         }
 

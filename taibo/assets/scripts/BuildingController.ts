@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3, Camera } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3, Camera, error } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -282,6 +282,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     showFloor(floor: EquipmentFloor) {
         this.hideAllFloor();
         const id = this.buildingFloorEnum.indexOf(floor);
+        if (id == -1) {
+            return;
+        }
         this.buildingFloorTargetOpacity[id] = 1;
         this.buildingFloor[id].active = true;
     }
