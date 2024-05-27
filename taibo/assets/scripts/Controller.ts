@@ -303,6 +303,10 @@ export class Controller extends Component {
     //     this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);
     // }
 
+    changeFloorB2F() {
+        this.building.openBuilding(EquipmentFloor.B2F);
+    }
+
     changeFloorB1F() {
         this.building.openBuilding(EquipmentFloor.B1F);
     }
@@ -321,6 +325,14 @@ export class Controller extends Component {
 
     changeFloorN4F() {
         this.building.openBuilding(EquipmentFloor.N4F);
+    }
+
+    changeFloorN5F() {
+        this.building.openBuilding(EquipmentFloor.N5F);
+    }
+
+    changeFloorN6F() {
+        this.building.openBuilding(EquipmentFloor.N6F);
     }
 
     changeToTaibo() {
