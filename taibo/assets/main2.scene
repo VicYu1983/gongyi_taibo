@@ -13769,7 +13769,7 @@
     "light": {
       "__id__": 3
     },
-    "currentState": 1,
+    "currentState": 4,
     "currentType": 0,
     "currentFloor": 1,
     "currentBelong": 0,
@@ -106884,7 +106884,7 @@
     "light": {
       "__id__": 3
     },
-    "currentState": 1,
+    "currentState": 4,
     "currentType": 0,
     "currentFloor": 0,
     "currentBelong": 1,
@@ -109057,6 +109057,7 @@
     "instance": {
       "__id__": 7745
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -109261,6 +109262,7 @@
     "instance": {
       "__id__": 7764
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -109465,6 +109467,7 @@
     "instance": {
       "__id__": 7783
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -109669,6 +109672,7 @@
     "instance": {
       "__id__": 7802
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -109873,6 +109877,7 @@
     "instance": {
       "__id__": 7821
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -110077,6 +110082,7 @@
     "instance": {
       "__id__": 7840
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -110281,6 +110287,7 @@
     "instance": {
       "__id__": 7859
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -110485,6 +110492,7 @@
     "instance": {
       "__id__": 7878
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -110689,6 +110697,7 @@
     "instance": {
       "__id__": 7897
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -110893,6 +110902,7 @@
     "instance": {
       "__id__": 7916
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -111097,6 +111107,7 @@
     "instance": {
       "__id__": 7935
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -111301,6 +111312,7 @@
     "instance": {
       "__id__": 7954
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -111505,6 +111517,7 @@
     "instance": {
       "__id__": 7973
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -111709,6 +111722,7 @@
     "instance": {
       "__id__": 7992
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {

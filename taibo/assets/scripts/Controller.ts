@@ -336,20 +336,16 @@ export class Controller extends Component {
     }
 
     changeToTaibo() {
-        this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.TAIBO);
-        this.buildingXuku.changeEquipmentBelong(EquipmentBelong.TAIBO);
 
-        this.buildingTaibo.openBuilding(EquipmentFloor.B1F);
+        this.buildingTaibo.openBuilding();
         this.buildingXuku.closeBuilding();
 
         this.building = this.buildingTaibo;
     }
 
     changeToXuku() {
-        this.buildingTaibo.changeEquipmentBelong(EquipmentBelong.XUKU);
-        this.buildingXuku.changeEquipmentBelong(EquipmentBelong.XUKU);
 
-        this.buildingXuku.openBuilding(EquipmentFloor.N1F);
+        this.buildingXuku.openBuilding();
         this.buildingTaibo.closeBuilding();
 
         this.building = this.buildingXuku;

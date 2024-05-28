@@ -220,9 +220,14 @@ export class BuildingController extends Component implements IEnviromentChanger 
         // this.updateEquipmentShow();
     }
 
-    openBuilding(floor: EquipmentFloor) {
-        this.showFloor(floor);
-        this.changeEquipmentFloor(floor);
+    openBuilding(floor?: EquipmentFloor) {
+        if (floor == null) {
+            this.showFloor(this.currentFloor);
+            this.changeEquipmentFloor(this.currentFloor);
+        } else {
+            this.showFloor(floor);
+            this.changeEquipmentFloor(floor);
+        }
     }
 
     closeBuilding() {
