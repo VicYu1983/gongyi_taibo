@@ -8,15 +8,6 @@ export class EquipmentGroupModel extends EquipmentModel {
     @property([EquipmentModel])
     equipments: EquipmentModel[] = [];
 
-    @property({ type: Enum(EquipmentBelong) })
-    belong: EquipmentBelong = EquipmentBelong.TAIBO;
-
-    @property({ type: Enum(EquipmentFloor) })
-    floor: EquipmentFloor = EquipmentFloor.B1F;
-
-    @property({ type: Enum(EquipmentType) })
-    type: EquipmentType = EquipmentType.AIR;
-
     @property(Camera)
     camera: Camera;
 
@@ -47,41 +38,7 @@ export class EquipmentGroupModel extends EquipmentModel {
         center.multiplyScalar(1 / this.equipments.length);
         this.node.setWorldPosition(center);
 
-        const modelData = this.node.name.split("_");
-        const belong = modelData[1];
-        const floor = modelData[2];
-        const type = modelData[3];
-
-        switch (belong) {
-            case "Taibo": this.belong = EquipmentBelong.TAIBO; break;
-            case "Xuku": this.belong = EquipmentBelong.XUKU; break;
-            default: error("should not be here!", this.node.name, belong);
-        }
-
-        switch (floor) {
-            case "B2F": this.floor = EquipmentFloor.B2F; break;
-            case "B1F": this.floor = EquipmentFloor.B1F; break;
-            case "1F": this.floor = EquipmentFloor.N1F; break;
-            case "2F": this.floor = EquipmentFloor.N2F; break;
-            case "3F": this.floor = EquipmentFloor.N3F; break;
-            case "4F": this.floor = EquipmentFloor.N4F; break;
-            case "5F": this.floor = EquipmentFloor.N5F; break;
-            case "6F": this.floor = EquipmentFloor.N6F; break;
-            case "7F": this.floor = EquipmentFloor.N7F; break;
-            default: error("should not be here!", this.node.name, floor);
-        }
-
-        switch (type) {
-            case "Air": this.type = EquipmentType.AIR; break;
-            case "AirCon": this.type = EquipmentType.AIRCONDITION; break;
-            case "CCTV": this.type = EquipmentType.CCTV; break;
-            case "Earth": this.type = EquipmentType.EARTHQUAKE; break;
-            case "Elec": this.type = EquipmentType.ELECTRIC; break;
-            case "Enviro": this.type = EquipmentType.ENVIROMENT; break;
-            case "Fire": this.type = EquipmentType.FIRE; break;
-            case "Secu": this.type = EquipmentType.SECURITY; break;
-            default: error("should not be here!", this.node.name, type);
-        }
+        super.onLoad();
     }
 
     start() {

@@ -93,9 +93,12 @@ export class EquipmentModel extends Component {
         const belong = modelData[1];
         const floor = modelData[2];
         const type = modelData[3];
-        const code = modelData[4];
 
-        this.code = code;
+        if (modelData.length > 4) {
+            const code = modelData[4];
+            this.code = code;
+        }
+
 
         switch (belong) {
             case "Taibo": this.belong = EquipmentBelong.TAIBO; break;
