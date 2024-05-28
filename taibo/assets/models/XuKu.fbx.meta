@@ -13,7 +13,7 @@
       "name": "B1FMesh.mesh",
       "userData": {
         "gltfIndex": 0,
-        "triangleCount": 1953
+        "triangleCount": 3205
       },
       "ver": "1.1.1",
       "imported": true,
@@ -31,7 +31,7 @@
       "name": "B2FMesh.mesh",
       "userData": {
         "gltfIndex": 1,
-        "triangleCount": 2464
+        "triangleCount": 3710
       },
       "ver": "1.1.1",
       "imported": true,
@@ -49,7 +49,7 @@
       "name": "TopMesh.mesh",
       "userData": {
         "gltfIndex": 2,
-        "triangleCount": 1128
+        "triangleCount": 1098
       },
       "ver": "1.1.1",
       "imported": true,
@@ -67,7 +67,7 @@
       "name": "3FMesh.mesh",
       "userData": {
         "gltfIndex": 3,
-        "triangleCount": 3540
+        "triangleCount": 4864
       },
       "ver": "1.1.1",
       "imported": true,
@@ -85,7 +85,7 @@
       "name": "2FMesh.mesh",
       "userData": {
         "gltfIndex": 4,
-        "triangleCount": 5886
+        "triangleCount": 7525
       },
       "ver": "1.1.1",
       "imported": true,
@@ -103,7 +103,7 @@
       "name": "4FMesh.mesh",
       "userData": {
         "gltfIndex": 5,
-        "triangleCount": 3902
+        "triangleCount": 5160
       },
       "ver": "1.1.1",
       "imported": true,
@@ -121,7 +121,7 @@
       "name": "5FMesh.mesh",
       "userData": {
         "gltfIndex": 6,
-        "triangleCount": 3974
+        "triangleCount": 5232
       },
       "ver": "1.1.1",
       "imported": true,
@@ -139,7 +139,7 @@
       "name": "6FMesh.mesh",
       "userData": {
         "gltfIndex": 7,
-        "triangleCount": 5222
+        "triangleCount": 6150
       },
       "ver": "1.1.1",
       "imported": true,
