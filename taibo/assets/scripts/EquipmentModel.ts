@@ -19,7 +19,8 @@ export enum EquipmentType {
     SECURITY, // 連綫保全
     EARTHQUAKE, // 地震
     CCTV, // cctv
-    ELECTRIC // 電力
+    ELECTRIC, // 電力
+    EARTHQUAKE_ALARM
 }
 
 export enum EquipmentBelong {
@@ -36,7 +37,12 @@ export enum EquipmentFloor {
     N4F,
     N5F,
     N6F,
-    N7F
+    N7F,
+    ALL
+}
+
+export enum Tag {
+    EARTHQUAKE
 }
 
 @ccclass('EquipmentModel')
@@ -63,6 +69,9 @@ export class EquipmentModel extends Component {
 
     @property({ type: Enum(EquipmentType) })
     type: EquipmentType = EquipmentType.AIR;
+
+    @property({ type: Enum(Tag) })
+    tag: Tag[] = [];
 
     view: Node;
 
@@ -99,7 +108,6 @@ export class EquipmentModel extends Component {
             this.code = code;
         }
 
-
         switch (belong) {
             case "Taibo": this.belong = EquipmentBelong.TAIBO; break;
             case "Xuku": this.belong = EquipmentBelong.XUKU; break;
@@ -124,6 +132,7 @@ export class EquipmentModel extends Component {
             case "AirCon": this.type = EquipmentType.AIRCONDITION; break;
             case "CCTV": this.type = EquipmentType.CCTV; break;
             case "Earth": this.type = EquipmentType.EARTHQUAKE; break;
+            case "EarthAlarm": this.type = EquipmentType.EARTHQUAKE_ALARM; break;
             case "Elec": this.type = EquipmentType.ELECTRIC; break;
             case "Enviro": this.type = EquipmentType.ENVIROMENT; break;
             case "Fire": this.type = EquipmentType.FIRE; break;
@@ -195,11 +204,15 @@ export class EquipmentModel extends Component {
         return this.message;
     }
 
-    // setState(state: EquipmentState) {
-    //     if (this.state != state) {
-    //         this.state = state;
-    //         this.node.emit(EquipmentModel.ON_CHANGE, this);
-    //     }
+    setState(state: EquipmentState) {
+        if (this.state != state) {
+            this.state = state;
+            this.node.emit(EquipmentModel.ON_CHANGE, this);
+        }
+    }
+
+    // isAlarm() {
+    //     return this.state == EquipmentState.ALARM1 || this.state == EquipmentState.ALARM2 || this.state == EquipmentState.ALARM3 || this.state == EquipmentState.ALARM4;
     // }
 
     update(deltaTime: number) {

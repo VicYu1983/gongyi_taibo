@@ -303,10 +303,16 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     private updateMaterialParams() {
-        this.buildingFloorMesh.forEach((mesh, id, ary) => {
+        this.buildingFloorMesh.forEach((mesh, fid, ary) => {
             mesh.materials.forEach((material, id, matAry) => {
                 if (this.checkIsDither(material)) {
-                    material.setProperty("blendValue", this.bulidingBlendValue);
+                    // 台博舘的屋頂很高，這個參數不能公用
+                    const isTaiboRoof = this.currentBelong == EquipmentBelong.TAIBO && fid == 4;
+                    if (isTaiboRoof) {
+                        material.setProperty("blendValue", this.bulidingBlendValue * 3);
+                    } else {
+                        material.setProperty("blendValue", this.bulidingBlendValue);
+                    }
                 }
             });
         });
@@ -318,6 +324,8 @@ export class BuildingController extends Component implements IEnviromentChanger 
             const isFloor = equipment.getModel().floor === this.currentFloor;
             const isType = equipment.getModel().type === this.currentType;
             let isState = equipment.getModel().state === this.currentState;
+
+            // 沒有設定state等於全部都要顯示
             if (this.currentState === EquipmentState.NONE) {
                 isState = true;
             }

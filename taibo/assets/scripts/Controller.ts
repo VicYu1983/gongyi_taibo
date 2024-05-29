@@ -64,11 +64,17 @@ export class Controller extends Component {
         window["cocos"] = {
             openFloor: function (id = 0) {
                 switch (id) {
+                    case -1: self.building.openBuilding(EquipmentFloor.B2F); break;
                     case 0: self.building.openBuilding(EquipmentFloor.B1F); break;
                     case 1: self.building.openBuilding(EquipmentFloor.N1F); break;
                     case 2: self.building.openBuilding(EquipmentFloor.N2F); break;
                     case 3: self.building.openBuilding(EquipmentFloor.N3F); break;
                     case 4: self.building.openBuilding(EquipmentFloor.N4F); break;
+                    case 5: self.building.openBuilding(EquipmentFloor.N5F); break;
+                    case 6: self.building.openBuilding(EquipmentFloor.N6F); break;
+                    case 99: self.building.openBuilding(EquipmentFloor.ALL); break;
+                    default:
+                        console.log("id值域為-1~6, 99");
                 }
             },
             backToInit: function () {
@@ -294,8 +300,8 @@ export class Controller extends Component {
     }
 
     changeToEarthquakeAlarm() {
-        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE_ALARM);
+        this.building.changeEquipmentState(EquipmentState.NONE);
     }
 
 

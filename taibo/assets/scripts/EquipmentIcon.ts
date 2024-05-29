@@ -153,6 +153,7 @@ export class EquipmentIcon extends Component {
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[1];
                 break;
             case EquipmentType.EARTHQUAKE:
+            case EquipmentType.EARTHQUAKE_ALARM:
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[5];
                 break;
             case EquipmentType.ELECTRIC:
@@ -318,6 +319,7 @@ export class EquipmentIcon extends Component {
             case EquipmentType.AIRCONDITION:
             case EquipmentType.CCTV:
             case EquipmentType.EARTHQUAKE:
+            case EquipmentType.EARTHQUAKE_ALARM:
             case EquipmentType.ELECTRIC:
             case EquipmentType.FIRE:
             case EquipmentType.SECURITY:
