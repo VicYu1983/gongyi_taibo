@@ -104,6 +104,8 @@ export class BuildingController extends Component implements IEnviromentChanger 
         // 自動產生對應的ui
         this.equipments.forEach((equipment, id, ary) => {
             if (equipment.node.active == false) return;
+            if (equipment.getModel().type == EquipmentType.EARTHQUAKE_ALARM) return;
+
             const iconNode = instantiate(this.prefabEquipmentIcon);
             const icon = iconNode.getComponent(EquipmentIcon);
             icon.navigation = this.navigation;

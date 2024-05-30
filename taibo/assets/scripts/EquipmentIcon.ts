@@ -184,6 +184,7 @@ export class EquipmentIcon extends Component {
                 this.iconBackSprite.color = this.iconBackColor[3];
                 break;
             case EquipmentState.ALARM4:
+                this.iconBackSprite.color = this.iconBackColor[4];
                 break;
             case EquipmentState.NOT_ACTIVE:
                 this.iconBackSprite.color = this.iconBackColor[5];
@@ -216,8 +217,8 @@ export class EquipmentIcon extends Component {
         this.txtTime.string = this.model.getTime();
         this.txtMsg.string = this.model.getMessage();
 
-        // alarm的强制顯示展開
-        if (this.model.state == EquipmentState.ALARM1) {
+        // 非earthquakeAlarm的alarm的强制顯示展開
+        if (!this.needHover()) {
             this.changeViewByModel();
         }
     }
@@ -232,14 +233,17 @@ export class EquipmentIcon extends Component {
         parent.addChild(this.node);
     }
 
+    needHover() {
+        const isEarthquakeAlarm = this.model.type == EquipmentType.EARTHQUAKE_ALARM;
+        const isAlarm = this.model.state == EquipmentState.ALARM1;
+        return !isEarthquakeAlarm && isAlarm;
+    }
+
     onBtnHover() {
 
         this.reAttach();
 
-        if (this.model.state == EquipmentState.ALARM1) {
-            return;
-        }
-
+        if (!this.needHover()) return;
         if (this.isHover) return;
         this.isHover = true;
 
@@ -247,10 +251,7 @@ export class EquipmentIcon extends Component {
     }
 
     onBtnRelease() {
-        if (this.model.state == EquipmentState.ALARM1) {
-            return;
-        }
-
+        if (!this.needHover()) return;
         if (!this.isHover) return;
         this.isHover = false;
 

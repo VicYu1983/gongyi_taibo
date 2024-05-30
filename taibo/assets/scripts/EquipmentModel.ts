@@ -110,6 +110,47 @@ export class EquipmentModel extends Component {
         if (modelData.length > 4) {
             const code = modelData[4];
             this.code = code;
+
+            if (this.code.indexOf("5AR") > -1) {
+                this.state = EquipmentState.ALARM1;
+                this.tags = [Tag.EARTHQUAKE_5A];
+            }
+            if (this.code.indexOf("5AB") > -1) {
+                this.state = EquipmentState.ALARM4;
+                this.tags = [Tag.EARTHQUAKE_5A];
+            }
+            if (this.code.indexOf("5BR") > -1) {
+                this.state = EquipmentState.ALARM1;
+                this.tags = [Tag.EARTHQUAKE_5B];
+            }
+            if (this.code.indexOf("5BB") > -1) {
+                this.state = EquipmentState.ALARM4;
+                this.tags = [Tag.EARTHQUAKE_5B];
+            }
+            if (this.code.indexOf("6AR") > -1) {
+                this.state = EquipmentState.ALARM1;
+                this.tags = [Tag.EARTHQUAKE_6A];
+            }
+            if (this.code.indexOf("6AB") > -1) {
+                this.state = EquipmentState.ALARM4;
+                this.tags = [Tag.EARTHQUAKE_6A];
+            }
+            if (this.code.indexOf("6BR") > -1) {
+                this.state = EquipmentState.ALARM1;
+                this.tags = [Tag.EARTHQUAKE_6B];
+            }
+            if (this.code.indexOf("6BB") > -1) {
+                this.state = EquipmentState.ALARM4;
+                this.tags = [Tag.EARTHQUAKE_6B];
+            }
+            if (this.code.indexOf("7AR") > -1) {
+                this.state = EquipmentState.ALARM1;
+                this.tags = [Tag.EARTHQUAKE_7A];
+            }
+            if (this.code.indexOf("7AB") > -1) {
+                this.state = EquipmentState.ALARM4;
+                this.tags = [Tag.EARTHQUAKE_7A];
+            }
         }
 
         switch (belong) {

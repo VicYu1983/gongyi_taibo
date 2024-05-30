@@ -380,6 +380,9 @@ export class Controller extends Component {
 
     changeToTaibo() {
 
+        this.buildingTaibo.currentBelong = EquipmentBelong.TAIBO;
+        this.buildingXuku.currentBelong = EquipmentBelong.TAIBO;
+
         this.buildingTaibo.openBuilding();
         this.buildingXuku.closeBuilding();
 
@@ -387,6 +390,9 @@ export class Controller extends Component {
     }
 
     changeToXuku() {
+
+        this.buildingTaibo.currentBelong = EquipmentBelong.XUKU;
+        this.buildingXuku.currentBelong = EquipmentBelong.XUKU;
 
         this.buildingXuku.openBuilding();
         this.buildingTaibo.closeBuilding();
