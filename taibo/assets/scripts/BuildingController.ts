@@ -318,17 +318,28 @@ export class BuildingController extends Component implements IEnviromentChanger 
         return material.effectName == "../shaders/standard-dither" || material.effectName == "../shaders/glass-dither";
     }
 
+    // private earthquakeMaterials = ["earthquake", "external-pillar", "1F_pillar"];
+    private earthquakeMaterials = ["earthquake"];
+
     private updateMaterialParams() {
         this.buildingFloorMesh.forEach((mesh, fid, ary) => {
             mesh.materials.forEach((material, id, matAry) => {
+
                 if (this.checkIsDither(material)) {
+
+                    let scaleBlend = 1.0;
+
                     // 台博舘的屋頂很高，這個參數不能公用
                     const isTaiboRoof = this.currentBelong == EquipmentBelong.TAIBO && fid == 4;
                     if (isTaiboRoof) {
-                        material.setProperty("blendValue", this.bulidingBlendValue * 3);
+                        scaleBlend = 3;
                     } else {
-                        material.setProperty("blendValue", this.bulidingBlendValue);
+                        const isEarthquake = this.earthquakeMaterials.indexOf(material._parent._name) > -1;
+                        if (isEarthquake) {
+                            scaleBlend = .1;
+                        }
                     }
+                    material.setProperty("blendValue", this.bulidingBlendValue * scaleBlend);
                 }
             });
         });

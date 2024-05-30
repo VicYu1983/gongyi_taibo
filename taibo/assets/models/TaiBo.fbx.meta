@@ -5,66 +5,12 @@
   "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab",
   "files": [],
   "subMetas": {
-    "97ff3": {
+    "77263": {
       "importer": "gltf-mesh",
-      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@97ff3",
+      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@77263",
       "displayName": "",
-      "id": "97ff3",
-      "name": "M_混凝土-正方形-柱 450 x 450mm [546906] Geometry.mesh",
-      "userData": {
-        "gltfIndex": 0,
-        "triangleCount": 14864
-      },
-      "ver": "1.1.1",
-      "imported": true,
-      "files": [
-        ".bin",
-        ".json"
-      ],
-      "subMetas": {}
-    },
-    "57ecb": {
-      "importer": "gltf-mesh",
-      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@57ecb",
-      "displayName": "",
-      "id": "57ecb",
-      "name": "Plane.010.mesh",
-      "userData": {
-        "gltfIndex": 1,
-        "triangleCount": 12856
-      },
-      "ver": "1.1.1",
-      "imported": true,
-      "files": [
-        ".bin",
-        ".json"
-      ],
-      "subMetas": {}
-    },
-    "344db": {
-      "importer": "gltf-mesh",
-      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@344db",
-      "displayName": "",
-      "id": "344db",
-      "name": "Plane.003.mesh",
-      "userData": {
-        "gltfIndex": 2,
-        "triangleCount": 12808
-      },
-      "ver": "1.1.1",
-      "imported": true,
-      "files": [
-        ".bin",
-        ".json"
-      ],
-      "subMetas": {}
-    },
-    "5f95a": {
-      "importer": "gltf-mesh",
-      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@5f95a",
-      "displayName": "",
-      "id": "5f95a",
-      "name": "25_mm_???.048.mesh",
+      "id": "77263",
+      "name": "building3f.mesh",
       "userData": {
         "gltfIndex": 3,
         "triangleCount": 15710
@@ -77,12 +23,66 @@
       ],
       "subMetas": {}
     },
-    "09767": {
+    "8d572": {
       "importer": "gltf-mesh",
-      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@09767",
+      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@8d572",
       "displayName": "",
-      "id": "09767",
-      "name": "TWM_0001_rvt.001.mesh",
+      "id": "8d572",
+      "name": "buildingB1f.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 14864
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f093a": {
+      "importer": "gltf-mesh",
+      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@f093a",
+      "displayName": "",
+      "id": "f093a",
+      "name": "building1f.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 13800
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ac73c": {
+      "importer": "gltf-mesh",
+      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@ac73c",
+      "displayName": "",
+      "id": "ac73c",
+      "name": "building2f.mesh",
+      "userData": {
+        "gltfIndex": 2,
+        "triangleCount": 13752
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "aa7fa": {
+      "importer": "gltf-mesh",
+      "uuid": "59921ec2-e06b-41f6-bc78-3df574e0baab@aa7fa",
+      "displayName": "",
+      "id": "aa7fa",
+      "name": "building4f.mesh",
       "userData": {
         "gltfIndex": 4,
         "triangleCount": 4245
@@ -138,11 +138,11 @@
     },
     "assetFinder": {
       "meshes": [
-        "59921ec2-e06b-41f6-bc78-3df574e0baab@97ff3",
-        "59921ec2-e06b-41f6-bc78-3df574e0baab@57ecb",
-        "59921ec2-e06b-41f6-bc78-3df574e0baab@344db",
-        "59921ec2-e06b-41f6-bc78-3df574e0baab@5f95a",
-        "59921ec2-e06b-41f6-bc78-3df574e0baab@09767"
+        "59921ec2-e06b-41f6-bc78-3df574e0baab@8d572",
+        "59921ec2-e06b-41f6-bc78-3df574e0baab@f093a",
+        "59921ec2-e06b-41f6-bc78-3df574e0baab@ac73c",
+        "59921ec2-e06b-41f6-bc78-3df574e0baab@77263",
+        "59921ec2-e06b-41f6-bc78-3df574e0baab@aa7fa"
       ],
       "skeletons": [],
       "textures": [],
@@ -157,6 +157,7 @@
         "8bcd9e32-5413-4650-894b-4280b2774943",
         "4c699d1f-1257-4ac5-904a-21f49c11300e",
         "d3ad9ff3-ad51-4f57-9bc3-181be4b2823b",
+        "d199f7b3-5241-4b88-b2f9-467898c5eb71",
         "848d4223-fd92-4b97-868d-2fda6aaee0d9",
         "e64e2405-cb73-448e-9756-b6831d4f9f7d",
         "c91a195f-91d6-46ac-83f8-9353622f476c",
