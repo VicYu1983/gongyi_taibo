@@ -2,7 +2,7 @@ import { _decorator, Button, Camera, CCBoolean, Component, director, Enum, Event
 import { BuildingController } from './BuildingController';
 import { Navigation } from './Navigation';
 import { EquipmentIcon } from './EquipmentIcon';
-import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
+import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType, Tag } from './EquipmentModel';
 import { Equipment } from './Equipment';
 import { Model } from './Model';
 import { Orbit } from './Orbit';
@@ -62,7 +62,7 @@ export class Controller extends Component {
 
         const self = this;
         window["cocos"] = {
-            openFloor: function (id = 0) {
+            openFloor(id = 0) {
                 switch (id) {
                     case -1: self.building.openBuilding(EquipmentFloor.B2F); break;
                     case 0: self.building.openBuilding(EquipmentFloor.B1F); break;
@@ -77,7 +77,7 @@ export class Controller extends Component {
                         console.log("id值域為-1~6, 99");
                 }
             },
-            backToInit: function () {
+            backToInit() {
                 self.onBackCameraClick();
             },
             showAir(onlyAlarm = false) {
@@ -115,11 +115,28 @@ export class Controller extends Component {
                     self.changeToCCTV();
                 }
             },
-            showEarthquake(onlyAlarm = false) {
-                if (onlyAlarm) {
-                    self.changeToEarthquakeAlarm();
-                } else {
-                    self.changeToEarthquake();
+            showEarthquake() {
+                self.changeToEarthquake();
+            },
+            showEarthquakeAlarm(level = 50) {
+                switch (level) {
+                    case 50:
+                        self.changeToEarthquakeAlarm5A();
+                        break;
+                    case 51:
+                        self.changeToEarthquakeAlarm5B();
+                        break;
+                    case 60:
+                        self.changeToEarthquakeAlarm6A();
+                        break;
+                    case 61:
+                        self.changeToEarthquakeAlarm6B();
+                        break;
+                    case 70:
+                        self.changeToEarthquakeAlarm7A();
+                        break;
+                    default:
+                        console.log("50:5A, 51:5B, 60:6A, 61:6B, 70:7A");
                 }
             },
             showElectric(onlyAlarm = false) {
@@ -299,11 +316,31 @@ export class Controller extends Component {
         this.building.changeEquipmentState(EquipmentState.NONE);
     }
 
-    changeToEarthquakeAlarm() {
-        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE_ALARM);
+    changeToEarthquakeAlarm(tag: Tag) {
+        this.building.openBuilding(EquipmentFloor.ALL);
+        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE_ALARM, tag);
         this.building.changeEquipmentState(EquipmentState.NONE);
     }
 
+    changeToEarthquakeAlarm5A() {
+        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_5A);
+    }
+
+    changeToEarthquakeAlarm5B() {
+        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_5B);
+    }
+
+    changeToEarthquakeAlarm6A() {
+        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_6A);
+    }
+
+    changeToEarthquakeAlarm6B() {
+        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_6B);
+    }
+
+    changeToEarthquakeAlarm7A() {
+        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_7A);
+    }
 
     // changeToAir() {
     //     this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);

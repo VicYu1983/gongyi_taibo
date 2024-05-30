@@ -20,7 +20,7 @@ export enum EquipmentType {
     EARTHQUAKE, // 地震
     CCTV, // cctv
     ELECTRIC, // 電力
-    EARTHQUAKE_ALARM
+    EARTHQUAKE_ALARM // 地震告警
 }
 
 export enum EquipmentBelong {
@@ -42,7 +42,11 @@ export enum EquipmentFloor {
 }
 
 export enum Tag {
-    EARTHQUAKE
+    EARTHQUAKE_5A,
+    EARTHQUAKE_5B,
+    EARTHQUAKE_6A,
+    EARTHQUAKE_6B,
+    EARTHQUAKE_7A
 }
 
 @ccclass('EquipmentModel')
@@ -71,7 +75,7 @@ export class EquipmentModel extends Component {
     type: EquipmentType = EquipmentType.AIR;
 
     @property({ type: Enum(Tag) })
-    tag: Tag[] = [];
+    tags: Tag[] = [];
 
     view: Node;
 
@@ -161,6 +165,10 @@ export class EquipmentModel extends Component {
     setOnlyDot(only: boolean) {
         this.isOnlyDot = only;
         this.node.emit(EquipmentModel.ON_CHANGE, this);
+    }
+
+    hasTag(tag: Tag) {
+        return this.tags.indexOf(tag) > -1;
     }
 
     getShow() {

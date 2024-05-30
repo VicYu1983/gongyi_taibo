@@ -4,7 +4,7 @@ import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
 import { PPController } from './PPController';
 import { EquipmentIcon } from './EquipmentIcon';
-import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
+import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType, Tag } from './EquipmentModel';
 import { Navigation } from './Navigation';
 import { BackgroundController } from './BackgroundController';
 import { IEnviromentChanger } from './IEnviromentChanger';
@@ -66,6 +66,8 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     @property({ type: Enum(EquipmentBelong) })
     currentBelong: EquipmentBelong = EquipmentBelong.TAIBO;
+
+    currentTag: Tag;
 
     @property(Node)
     uiNode: Node;
@@ -260,8 +262,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.updateEquipmentIconShow();
     }
 
-    changeEquipmentType(type: EquipmentType) {
+    changeEquipmentType(type: EquipmentType, tag: Tag = null) {
         this.currentType = type;
+        this.currentTag = tag;
         this.updateEquipmentShow();
         this.updateEquipmentIconShow();
     }
@@ -284,14 +287,25 @@ export class BuildingController extends Component implements IEnviromentChanger 
         }
     }
 
-    showFloor(floor: EquipmentFloor) {
-        this.hideAllFloor();
-        const id = this.buildingFloorEnum.indexOf(floor);
-        if (id == -1) {
-            return;
+    showAllFloor() {
+        for (let i = 0; i < this.buildingFloorTargetOpacity.length; ++i) {
+            this.buildingFloorTargetOpacity[i] = 1;
+            this.buildingFloor[i].active = true;
         }
-        this.buildingFloorTargetOpacity[id] = 1;
-        this.buildingFloor[id].active = true;
+    }
+
+    showFloor(floor: EquipmentFloor) {
+        if (floor == EquipmentFloor.ALL) {
+            this.showAllFloor();
+        } else {
+            this.hideAllFloor();
+            const id = this.buildingFloorEnum.indexOf(floor);
+            if (id == -1) {
+                return;
+            }
+            this.buildingFloorTargetOpacity[id] = 1;
+            this.buildingFloor[id].active = true;
+        }
     }
 
     getEquipment(id: number = 0) {
@@ -321,15 +335,27 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private updateEquipmentShow() {
         this.equipments.forEach((equipment, id, ary) => {
             const isBelong = equipment.getModel().belong === this.currentBelong;
-            const isFloor = equipment.getModel().floor === this.currentFloor;
             const isType = equipment.getModel().type === this.currentType;
-            let isState = equipment.getModel().state === this.currentState;
 
+            let isState = equipment.getModel().state === this.currentState;
             // 沒有設定state等於全部都要顯示
             if (this.currentState === EquipmentState.NONE) {
                 isState = true;
             }
-            equipment.getModel().setShow(isBelong && isFloor && isType && isState);
+
+            let isFloor = equipment.getModel().floor === this.currentFloor;
+            if (this.currentFloor === EquipmentFloor.ALL) {
+                isFloor = true;
+            }
+
+            let isTag = true;
+            if (this.currentTag != null) {
+                if (!equipment.getModel().hasTag(this.currentTag)) {
+                    isTag = false;
+                }
+            }
+
+            equipment.getModel().setShow(isBelong && isFloor && isType && isState && isTag);
         });
     }
 
@@ -341,10 +367,21 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
         this.equipmentGroups.forEach((group, id, ary) => {
             const isBelong = group.belong === this.currentBelong;
-            const isFloor = group.floor === this.currentFloor;
             const isType = group.type === this.currentType;
 
-            group.setShow(isBelong && isFloor && isType);
+            let isFloor = group.floor === this.currentFloor;
+            if (this.currentFloor === EquipmentFloor.ALL) {
+                isFloor = true;
+            }
+
+            let isTag = true;
+            if (this.currentTag != null) {
+                if (!group.hasTag(this.currentTag)) {
+                    isTag = false;
+                }
+            }
+
+            group.setShow(isBelong && isFloor && isType && isTag);
         });
     }
 
