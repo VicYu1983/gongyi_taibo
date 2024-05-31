@@ -13,8 +13,23 @@ export enum Level {
 @ccclass('EarthquakeAlarmModel')
 export class EarthquakeAlarmModel extends Component {
 
+    // @property(CCFloat)
+    // maxPower1: number = 0;
+
+    // @property(CCFloat)
+    // maxPower2: number = 0;
+
+    // @property(CCFloat)
+    // maxPower3: number = 0;
+
+    // @property(CCFloat)
+    // maxPower4: number = 0;
+
+    // @property(CCFloat)
+    // maxPower5: number = 0;
+
     @property(CCFloat)
-    maxPower: number[] = [];
+    private maxPower: number[] = [];
 
     @property({ type: Enum(Level) })
     maxPowerLevel: Level[] = [];
@@ -41,18 +56,28 @@ export class EarthquakeAlarmModel extends Component {
         return this._power;
     }
 
+    private powerMap(id) {
+        switch (id) {
+            case "0": return 0;
+            case "1": return 1;
+            case "2": return 2;
+        }
+    }
+
     protected onLoad(): void {
         const powers = this.node.name.split("_");
         if (powers.length > 1) {
-            this.maxPower[0] = parseInt(powers[1]);
-            this.maxPower[1] = parseInt(powers[2]);
-            this.maxPower[2] = parseInt(powers[3]);
-            this.maxPower[3] = parseInt(powers[4]);
-            this.maxPower[4] = parseInt(powers[5]);
+            this.maxPower[0] = this.powerMap(powers[1]);
+            this.maxPower[1] = this.powerMap(powers[2]);
+            this.maxPower[2] = this.powerMap(powers[3]);
+            this.maxPower[3] = this.powerMap(powers[4]);
+            this.maxPower[4] = this.powerMap(powers[5]);
         }
     }
 
     start() {
+        // this.maxPower = [this.maxPower1, this.maxPower2, this.maxPower3, this.maxPower4, this.maxPower5];
+
         this.level = Level.EARTHQUAKE_5A;
         this.getComponentInChildren(MeshRenderer).node.active = false;
     }

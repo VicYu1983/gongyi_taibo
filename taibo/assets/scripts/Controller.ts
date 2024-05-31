@@ -318,7 +318,7 @@ export class Controller extends Component {
     }
 
     changeToEarthquakeAlarm(level: Level) {
-        this.building.openBuilding(EquipmentFloor.ALL);
+        // this.building.openBuilding(EquipmentFloor.ALL);
         this.building.changeEquipmentType(EquipmentType.EARTHQUAKE_ALARM);
         this.building.changeEquipmentState(EquipmentState.NONE);
         this.building.changeEarthquakeLevel(level);
