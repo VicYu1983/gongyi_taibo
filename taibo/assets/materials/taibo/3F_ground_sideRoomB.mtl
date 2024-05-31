@@ -13,7 +13,8 @@
     {
       "USE_NORMAL_MAP": true,
       "USE_ALBEDO_MAP": true,
-      "USE_PBR_MAP": true
+      "USE_PBR_MAP": true,
+      "USE_EARTHQUAKE": true
     },
     {},
     {},
@@ -85,6 +86,11 @@
         "y": 10,
         "z": 0,
         "w": 0
+      },
+      "earthquakePoints": [],
+      "earthquakeMap": {
+        "__uuid__": "2296a298-ad9c-41a6-95af-8744febc5101@6c48a",
+        "__expectedType__": "cc.Texture2D"
       },
       "roughness": 1,
       "mainTexture": {

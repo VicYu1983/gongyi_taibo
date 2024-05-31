@@ -10,7 +10,9 @@
   },
   "_techIdx": 0,
   "_defines": [
-    {},
+    {
+      "USE_EARTHQUAKE": true
+    },
     {},
     {},
     {},
@@ -74,7 +76,13 @@
     }
   ],
   "_props": [
-    {},
+    {
+      "earthquakePoints": [],
+      "earthquakeMap": {
+        "__uuid__": "2296a298-ad9c-41a6-95af-8744febc5101@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      }
+    },
     {},
     {},
     {},

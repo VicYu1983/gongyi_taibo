@@ -13,7 +13,8 @@
     {
       "USE_NORMAL_MAP": true,
       "USE_ALBEDO_MAP": true,
-      "USE_PBR_MAP": true
+      "USE_PBR_MAP": true,
+      "USE_EARTHQUAKE": true
     },
     {},
     {},

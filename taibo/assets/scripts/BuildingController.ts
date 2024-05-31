@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3, Camera, error } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3, Camera, error, Vec4 } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -15,6 +15,7 @@ import { EquipmentGroupIcon } from './EquipmentGroupIcon';
 import { ICamera } from './ICamera';
 import { Orbit } from './Orbit';
 import { Area } from './Area';
+import { EarthquakeAlarmModel } from './EarthquakeAlarmModel';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -93,10 +94,14 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private equipmentGroups: EquipmentGroupModel[] = [];
     private btnEquipmentGroupIcon: Node[] = [];
     private areas: Area[] = [];
+    private earthquakeAlarms: EarthquakeAlarmModel[] = [];
 
     protected onLoad(): void {
 
         this.areas = this.node.getComponentsInChildren(Area);
+        this.earthquakeAlarms = this.node.getComponentsInChildren(EarthquakeAlarmModel);
+
+        log(this.earthquakeAlarms.length);
 
         // 自動抓取equipment
         this.equipments = this.node.getComponentsInChildren(Equipment);
@@ -318,10 +323,19 @@ export class BuildingController extends Component implements IEnviromentChanger 
         return material.effectName == "../shaders/standard-dither" || material.effectName == "../shaders/glass-dither";
     }
 
+    private checkIsEarthquake(material) {
+        return material.effectName == "../shaders/standard-dither";
+    }
+
     // private earthquakeMaterials = ["earthquake", "external-pillar", "1F_pillar"];
     private earthquakeMaterials = ["earthquake"];
 
     private updateMaterialParams() {
+        const earthquakes = this.earthquakeAlarms.map((quake, id, ary) => {
+            const p = quake.node.getWorldPosition();
+            return new Vec4(p.x, p.y, p.z, quake.power);
+        });
+
         this.buildingFloorMesh.forEach((mesh, fid, ary) => {
             mesh.materials.forEach((material, id, matAry) => {
 
@@ -340,6 +354,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
                         }
                     }
                     material.setProperty("blendValue", this.bulidingBlendValue * scaleBlend);
+                }
+                if (this.checkIsEarthquake(material)) {
+                    material.setProperty("earthquakePoints", earthquakes);
                 }
             });
         });
