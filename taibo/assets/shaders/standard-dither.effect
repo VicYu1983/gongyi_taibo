@@ -309,10 +309,12 @@ CCProgram surface-fragment %{
       distance = 1.0 - clamp(distance, 0., 1.);
       distance_all += distance * power;
     }
+    float mask = smoothstep(0.2, 0.21, distance_all);
+    distance_all *= mask;
     vec4 heatColor = texture(earthquakeMap, vec2(distance_all, 1.));
     earthColor.xyz += heatColor.rgb;
 
-    outColor += earthColor * 3.0;
+    outColor += earthColor * 1.0;
     #endif
 
     return outColor;

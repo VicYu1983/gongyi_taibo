@@ -86,7 +86,7 @@ export class EarthquakeAlarmModel extends Component {
             this.power = 0;
             return;
         }
-        this.power = ((Math.sin(game.totalTime * 0.005) + 1.0) * 0.5 * 0.3 + 0.7) * this._currentMaxPower;
+        this.power = ((Math.sin(game.totalTime * 0.005) + 1.0) * 0.5 * 0.1 + 0.9) * this._currentMaxPower;
     }
 }
 
