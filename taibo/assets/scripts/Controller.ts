@@ -6,6 +6,7 @@ import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, Equipm
 import { Equipment } from './Equipment';
 import { Model } from './Model';
 import { Orbit } from './Orbit';
+import { Level } from './EarthquakeAlarmModel';
 const { ccclass, property } = _decorator;
 const { requireComponent } = _decorator;
 
@@ -316,30 +317,31 @@ export class Controller extends Component {
         this.building.changeEquipmentState(EquipmentState.NONE);
     }
 
-    changeToEarthquakeAlarm(tag: Tag) {
+    changeToEarthquakeAlarm(level: Level) {
         this.building.openBuilding(EquipmentFloor.ALL);
-        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE_ALARM, tag);
+        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE_ALARM);
         this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEarthquakeLevel(level);
     }
 
     changeToEarthquakeAlarm5A() {
-        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_5A);
+        this.changeToEarthquakeAlarm(Level.EARTHQUAKE_5A);
     }
 
     changeToEarthquakeAlarm5B() {
-        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_5B);
+        this.changeToEarthquakeAlarm(Level.EARTHQUAKE_5B);
     }
 
     changeToEarthquakeAlarm6A() {
-        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_6A);
+        this.changeToEarthquakeAlarm(Level.EARTHQUAKE_6A);
     }
 
     changeToEarthquakeAlarm6B() {
-        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_6B);
+        this.changeToEarthquakeAlarm(Level.EARTHQUAKE_6B);
     }
 
     changeToEarthquakeAlarm7A() {
-        this.changeToEarthquakeAlarm(Tag.EARTHQUAKE_7A);
+        this.changeToEarthquakeAlarm(Level.EARTHQUAKE_7A);
     }
 
     // changeToAir() {

@@ -15,7 +15,7 @@ import { EquipmentGroupIcon } from './EquipmentGroupIcon';
 import { ICamera } from './ICamera';
 import { Orbit } from './Orbit';
 import { Area } from './Area';
-import { EarthquakeAlarmModel } from './EarthquakeAlarmModel';
+import { EarthquakeAlarmModel, Level } from './EarthquakeAlarmModel';
 const { Bloom } = postProcess;
 const { ccclass, property } = _decorator;
 
@@ -69,6 +69,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     currentBelong: EquipmentBelong = EquipmentBelong.TAIBO;
 
     currentTag: Tag;
+    currentLevel: Level;
 
     @property(Node)
     uiNode: Node;
@@ -101,7 +102,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.areas = this.node.getComponentsInChildren(Area);
         this.earthquakeAlarms = this.node.getComponentsInChildren(EarthquakeAlarmModel);
 
-        log(this.earthquakeAlarms.length);
+        log("earth count:" + this.earthquakeAlarms.length);
 
         // 自動抓取equipment
         this.equipments = this.node.getComponentsInChildren(Equipment);
@@ -178,6 +179,14 @@ export class BuildingController extends Component implements IEnviromentChanger 
                     material.setProperty("blendFloorY", height);
                 }
             })
+        });
+
+        this.buildingFloorMesh.forEach((mesh, fid, ary) => {
+            mesh.materials.forEach((material, id, matAry) => {
+                if (this.checkIsEarthquake(material)) {
+                    material.setProperty("earthquakeSize", 1.0);
+                }
+            });
         });
     }
 
@@ -270,6 +279,15 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     changeEquipmentType(type: EquipmentType, tag: Tag = null) {
+
+        // 類別是地震告警時，點位開始update
+        this.earthquakeAlarms.forEach((earth, id, ary) => {
+            const isEarthAlarm = (type == EquipmentType.EARTHQUAKE_ALARM);
+            if (!isEarthAlarm) {
+                earth.level = Level.EARTHQUAKE_0;
+            }
+        });
+
         this.currentType = type;
         this.currentTag = tag;
         this.updateEquipmentShow();
@@ -286,6 +304,13 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.currentBelong = belong;
         this.updateEquipmentShow();
         this.updateEquipmentIconShow();
+    }
+
+    changeEarthquakeLevel(level: Level = null) {
+        this.currentLevel = level;
+        this.earthquakeAlarms.forEach((quake, id, ary) => {
+            quake.level = level;
+        });
     }
 
     hideAllFloor() {
@@ -348,7 +373,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
                     if (isTaiboRoof) {
                         scaleBlend = 3;
                     } else {
-                        const isEarthquake = this.earthquakeMaterials.indexOf(material._parent._name) > -1;
+                        const isEarthquake = this.earthquakeMaterials.indexOf(material["_parent"]._name) > -1;
                         if (isEarthquake) {
                             scaleBlend = .1;
                         }
