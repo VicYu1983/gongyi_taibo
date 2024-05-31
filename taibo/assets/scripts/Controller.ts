@@ -380,6 +380,10 @@ export class Controller extends Component {
         this.building.openBuilding(EquipmentFloor.N6F);
     }
 
+    changeFloorALL() {
+        this.building.openBuilding(EquipmentFloor.ALL);
+    }
+
     changeToTaibo() {
 
         this.buildingTaibo.currentBelong = EquipmentBelong.TAIBO;

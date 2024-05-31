@@ -59,7 +59,7 @@ export class EarthquakeAlarmModel extends Component {
     private powerMap(id) {
         switch (id) {
             case "0": return 0;
-            case "1": return 1;
+            case "1": return 0.25;
             case "2": return 2;
         }
     }
@@ -76,7 +76,6 @@ export class EarthquakeAlarmModel extends Component {
     }
 
     start() {
-        // this.maxPower = [this.maxPower1, this.maxPower2, this.maxPower3, this.maxPower4, this.maxPower5];
 
         this.level = Level.EARTHQUAKE_5A;
         this.getComponentInChildren(MeshRenderer).node.active = false;
@@ -87,7 +86,7 @@ export class EarthquakeAlarmModel extends Component {
             this.power = 0;
             return;
         }
-        this.power = ((Math.sin(game.totalTime * 0.01) + 1.0) * 0.5 * 0.5 + 0.5) * this._currentMaxPower;
+        this.power = ((Math.sin(game.totalTime * 0.005) + 1.0) * 0.5 * 0.3 + 0.7) * this._currentMaxPower;
     }
 }
 
