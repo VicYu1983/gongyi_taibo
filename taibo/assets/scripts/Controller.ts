@@ -88,14 +88,14 @@ export class Controller extends Component {
                     self.changeToAir();
                 }
             },
-            showAirCondition(onlyAlarm = false) {
+            showAirConditioner(onlyAlarm = false) {
                 if (onlyAlarm) {
                     self.changeToAirConditionAlarm();
                 } else {
                     self.changeToAirCondition();
                 }
             },
-            showEnviroment(onlyAlarm = false) {
+            showEnvironment(onlyAlarm = false) {
                 if (onlyAlarm) {
                     self.changeToEnviromentAlarm();
                 } else {

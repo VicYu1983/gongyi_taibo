@@ -11,7 +11,7 @@ CCEffect %{
         mainColor:                        { value: [1.0, 1.0, 1.0, 1.0], target: albedo, linear: true, editor: { displayName: Albedo, type: color } }
         earthquakePoints:                 { value: [0, 0, 0, 0], array: 1, editor: { parent: USE_EARTHQUAKE } }
         earthquakeMap:                    { value: white, editor: { parent: USE_EARTHQUAKE } }
-        earthquakeSize:                   { value: .2, editor: { parent: USE_EARTHQUAKE } }
+        earthquakeSize:                   { value: .3, editor: { parent: USE_EARTHQUAKE } }
         albedoScale:                      { value: [1.0, 1.0, 1.0], target: albedoScaleAndCutoff.xyz }
         alphaThreshold:                   { value: 0.5, target: albedoScaleAndCutoff.w, editor: { parent: USE_ALPHA_TEST, slide: true, range: [0, 1.0], step: 0.001 } }
         blendRange:                       { value: 0.3, target: ditherParams.r, editor: { slide: true, range: [0.001, 5.0], step: 0.001 } }
@@ -305,7 +305,7 @@ CCProgram surface-fragment %{
       vec3 p = earthquakePoints[i].xyz;
       float power = earthquakePoints[i].w;
       float distance = length(FSInput_worldPos - p);
-      distance *= 1.0 / 0.25;
+      distance *= 1.0 / 0.3;
       distance = 1.0 - clamp(distance, 0., 1.);
       distance_all += distance * power;
     }
