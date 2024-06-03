@@ -236,7 +236,7 @@ export class EquipmentIcon extends Component {
     needHover() {
         const isEarthquakeAlarm = this.model.type == EquipmentType.EARTHQUAKE_ALARM;
         const isAlarm = this.model.state == EquipmentState.ALARM1;
-        return !isEarthquakeAlarm && isAlarm;
+        return !isEarthquakeAlarm && !isAlarm;
     }
 
     onBtnHover() {

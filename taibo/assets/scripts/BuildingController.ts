@@ -128,7 +128,19 @@ export class BuildingController extends Component implements IEnviromentChanger 
             this.btnEquipmentIcon.push(iconNode);
 
             if (this.debugAlarm) {
-                icon.model.state = Math.random() > .95 ? EquipmentState.ALARM1 : EquipmentState.NORMAL;
+                icon.model.state = EquipmentState.NORMAL;
+                if (Math.random() > .95) {
+                    icon.model.state = EquipmentState.ALARM1;
+                }
+                if (Math.random() > .95) {
+                    icon.model.state = EquipmentState.ALARM2;
+                }
+                if (Math.random() > .95) {
+                    icon.model.state = EquipmentState.ALARM3;
+                }
+                if (Math.random() > .95) {
+                    icon.model.state = EquipmentState.ALARM4;
+                }
             }
         });
 
@@ -396,6 +408,18 @@ export class BuildingController extends Component implements IEnviromentChanger 
             // 沒有設定state等於全部都要顯示
             if (this.currentState === EquipmentState.NONE) {
                 isState = true;
+            }
+
+            // 只要是查看alarm1的就是查看alarm1~alarm4
+            if (this.currentState === EquipmentState.ALARM1) {
+                switch (equipment.getModel().state) {
+                    case EquipmentState.ALARM1:
+                    case EquipmentState.ALARM2:
+                    case EquipmentState.ALARM3:
+                    case EquipmentState.ALARM4:
+                        isState = true;
+                        break;
+                }
             }
 
             let isFloor = equipment.getModel().floor === this.currentFloor;
