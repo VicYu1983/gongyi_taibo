@@ -14,6 +14,9 @@ export enum Level {
 @ccclass('EarthquakeAlarmModel')
 export class EarthquakeAlarmModel extends Component {
 
+    @property(MeshRenderer)
+    centerSphere: MeshRenderer;
+
     @property({ type: Enum(EquipmentFloor) })
     floor: EquipmentFloor = EquipmentFloor.ALL;
 
@@ -57,23 +60,6 @@ export class EarthquakeAlarmModel extends Component {
         return this._currentMaxPower;
     }
 
-    // private _power: number = 1.0;
-    // set power(power) {
-    //     this._power = power;
-    // }
-
-    // get power() {
-    //     return this._power;
-    // }
-
-    // private powerMap(id) {
-    //     switch (id) {
-    //         case "0": return 0;
-    //         case "1": return 1;
-    //         case "2": return 2;
-    //     }
-    // }
-
     protected onLoad(): void {
         const powers = this.node.name.split("_");
         if (powers.length > 1) {
@@ -95,17 +81,8 @@ export class EarthquakeAlarmModel extends Component {
     }
 
     start() {
-        // this.level = Level.EARTHQUAKE_5A;
-        // this.getComponentInChildren(MeshRenderer).node.active = false;
+        this.centerSphere.node.active = false;
     }
-
-    // update(deltaTime: number) {
-    //     if (this._currentMaxPower == 0) {
-    //         this.power = 0;
-    //         return;
-    //     }
-    //     this.power = ((Math.sin(game.totalTime * 0.005) + 1.0) * 0.5 * 0.1 + 0.9) * this._currentMaxPower;
-    // }
 }
 
 

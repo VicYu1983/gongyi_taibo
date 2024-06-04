@@ -288,9 +288,9 @@
     "lookAt": {
       "__id__": 8
     },
-    "distance": 8,
-    "distanceMax": 10,
-    "distanceMin": 0.1,
+    "distance": 6,
+    "distanceMax": 6,
+    "distanceMin": 0.4,
     "yaw": 3.141592,
     "pitch": 0.7,
     "_id": "72FWvts7xAHJPGhaQnBOHk"

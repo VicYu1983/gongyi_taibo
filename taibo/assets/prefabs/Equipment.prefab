@@ -325,6 +325,7 @@
     "floor": 1,
     "state": 0,
     "type": 0,
+    "tags": [],
     "_id": ""
   },
   {
@@ -346,6 +347,10 @@
     "alarmIcon": {
       "__id__": 8
     },
+    "centerSphere": {
+      "__id__": 3
+    },
+    "links": [],
     "normalColor": {
       "__type__": "cc.Color",
       "r": 0,

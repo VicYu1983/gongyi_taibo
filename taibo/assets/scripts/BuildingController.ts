@@ -378,13 +378,13 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     // private earthquakeMaterials = ["earthquake", "external-pillar", "1F_pillar"];
-    private earthquakeMaterials = ["earthquake"];
+    // private earthquakeMaterials = ["earthquake"];
 
     private updateMaterialParams() {
-        const earthquakes = this.earthquakeAlarms.map((quake, id, ary) => {
-            const p = quake.node.getWorldPosition();
-            return new Vec4(p.x, p.y, p.z, quake.power);
-        });
+        // const earthquakes = this.earthquakeAlarms.map((quake, id, ary) => {
+        //     const p = quake.node.getWorldPosition();
+        //     return new Vec4(p.x, p.y, p.z, quake.power);
+        // });
 
         this.buildingFloorMesh.forEach((mesh, fid, ary) => {
             mesh.materials.forEach((material, id, matAry) => {
@@ -398,16 +398,16 @@ export class BuildingController extends Component implements IEnviromentChanger 
                     if (isTaiboRoof) {
                         scaleBlend = 3;
                     } else {
-                        const isEarthquake = this.earthquakeMaterials.indexOf(material["_parent"]._name) > -1;
-                        if (isEarthquake) {
-                            scaleBlend = .1;
-                        }
+                        // const isEarthquake = this.earthquakeMaterials.indexOf(material["_parent"]._name) > -1;
+                        // if (isEarthquake) {
+                        //     scaleBlend = .1;
+                        // }
                     }
                     material.setProperty("blendValue", this.bulidingBlendValue * scaleBlend);
                 }
-                if (this.checkIsEarthquake(material)) {
-                    material.setProperty("earthquakePoints", earthquakes);
-                }
+                // if (this.checkIsEarthquake(material)) {
+                //     material.setProperty("earthquakePoints", earthquakes);
+                // }
             });
         });
     }

@@ -317,6 +317,9 @@
     "__prefab": {
       "__id__": 13
     },
+    "centerSphere": {
+      "__id__": 3
+    },
     "floor": 9,
     "belong": 0,
     "alarmIcon": {

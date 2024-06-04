@@ -11,6 +11,9 @@ export class Equipment extends Component {
     @property(MeshRenderer)
     alarmIcon: MeshRenderer;
 
+    @property(MeshRenderer)
+    centerSphere: MeshRenderer;
+
     @property([Node])
     links: Node[] = [];
 
@@ -32,6 +35,13 @@ export class Equipment extends Component {
     @property(Color)
     alarm4Color: Color = new Color(22, 94, 255, 255);
 
+    normalSize = new Vec4(0.025, 0.025, 0, 0);
+    notActiveSize = new Vec4(0.025, 0.025, 0, 0);
+    alarm1Size = new Vec4(0.05, 0.05, 0, 0);
+    alarm2Size = new Vec4(0.05, 0.05, 0, 0);
+    alarm3Size = new Vec4(0.05, 0.05, 0, 0);
+    alarm4Size = new Vec4(0.05, 0.05, 0, 0);
+
     currentColor: Color = this.normalColor;
 
     protected onLoad(): void {
@@ -41,6 +51,7 @@ export class Equipment extends Component {
     start() {
         this.currentColor = this.normalColor.clone();
         this.onModelStateChange(this.getModel());
+        this.centerSphere.node.active = false;
     }
 
     onModelStateChange(data: EquipmentModel) {
@@ -78,26 +89,32 @@ export class Equipment extends Component {
 
     changeToAlarm1() {
         this.alarmIcon.material.setProperty("mainColor", this.alarm1Color);
+        this.alarmIcon.material.setProperty("alarmParams", this.alarm1Size);
     }
 
     changeToAlarm2() {
         this.alarmIcon.material.setProperty("mainColor", this.alarm2Color);
+        this.alarmIcon.material.setProperty("alarmParams", this.alarm2Size);
     }
 
     changeToAlarm3() {
         this.alarmIcon.material.setProperty("mainColor", this.alarm3Color);
+        this.alarmIcon.material.setProperty("alarmParams", this.alarm3Size);
     }
 
     changeToAlarm4() {
         this.alarmIcon.material.setProperty("mainColor", this.alarm4Color);
+        this.alarmIcon.material.setProperty("alarmParams", this.alarm4Size);
     }
 
     changeToNotActive() {
         this.alarmIcon.material.setProperty("mainColor", this.notActiveColor);
+        this.alarmIcon.material.setProperty("alarmParams", this.notActiveSize);
     }
 
     changeToNormal() {
         this.alarmIcon.material.setProperty("mainColor", this.normalColor);
+        this.alarmIcon.material.setProperty("alarmParams", this.normalSize);
     }
 
     update(deltaTime: number) {
