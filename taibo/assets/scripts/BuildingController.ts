@@ -216,7 +216,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         } else {
             this.setOnlyDotAtAllEquipment(false);
             this.updateEquipmentShow();
-            this.updateEquipmentIconShow();
+            this.updateEquipmentGroupShow();
             this.updateEarthquakesShow();
         }
     }
@@ -295,7 +295,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     changeEquipmentState(state: EquipmentState) {
         this.currentState = state;
         this.updateEquipmentShow();
-        this.updateEquipmentIconShow();
+        this.updateEquipmentGroupShow();
         this.updateEarthquakesShow();
     }
 
@@ -312,21 +312,21 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.currentType = type;
         this.currentTag = tag;
         this.updateEquipmentShow();
-        this.updateEquipmentIconShow();
+        this.updateEquipmentGroupShow();
         this.updateEarthquakesShow();
     }
 
     changeEquipmentFloor(floor: EquipmentFloor) {
         this.currentFloor = floor;
         this.updateEquipmentShow();
-        this.updateEquipmentIconShow();
+        this.updateEquipmentGroupShow();
         this.updateEarthquakesShow();
     }
 
     changeEquipmentBelong(belong: EquipmentBelong) {
         this.currentBelong = belong;
         this.updateEquipmentShow();
-        this.updateEquipmentIconShow();
+        this.updateEquipmentGroupShow();
         this.updateEarthquakesShow();
     }
 
@@ -367,6 +367,17 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     getEquipment(id: number = 0) {
         return this.equipments[id];
+    }
+
+    getEquipmentByCode(code: String) {
+        let targetEquipment = null;
+        this.equipments.forEach((equipment, id, ary) => {
+            if (equipment.getModel().code === code) {
+                targetEquipment = equipment;
+                return;
+            }
+        });
+        return targetEquipment;
     }
 
     private checkIsDither(material) {
@@ -415,7 +426,11 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private updateEquipmentShow() {
         this.equipments.forEach((equipment, id, ary) => {
             const isBelong = equipment.getModel().belong === this.currentBelong;
-            const isType = equipment.getModel().type === this.currentType;
+            let isType = equipment.getModel().type === this.currentType;
+            // 沒有設定type等於全部都要顯示
+            if (this.currentType === EquipmentType.NONE) {
+                isType = true;
+            }
 
             let isState = equipment.getModel().state === this.currentState;
             // 沒有設定state等於全部都要顯示
@@ -451,7 +466,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         });
     }
 
-    private updateEquipmentIconShow() {
+    private updateEquipmentGroupShow() {
         const isAlarm = (this.currentState == EquipmentState.ALARM1);
         this.equipmentGroups.forEach((group, id, ary) => {
             group.setAtAlarm(isAlarm);
@@ -459,7 +474,11 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
         this.equipmentGroups.forEach((group, id, ary) => {
             const isBelong = group.belong === this.currentBelong;
-            const isType = group.type === this.currentType;
+            let isType = group.type === this.currentType;
+            // 沒有設定type等於全部都要顯示
+            if (this.currentType === EquipmentType.NONE) {
+                isType = true;
+            }
 
             let isFloor = group.floor === this.currentFloor;
             if (this.currentFloor === EquipmentFloor.ALL) {

@@ -110,6 +110,16 @@ export class Controller extends Component {
             backToInit() {
                 self.onBackCameraClick();
             },
+            zoomToEquipment(code: string) {
+                self.zoomToEquipment(code);
+            },
+            showAll(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToALLAlarm();
+                } else {
+                    self.changeToALL();
+                }
+            },
             showAir(onlyAlarm = false) {
                 if (onlyAlarm) {
                     self.changeToAirAlarm();
@@ -264,12 +274,18 @@ export class Controller extends Component {
     }
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
-        this.callWeb("onClickEquipment", model.id);
+        this.callWeb("onClickEquipment", model.code);
     }
 
-    // changeToCarbon() {
-    //     this.building.changeEquipmentType(EquipmentType.CARBON);
-    // }
+    changeToALL() {
+        this.building.changeEquipmentType(EquipmentType.NONE);
+        this.building.changeEquipmentState(EquipmentState.NONE);
+    }
+
+    changeToALLAlarm() {
+        this.building.changeEquipmentType(EquipmentType.NONE);
+        this.building.changeEquipmentState(EquipmentState.ALARM1);
+    }
 
     changeToAir() {
         this.building.changeEquipmentType(EquipmentType.AIR);
@@ -434,6 +450,15 @@ export class Controller extends Component {
         this.building = this.buildingXuku;
     }
 
+    zoomToEquipment(code) {
+        const equipment = this.building.getEquipmentByCode(code);
+        if (equipment === null) {
+            console.log("cocos 沒有這個code的設備:" + code);
+            return;
+        }
+        this.building.onBtnEquipmentIconClick(equipment.getModel());
+    }
+
     toggleScifi() {
         if (this.isScifi) {
             this.onNormalClick();
@@ -481,12 +506,7 @@ export class Controller extends Component {
     }
 
     onEquipmentClick() {
-        const equipment = this.building.getEquipment(0);
-
-        const pos = equipment.node.getPosition();
-        const rot = new Vec3();
-        equipment.node.getRotation().getEulerAngles(rot);
-        this.navigation.setTargetPositionAndRotation(pos, rot);
+        this.zoomToEquipment("319107");
     }
 
     onNormalClick() {

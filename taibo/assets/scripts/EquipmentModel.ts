@@ -12,6 +12,7 @@ export enum EquipmentState {
 }
 
 export enum EquipmentType {
+    NONE,
     AIR, // 空品
     AIRCONDITION, // 空調
     ENVIROMENT, // 微環境
