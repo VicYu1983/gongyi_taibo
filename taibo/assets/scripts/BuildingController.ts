@@ -217,6 +217,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
             this.setOnlyDotAtAllEquipment(false);
             this.updateEquipmentShow();
             this.updateEquipmentIconShow();
+            this.updateEarthquakesShow();
         }
     }
 
@@ -263,6 +264,13 @@ export class BuildingController extends Component implements IEnviromentChanger 
     closeBuilding() {
         this.hideAllFloor();
         this.showAllEquipment(false);
+        this.showAllEarthquakes(false);
+    }
+
+    showAllEarthquakes(show: boolean) {
+        this.earthquakeAlarms.forEach((earth, id, ary) => {
+            earth.node.active = show;
+        });
     }
 
     showAllEquipment(show: boolean) {
@@ -288,34 +296,38 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.currentState = state;
         this.updateEquipmentShow();
         this.updateEquipmentIconShow();
+        this.updateEarthquakesShow();
     }
 
     changeEquipmentType(type: EquipmentType, tag: Tag = null) {
 
         // 類別是地震告警時，點位開始update
-        this.earthquakeAlarms.forEach((earth, id, ary) => {
-            const isEarthAlarm = (type == EquipmentType.EARTHQUAKE_ALARM);
-            if (!isEarthAlarm) {
-                earth.level = Level.EARTHQUAKE_0;
-            }
-        });
+        // this.earthquakeAlarms.forEach((earth, id, ary) => {
+        //     const isEarthAlarm = (type == EquipmentType.EARTHQUAKE_ALARM);
+        //     if (!isEarthAlarm) {
+        //         earth.level = Level.EARTHQUAKE_0;
+        //     }
+        // });
 
         this.currentType = type;
         this.currentTag = tag;
         this.updateEquipmentShow();
         this.updateEquipmentIconShow();
+        this.updateEarthquakesShow();
     }
 
     changeEquipmentFloor(floor: EquipmentFloor) {
         this.currentFloor = floor;
         this.updateEquipmentShow();
         this.updateEquipmentIconShow();
+        this.updateEarthquakesShow();
     }
 
     changeEquipmentBelong(belong: EquipmentBelong) {
         this.currentBelong = belong;
         this.updateEquipmentShow();
         this.updateEquipmentIconShow();
+        this.updateEarthquakesShow();
     }
 
     changeEarthquakeLevel(level: Level = null) {
@@ -323,6 +335,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.earthquakeAlarms.forEach((quake, id, ary) => {
             quake.level = level;
         });
+        this.updateEarthquakesShow();
     }
 
     hideAllFloor() {
@@ -461,6 +474,22 @@ export class BuildingController extends Component implements IEnviromentChanger 
             }
 
             group.setShow(isBelong && isFloor && isType && isTag);
+        });
+    }
+
+    private updateEarthquakesShow() {
+        this.earthquakeAlarms.forEach((earth, id, ary) => {
+            const isBelong = earth.belong === this.currentBelong;
+            const isType = this.currentType === EquipmentType.EARTHQUAKE_ALARM;
+
+            let isFloor = earth.floor === this.currentFloor;
+            if (this.currentFloor === EquipmentFloor.ALL) {
+                isFloor = true;
+            }
+
+            const isHavePower = earth.currentMaxPower > 0;
+
+            earth.node.active = (isBelong && isType && isFloor && isHavePower);
         });
     }
 

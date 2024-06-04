@@ -1,4 +1,5 @@
-import { _decorator, CCFloat, Component, director, Enum, game, MeshRenderer, Node } from 'cc';
+import { _decorator, CCFloat, Color, Component, director, Enum, game, MeshRenderer, Node } from 'cc';
+import { EquipmentBelong, EquipmentFloor, EquipmentType } from './EquipmentModel';
 const { ccclass, property } = _decorator;
 
 export enum Level {
@@ -13,20 +14,25 @@ export enum Level {
 @ccclass('EarthquakeAlarmModel')
 export class EarthquakeAlarmModel extends Component {
 
-    // @property(CCFloat)
-    // maxPower1: number = 0;
+    @property({ type: Enum(EquipmentFloor) })
+    floor: EquipmentFloor = EquipmentFloor.ALL;
 
-    // @property(CCFloat)
-    // maxPower2: number = 0;
+    @property({ type: Enum(EquipmentBelong) })
+    belong: EquipmentBelong = EquipmentBelong.TAIBO;
 
-    // @property(CCFloat)
-    // maxPower3: number = 0;
+    @property(MeshRenderer)
+    alarmIcon: MeshRenderer;
 
-    // @property(CCFloat)
-    // maxPower4: number = 0;
+    @property([Node])
+    links: Node[] = [];
 
-    // @property(CCFloat)
-    // maxPower5: number = 0;
+    @property(Color)
+    lightColor: Color = new Color(0, 224, 255, 255);
+
+    @property(Color)
+    heavyColor: Color = new Color(255, 55, 55, 255);
+
+    currentColor: Color = this.lightColor;
 
     @property(CCFloat)
     private maxPower: number[] = [];
@@ -44,50 +50,62 @@ export class EarthquakeAlarmModel extends Component {
         } else {
             this._currentMaxPower = this.maxPower[this.maxPowerLevel.indexOf(level)];
         }
-
+        this.changeColor();
     }
 
-    private _power: number = 1.0;
-    set power(power) {
-        this._power = power;
+    get currentMaxPower() {
+        return this._currentMaxPower;
     }
 
-    get power() {
-        return this._power;
-    }
+    // private _power: number = 1.0;
+    // set power(power) {
+    //     this._power = power;
+    // }
 
-    private powerMap(id) {
-        switch (id) {
-            case "0": return 0;
-            case "1": return 0.25;
-            case "2": return 2;
-        }
-    }
+    // get power() {
+    //     return this._power;
+    // }
+
+    // private powerMap(id) {
+    //     switch (id) {
+    //         case "0": return 0;
+    //         case "1": return 1;
+    //         case "2": return 2;
+    //     }
+    // }
 
     protected onLoad(): void {
         const powers = this.node.name.split("_");
         if (powers.length > 1) {
-            this.maxPower[0] = this.powerMap(powers[1]);
-            this.maxPower[1] = this.powerMap(powers[2]);
-            this.maxPower[2] = this.powerMap(powers[3]);
-            this.maxPower[3] = this.powerMap(powers[4]);
-            this.maxPower[4] = this.powerMap(powers[5]);
+            this.maxPower[0] = Number(powers[1]);
+            this.maxPower[1] = Number(powers[2]);
+            this.maxPower[2] = Number(powers[3]);
+            this.maxPower[3] = Number(powers[4]);
+            this.maxPower[4] = Number(powers[5]);
+        }
+    }
+
+    private changeColor() {
+        switch (this._currentMaxPower) {
+            case 1: this.alarmIcon.material.setProperty("mainColor", this.lightColor);
+                break;
+            case 2: this.alarmIcon.material.setProperty("mainColor", this.heavyColor);
+                break;
         }
     }
 
     start() {
-
-        this.level = Level.EARTHQUAKE_5A;
-        this.getComponentInChildren(MeshRenderer).node.active = false;
+        // this.level = Level.EARTHQUAKE_5A;
+        // this.getComponentInChildren(MeshRenderer).node.active = false;
     }
 
-    update(deltaTime: number) {
-        if (this._currentMaxPower == 0) {
-            this.power = 0;
-            return;
-        }
-        this.power = ((Math.sin(game.totalTime * 0.005) + 1.0) * 0.5 * 0.1 + 0.9) * this._currentMaxPower;
-    }
+    // update(deltaTime: number) {
+    //     if (this._currentMaxPower == 0) {
+    //         this.power = 0;
+    //         return;
+    //     }
+    //     this.power = ((Math.sin(game.totalTime * 0.005) + 1.0) * 0.5 * 0.1 + 0.9) * this._currentMaxPower;
+    // }
 }
 
 
