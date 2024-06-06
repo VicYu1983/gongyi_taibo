@@ -277,8 +277,9 @@ export class Controller extends Component {
         this.building.changeEquipmentState(this.allState);
     }
 
+    // 機電和空調的告警都歸類到【其他設備】
     changeToAirConditionAlarm() {
-        this.building.changeEquipmentType([EquipmentType.AIRCONDITION]);
+        this.building.changeEquipmentType([EquipmentType.AIRCONDITION, EquipmentType.ELECTRIC]);
         this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
@@ -323,10 +324,11 @@ export class Controller extends Component {
     }
 
     changeToElectric() {
-        this.building.changeEquipmentType([EquipmentType.AIRCONDITION, EquipmentType.ELECTRIC]);
+        this.building.changeEquipmentType([EquipmentType.ELECTRIC]);
         this.building.changeEquipmentState(this.allState);
     }
 
+    // 機電和空調的告警都歸類到【其他設備】
     changeToElectricAlarm() {
         this.building.changeEquipmentType([EquipmentType.AIRCONDITION, EquipmentType.ELECTRIC]);
         this.building.changeEquipmentState(this.onlyAlarmState);

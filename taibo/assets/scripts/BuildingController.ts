@@ -214,6 +214,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     onBtnEquipmentIconClick(model: EquipmentModel) {
 
+        // cctv 點擊不要zoom
+        if (model.type === EquipmentType.CCTV) return;
+
         const equipment = model.node;
 
         const pos = equipment.getPosition();
@@ -294,7 +297,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
         // 類別是地震告警時，點位開始update
         // this.earthquakeAlarms.forEach((earth, id, ary) => {
-        //     const isEarthAlarm = (type == EquipmentType.EARTHQUAKE_ALARM);
+        //     const isEarthAlarm = type.indexOf(EquipmentType.EARTHQUAKE_ALARM) >= 0;
         //     if (!isEarthAlarm) {
         //         earth.level = Level.EARTHQUAKE_0;
         //     }
@@ -466,7 +469,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private updateEarthquakesShow() {
         this.earthquakeAlarms.forEach((earth, id, ary) => {
             const isBelong = earth.belong === this.currentBelong;
-            const isType = this.currentType.indexOf(EquipmentType.EARTHQUAKE_ALARM) >= 1;
+            const isType = this.currentType.indexOf(EquipmentType.EARTHQUAKE_ALARM) >= 0;
 
             let isFloor = earth.floor === this.currentFloor;
             if (this.currentFloor === EquipmentFloor.ALL) {
