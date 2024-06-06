@@ -166,6 +166,7 @@ export class EquipmentIcon extends Component {
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[7];
                 break;
             case EquipmentType.SECURITY:
+            case EquipmentType.SECURITY_ALARM:
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[8];
                 break;
         }
@@ -324,6 +325,7 @@ export class EquipmentIcon extends Component {
             case EquipmentType.ELECTRIC:
             case EquipmentType.FIRE:
             case EquipmentType.SECURITY:
+            case EquipmentType.SECURITY_ALARM:
                 switch (this.model.state) {
                     case EquipmentState.NOT_ACTIVE:
                     case EquipmentState.NORMAL:

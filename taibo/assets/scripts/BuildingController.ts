@@ -102,8 +102,6 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.areas = this.node.getComponentsInChildren(Area);
         this.earthquakeAlarms = this.node.getComponentsInChildren(EarthquakeAlarmModel);
 
-        log("earth count:" + this.earthquakeAlarms.length);
-
         // 自動抓取equipment
         this.equipments = this.node.getComponentsInChildren(Equipment);
 
@@ -433,21 +431,23 @@ export class BuildingController extends Component implements IEnviromentChanger 
             }
 
             let isState = equipment.getModel().state === this.currentState;
-            // 沒有設定state等於全部都要顯示
-            if (this.currentState === EquipmentState.NONE) {
-                isState = true;
-            }
 
-            // 只要是查看alarm1的就是查看alarm1~alarm4
-            if (this.currentState === EquipmentState.ALARM1) {
-                switch (equipment.getModel().state) {
-                    case EquipmentState.ALARM1:
-                    case EquipmentState.ALARM2:
-                    case EquipmentState.ALARM3:
-                    case EquipmentState.ALARM4:
-                        isState = true;
-                        break;
-                }
+            switch (this.currentState) {
+                // 沒有設定state等於全部都要顯示
+                case EquipmentState.NONE:
+                    isState = true;
+                    break;
+                // 只要是查看alarm1的就是查看alarm1~alarm4
+                case EquipmentState.ALARM1:
+                    switch (equipment.getModel().state) {
+                        case EquipmentState.ALARM1:
+                        case EquipmentState.ALARM2:
+                        case EquipmentState.ALARM3:
+                        case EquipmentState.ALARM4:
+                            isState = true;
+                            break;
+                    }
+                    break;
             }
 
             let isFloor = equipment.getModel().floor === this.currentFloor;

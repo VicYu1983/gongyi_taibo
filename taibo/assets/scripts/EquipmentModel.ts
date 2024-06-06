@@ -1,4 +1,5 @@
-import { _decorator, CCInteger, CCString, Component, Enum, error, Node } from 'cc';
+import { _decorator, CCInteger, CCString, Component, Enum, error, log, Node } from 'cc';
+import { Controller } from './Controller';
 const { ccclass, property } = _decorator;
 
 export enum EquipmentState {
@@ -21,7 +22,9 @@ export enum EquipmentType {
     EARTHQUAKE, // 地震
     CCTV, // cctv
     ELECTRIC, // 電力
-    EARTHQUAKE_ALARM // 地震告警
+    EARTHQUAKE_ALARM, // 地震告警(only for alarm)
+    SECURITY_ALARM, // 連綫保全告警(only for alarm)
+    WEB // 網路
 }
 
 export enum EquipmentBelong {
@@ -63,6 +66,9 @@ export class EquipmentModel extends Component {
     @property(CCString)
     code: string;
 
+    @property(CCString)
+    codePrefix: string = "{0}";
+
     @property({ type: Enum(EquipmentBelong) })
     belong: EquipmentBelong = EquipmentBelong.TAIBO;
 
@@ -92,15 +98,21 @@ export class EquipmentModel extends Component {
         pm: 10
     }
 
-    private alarmable = [
-        EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.CCTV, EquipmentType.ELECTRIC
-    ];
+    // private alarmable = [
+    //     EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.CCTV, EquipmentType.ELECTRIC
+    // ];
 
-    private electable = [
-        EquipmentType.AIRCONDITION, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.ELECTRIC
-    ];
+    // private electable = [
+    //     EquipmentType.AIRCONDITION, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.ELECTRIC
+    // ];
 
     protected showOnScreen = true;
+
+    private formatString(template: string, ...args: any[]): string {
+        return template.replace(/{(\d+)}/g, (match, index) => {
+            return typeof args[index] !== 'undefined' ? args[index] : match;
+        });
+    }
 
     protected onLoad(): void {
         const modelData = this.node.name.split("_");
@@ -110,8 +122,11 @@ export class EquipmentModel extends Component {
 
         if (modelData.length > 4) {
             const code = modelData[4];
-            this.code = code;
+            this.code = this.formatString(this.codePrefix, code);
 
+            console.log(this.code);
+
+            // for earthquake alarm
             if (this.code.indexOf("5AR") > -1) {
                 this.state = EquipmentState.ALARM1;
                 this.tags = [Tag.EARTHQUAKE_5A];
@@ -183,6 +198,7 @@ export class EquipmentModel extends Component {
             case "Enviro": this.type = EquipmentType.ENVIROMENT; break;
             case "Fire": this.type = EquipmentType.FIRE; break;
             case "Secu": this.type = EquipmentType.SECURITY; break;
+            case "SecuAlarm": this.type = EquipmentType.SECURITY_ALARM; break;
             default: error("should not be here!", this.node.name, type);
         }
     }
@@ -191,13 +207,13 @@ export class EquipmentModel extends Component {
 
     }
 
-    isAlarmable() {
-        return this.alarmable.indexOf(this.type) >= 0;
-    }
+    // isAlarmable() {
+    //     return this.alarmable.indexOf(this.type) >= 0;
+    // }
 
-    isElectable() {
-        return this.electable.indexOf(this.type) >= 0;
-    }
+    // isElectable() {
+    //     return this.electable.indexOf(this.type) >= 0;
+    // }
 
     setShow(show: boolean) {
         this.showOnScreen = show;
