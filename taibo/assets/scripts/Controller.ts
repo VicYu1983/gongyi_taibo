@@ -127,6 +127,20 @@ export class Controller extends Component {
                     self.changeToCCTV();
                 }
             },
+            showWeb(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToWebAlarm();
+                } else {
+                    self.changeToWeb();
+                }
+            },
+            showOther(onlyAlarm = false) {
+                if (onlyAlarm) {
+                    self.changeToOtherAlarm();
+                } else {
+                    self.changeToOther();
+                }
+            },
             showEarthquake() {
                 self.changeToEarthquake();
             },
@@ -326,6 +340,26 @@ export class Controller extends Component {
     changeToElectric() {
         this.building.changeEquipmentType([EquipmentType.ELECTRIC]);
         this.building.changeEquipmentState(this.allState);
+    }
+
+    changeToWeb() {
+        this.building.changeEquipmentType([EquipmentType.WEB]);
+        this.building.changeEquipmentState(this.allState);
+    }
+
+    changeToWebAlarm() {
+        this.building.changeEquipmentType([EquipmentType.WEB]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
+    }
+
+    changeToOther() {
+        this.building.changeEquipmentType([EquipmentType.OTHER]);
+        this.building.changeEquipmentState(this.allState);
+    }
+
+    changeToOtherAlarm() {
+        this.building.changeEquipmentType([EquipmentType.OTHER]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     // 機電和空調的告警都歸類到【其他設備】

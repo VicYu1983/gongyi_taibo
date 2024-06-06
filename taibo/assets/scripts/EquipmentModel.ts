@@ -24,7 +24,8 @@ export enum EquipmentType {
     ELECTRIC, // 電力
     EARTHQUAKE_ALARM, // 地震告警(only for alarm)
     SECURITY_ALARM, // 連綫保全告警(only for alarm)
-    WEB // 網路
+    WEB, // 網路
+    OTHER // 其他
 }
 
 export enum EquipmentBelong {
@@ -122,9 +123,12 @@ export class EquipmentModel extends Component {
 
         if (modelData.length > 4) {
             const code = modelData[4];
-            this.code = this.formatString(this.codePrefix, code);
 
-            console.log(this.code);
+            // 規則一：把基本的code的[-]統一換成[_]。也就是説如果需要帶有[_]的名稱可以先用[-]
+            let usingCode = code.replace(/-/gm, "_");
+            // 規則二：把codePrefix的format套用到目前的code上。如果同時需要[_][-]。可以用這個方法
+            usingCode = this.formatString(this.codePrefix, usingCode);
+            this.code = usingCode;
 
             // for earthquake alarm
             if (this.code.indexOf("5AR") > -1) {
@@ -199,6 +203,8 @@ export class EquipmentModel extends Component {
             case "Fire": this.type = EquipmentType.FIRE; break;
             case "Secu": this.type = EquipmentType.SECURITY; break;
             case "SecuAlarm": this.type = EquipmentType.SECURITY_ALARM; break;
+            case "Web": this.type = EquipmentType.WEB; break;
+            case "Other": this.type = EquipmentType.OTHER; break;
             default: error("should not be here!", this.node.name, type);
         }
     }

@@ -152,8 +152,7 @@ export class EquipmentIcon extends Component {
             case EquipmentType.CCTV:
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[1];
                 break;
-            case EquipmentType.EARTHQUAKE:
-            case EquipmentType.EARTHQUAKE_ALARM:
+            case EquipmentType.WEB:
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[5];
                 break;
             case EquipmentType.ELECTRIC:
@@ -161,6 +160,11 @@ export class EquipmentIcon extends Component {
                 break;
             case EquipmentType.ENVIROMENT:
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[2];
+                break;
+            case EquipmentType.OTHER:
+            case EquipmentType.EARTHQUAKE:
+            case EquipmentType.EARTHQUAKE_ALARM:
+                this.iconSprite.spriteFrame = this.iconSpriteFrame[6];
                 break;
             case EquipmentType.FIRE:
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[7];
@@ -324,6 +328,8 @@ export class EquipmentIcon extends Component {
             case EquipmentType.EARTHQUAKE_ALARM:
             case EquipmentType.ELECTRIC:
             case EquipmentType.FIRE:
+            case EquipmentType.WEB:
+            case EquipmentType.OTHER:
             case EquipmentType.SECURITY:
             case EquipmentType.SECURITY_ALARM:
                 switch (this.model.state) {
