@@ -56,6 +56,7 @@ export class EquipmentGroupModel extends EquipmentModel {
     }
 
     private turnToGroupMode() {
+        if (this.getGroupMode()) return;
         this.setGroupMode(true);
         this.equipments.forEach((equpment, id, ary) => {
             equpment.setGroupMode(true);
@@ -63,6 +64,7 @@ export class EquipmentGroupModel extends EquipmentModel {
     }
 
     private turnToNoneGroupMode() {
+        if (!this.getGroupMode()) return;
         this.setGroupMode(false);
         this.equipments.forEach((equpment, id, ary) => {
             equpment.setGroupMode(false);

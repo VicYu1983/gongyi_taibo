@@ -78,34 +78,6 @@ export class Controller extends Component {
                         console.log("id值域為0~6, 99");
                 }
 
-                // if (self.building === self.buildingTaibo) {
-                //     switch (id) {
-                //         case 0: self.building.openBuilding(EquipmentFloor.B1F); break;
-                //         case 1: self.building.openBuilding(EquipmentFloor.N1F); break;
-                //         case 2: self.building.openBuilding(EquipmentFloor.N2F); break;
-                //         case 3: self.building.openBuilding(EquipmentFloor.N3F); break;
-                //         case 4: self.building.openBuilding(EquipmentFloor.N4F); break;
-                //         case 99: self.building.openBuilding(EquipmentFloor.ALL); break;
-                //         default:
-                //             console.log("id值域為0~4, 99");
-                //     }
-                // }
-
-                // if (self.building === self.buildingXuku) {
-                //     switch (id) {
-                //         case 0: self.building.openBuilding(EquipmentFloor.B2F); break;
-                //         case 1: self.building.openBuilding(EquipmentFloor.B1F); break;
-                //         case 2: self.building.openBuilding(EquipmentFloor.N2F); break;
-                //         case 3: self.building.openBuilding(EquipmentFloor.N3F); break;
-                //         case 4: self.building.openBuilding(EquipmentFloor.N4F); break;
-                //         case 5: self.building.openBuilding(EquipmentFloor.N5F); break;
-                //         case 6: self.building.openBuilding(EquipmentFloor.N6F); break;
-                //         case 99: self.building.openBuilding(EquipmentFloor.ALL); break;
-                //         default:
-                //             console.log("id值域為0~6, 99");
-                //     }
-                // }
-
             },
             backToInit() {
                 self.onBackCameraClick();
@@ -277,94 +249,97 @@ export class Controller extends Component {
         this.callWeb("onClickEquipment", model.code);
     }
 
+    private allState = [EquipmentState.NOT_ACTIVE, EquipmentState.NORMAL, EquipmentState.ALARM1, EquipmentState.ALARM2, EquipmentState.ALARM3, EquipmentState.ALARM4];
+    private onlyAlarmState = [EquipmentState.ALARM1, EquipmentState.ALARM2, EquipmentState.ALARM3, EquipmentState.ALARM4];
+
     changeToALL() {
-        this.building.changeEquipmentType(EquipmentType.NONE);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.CCTV, EquipmentType.EARTHQUAKE, EquipmentType.ELECTRIC, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.WEB]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToALLAlarm() {
-        this.building.changeEquipmentType(EquipmentType.NONE);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType([EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.CCTV, EquipmentType.EARTHQUAKE_ALARM, EquipmentType.ELECTRIC, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY_ALARM, EquipmentType.WEB]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     changeToAir() {
-        this.building.changeEquipmentType(EquipmentType.AIR);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.AIR]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToAirAlarm() {
-        this.building.changeEquipmentType(EquipmentType.AIR);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType([EquipmentType.AIR]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     changeToAirCondition() {
-        this.building.changeEquipmentType(EquipmentType.AIRCONDITION);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.AIRCONDITION]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToAirConditionAlarm() {
-        this.building.changeEquipmentType(EquipmentType.AIRCONDITION);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType([EquipmentType.AIRCONDITION]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     changeToEnviroment() {
-        this.building.changeEquipmentType(EquipmentType.ENVIROMENT);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.ENVIROMENT]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToEnviromentAlarm() {
-        this.building.changeEquipmentType(EquipmentType.ENVIROMENT);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType([EquipmentType.ENVIROMENT]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     changeToFire() {
-        this.building.changeEquipmentType(EquipmentType.FIRE);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.FIRE]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToFireAlarm() {
-        this.building.changeEquipmentType(EquipmentType.FIRE);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType([EquipmentType.FIRE]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     changeToSecurity() {
-        this.building.changeEquipmentType(EquipmentType.SECURITY);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.SECURITY]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToSecurityAlarm() {
-        this.building.changeEquipmentType(EquipmentType.SECURITY_ALARM);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType([EquipmentType.SECURITY_ALARM]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     changeToCCTV() {
-        this.building.changeEquipmentType(EquipmentType.CCTV);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.CCTV]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToCCTVAlarm() {
-        this.building.changeEquipmentType(EquipmentType.CCTV);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType([EquipmentType.CCTV]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     changeToElectric() {
-        this.building.changeEquipmentType(EquipmentType.ELECTRIC);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.AIRCONDITION, EquipmentType.ELECTRIC]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToElectricAlarm() {
-        this.building.changeEquipmentType(EquipmentType.ELECTRIC);
-        this.building.changeEquipmentState(EquipmentState.ALARM1);
+        this.building.changeEquipmentType([EquipmentType.AIRCONDITION, EquipmentType.ELECTRIC]);
+        this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
     changeToEarthquake() {
-        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.EARTHQUAKE]);
+        this.building.changeEquipmentState(this.allState);
     }
 
     changeToEarthquakeAlarm(level: Level) {
-        this.building.changeEquipmentType(EquipmentType.EARTHQUAKE_ALARM);
-        this.building.changeEquipmentState(EquipmentState.NONE);
+        this.building.changeEquipmentType([EquipmentType.EARTHQUAKE_ALARM]);
+        this.building.changeEquipmentState(this.allState);
         this.building.changeEarthquakeLevel(level);
     }
 

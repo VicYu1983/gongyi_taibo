@@ -56,20 +56,13 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property(Light)
     light: Light;
 
-    @property({ type: Enum(EquipmentState) })
-    currentState: EquipmentState = EquipmentState.NORMAL;
+    private currentState: EquipmentState[] = [EquipmentState.NORMAL];
+    private currentType: EquipmentType[] = [EquipmentType.AIR];
+    private currentFloor: EquipmentFloor = EquipmentFloor.B1F;
+    private currentTag: Tag;
+    private currentLevel: Level;
 
-    @property({ type: Enum(EquipmentType) })
-    currentType: EquipmentType = EquipmentType.AIR;
-
-    @property({ type: Enum(EquipmentFloor) })
-    currentFloor: EquipmentFloor = EquipmentFloor.B1F;
-
-    @property({ type: Enum(EquipmentBelong) })
     currentBelong: EquipmentBelong = EquipmentBelong.TAIBO;
-
-    currentTag: Tag;
-    currentLevel: Level;
 
     @property(Node)
     uiNode: Node;
@@ -290,14 +283,14 @@ export class BuildingController extends Component implements IEnviromentChanger 
         });
     }
 
-    changeEquipmentState(state: EquipmentState) {
+    changeEquipmentState(state: EquipmentState[]) {
         this.currentState = state;
         this.updateEquipmentShow();
         this.updateEquipmentGroupShow();
         this.updateEarthquakesShow();
     }
 
-    changeEquipmentType(type: EquipmentType, tag: Tag = null) {
+    changeEquipmentType(type: EquipmentType[], tag: Tag = null) {
 
         // 類別是地震告警時，點位開始update
         // this.earthquakeAlarms.forEach((earth, id, ary) => {
@@ -424,31 +417,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private updateEquipmentShow() {
         this.equipments.forEach((equipment, id, ary) => {
             const isBelong = equipment.getModel().belong === this.currentBelong;
-            let isType = equipment.getModel().type === this.currentType;
-            // 沒有設定type等於全部都要顯示
-            if (this.currentType === EquipmentType.NONE) {
-                isType = true;
-            }
+            let isType = this.currentType.indexOf(equipment.getModel().type) >= 0;
 
-            let isState = equipment.getModel().state === this.currentState;
-
-            switch (this.currentState) {
-                // 沒有設定state等於全部都要顯示
-                case EquipmentState.NONE:
-                    isState = true;
-                    break;
-                // 只要是查看alarm1的就是查看alarm1~alarm4
-                case EquipmentState.ALARM1:
-                    switch (equipment.getModel().state) {
-                        case EquipmentState.ALARM1:
-                        case EquipmentState.ALARM2:
-                        case EquipmentState.ALARM3:
-                        case EquipmentState.ALARM4:
-                            isState = true;
-                            break;
-                    }
-                    break;
-            }
+            let isState = this.currentState.indexOf(equipment.getModel().state) >= 0;
 
             let isFloor = equipment.getModel().floor === this.currentFloor;
             if (this.currentFloor === EquipmentFloor.ALL) {
@@ -467,18 +438,14 @@ export class BuildingController extends Component implements IEnviromentChanger 
     }
 
     private updateEquipmentGroupShow() {
-        const isAlarm = (this.currentState == EquipmentState.ALARM1);
+        const isAlarmPage = this.currentState.indexOf(EquipmentState.NORMAL) == -1;
         this.equipmentGroups.forEach((group, id, ary) => {
-            group.setAtAlarm(isAlarm);
+            group.setAtAlarm(isAlarmPage);
         });
 
         this.equipmentGroups.forEach((group, id, ary) => {
             const isBelong = group.belong === this.currentBelong;
-            let isType = group.type === this.currentType;
-            // 沒有設定type等於全部都要顯示
-            if (this.currentType === EquipmentType.NONE) {
-                isType = true;
-            }
+            let isType = this.currentType.indexOf(group.type) >= 0;
 
             let isFloor = group.floor === this.currentFloor;
             if (this.currentFloor === EquipmentFloor.ALL) {
@@ -499,7 +466,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
     private updateEarthquakesShow() {
         this.earthquakeAlarms.forEach((earth, id, ary) => {
             const isBelong = earth.belong === this.currentBelong;
-            const isType = this.currentType === EquipmentType.EARTHQUAKE_ALARM;
+            const isType = this.currentType.indexOf(EquipmentType.EARTHQUAKE_ALARM) >= 1;
 
             let isFloor = earth.floor === this.currentFloor;
             if (this.currentFloor === EquipmentFloor.ALL) {

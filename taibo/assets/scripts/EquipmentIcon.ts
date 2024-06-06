@@ -75,7 +75,7 @@ export class EquipmentIcon extends Component {
     @property([Node])
     hovers: Node[] = [];
 
-    private bubbleNormalSize = new Size(200, 89);
+    private bubbleNormalSize = new Size(250, 89);
     private bubbleSizeCurrent = this.bubbleNormalSize.clone();
     private bubbleSizeTarget = this.bubbleNormalSize.clone();
 

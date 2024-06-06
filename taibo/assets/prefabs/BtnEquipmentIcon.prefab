@@ -10790,12 +10790,12 @@
     "bubbleSizes": [
       {
         "__type__": "cc.Size",
-        "width": 200,
+        "width": 250,
         "height": 176
       },
       {
         "__type__": "cc.Size",
-        "width": 200,
+        "width": 250,
         "height": 154
       },
       {
@@ -10805,7 +10805,7 @@
       },
       {
         "__type__": "cc.Size",
-        "width": 200,
+        "width": 250,
         "height": 97
       }
     ],

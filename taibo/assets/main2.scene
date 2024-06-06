@@ -16610,10 +16610,6 @@
     "light": {
       "__id__": 3
     },
-    "currentState": 4,
-    "currentType": 0,
-    "currentFloor": 1,
-    "currentBelong": 0,
     "uiNode": {
       "__id__": 127
     },
@@ -111997,6 +111993,7 @@
     "instance": {
       "__id__": 7948
     },
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -112133,7 +112130,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 0
+    "value": 2
   },
   {
     "__type__": "cc.TargetInfo",
@@ -115153,7 +115150,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 0
+    "value": 2
   },
   {
     "__type__": "cc.TargetInfo",
@@ -115452,7 +115449,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 0
+    "value": 2
   },
   {
     "__type__": "cc.TargetInfo",
@@ -115723,7 +115720,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 0
+    "value": 2
   },
   {
     "__type__": "cc.TargetInfo",
@@ -115994,7 +115991,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 0
+    "value": 2
   },
   {
     "__type__": "cc.TargetInfo",
@@ -116286,7 +116283,7 @@
     "propertyPath": [
       "state"
     ],
-    "value": 0
+    "value": 2
   },
   {
     "__type__": "cc.TargetInfo",
@@ -168544,10 +168541,6 @@
     "light": {
       "__id__": 3
     },
-    "currentState": 4,
-    "currentType": 0,
-    "currentFloor": 0,
-    "currentBelong": 1,
     "uiNode": {
       "__id__": 127
     },
