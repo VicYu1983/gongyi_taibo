@@ -517,7 +517,7 @@ export class Controller extends Component {
     }
 
     onEquipmentClick() {
-        this.zoomToEquipment("319107");
+        this.zoomToEquipment("B1F_CH_10008");
     }
 
     onNormalClick() {
