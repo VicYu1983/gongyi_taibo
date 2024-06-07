@@ -5,25 +5,30 @@
   "__editorExtras__": {},
   "_native": "",
   "_effectAsset": {
-    "__uuid__": "98e7ef3b-cb13-4fa6-a39e-b375fc5e9054",
+    "__uuid__": "a3cd009f-0ab0-420d-9278-b9fdab939bbc",
     "__expectedType__": "cc.EffectAsset"
   },
-  "_techIdx": 1,
+  "_techIdx": 2,
   "_defines": [
+    {},
     {}
   ],
   "_states": [
     {
-      "rasterizerState": {
-        "cullMode": 0
-      },
+      "rasterizerState": {},
       "depthStencilState": {},
       "blendState": {
         "targets": [
-          {
-            "blendSrc": 1,
-            "blendDst": 1
-          }
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
         ]
       }
     }
@@ -32,16 +37,12 @@
     {
       "mainColor": {
         "__type__": "cc.Color",
-        "r": 1,
-        "g": 41,
-        "b": 51,
+        "r": 255,
+        "g": 0,
+        "b": 0,
         "a": 255
-      },
-      "opacity": 0.17,
-      "waveFrequence": 8.66,
-      "waveHeight": 0.125,
-      "wavePosition": 0.24,
-      "waveSpeed": 1.9
-    }
+      }
+    },
+    {}
   ]
 }

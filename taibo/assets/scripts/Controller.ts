@@ -272,7 +272,7 @@ export class Controller extends Component {
     }
 
     changeToALLAlarm() {
-        this.building.changeEquipmentType([EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.CCTV, EquipmentType.EARTHQUAKE_ALARM, EquipmentType.ELECTRIC, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY_ALARM, EquipmentType.WEB]);
+        this.building.changeEquipmentType([EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.CCTV, EquipmentType.ELECTRIC, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY_ALARM, EquipmentType.WEB]);
         this.building.changeEquipmentState(this.onlyAlarmState);
     }
 
@@ -448,6 +448,10 @@ export class Controller extends Component {
         this.buildingXuku.closeBuilding();
 
         this.building = this.buildingTaibo;
+        this.building.changeEarthquakeLevel(this.buildingXuku.currentLevel);
+        this.building.changeEquipmentFloor(this.buildingXuku.currentFloor);
+        this.building.changeEquipmentType(this.buildingXuku.currentType);
+        this.building.changeEquipmentState(this.buildingXuku.currentState);
     }
 
     changeToXuku() {
@@ -459,6 +463,10 @@ export class Controller extends Component {
         this.buildingTaibo.closeBuilding();
 
         this.building = this.buildingXuku;
+        this.building.changeEarthquakeLevel(this.buildingTaibo.currentLevel);
+        this.building.changeEquipmentFloor(this.buildingTaibo.currentFloor);
+        this.building.changeEquipmentType(this.buildingTaibo.currentType);
+        this.building.changeEquipmentState(this.buildingTaibo.currentState);
     }
 
     zoomToEquipment(code) {

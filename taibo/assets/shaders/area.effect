@@ -8,10 +8,11 @@ CCEffect %{
       frag: unlit-fs:frag
       properties: &props
         mainColor:      { value: [1, 1, 1, 1], editor: { type: color } }
-        opacity:  { value: .2, editor: { slide: true, range: [0.001, 1.0], step: 0.01 } }
+        opacity:  { value: .2, target: opacityParams.x, editor: { slide: true, range: [0.001, 1.0], step: 0.01 } }
+        waveOpacity:  { value: .2, target: opacityParams.y, editor: { slide: true, range: [0.001, 1.0], step: 0.01 } }
         waveFrequence:  { value: 20, target: waveParams.x, editor: { slide: true, range: [0.001, 100.0], step: 0.01 } }
         waveHeight:  { value: 1, target: waveParams.y, editor: { slide: true, range: [0.001, 1.0], step: 0.001 } }
-        wavePosition:  { value: 0.5, target: waveParams.z, editor: { slide: true, range: [0.001, 1.0], step: 0.001 } }
+        wavePosition:  { value: 0.5, target: waveParams.z, editor: { slide: true, range: [-1.0, 1.0], step: 0.001 } }
         waveSpeed:  { value: 1.0, target: waveParams.a, editor: { slide: true, range: [-10, 10.0], step: 0.01 } }
   - name: transparent
     passes:
@@ -42,20 +43,29 @@ CCProgram unlit-fs %{
   uniform Constant {
     vec4 mainColor;
     vec4 waveParams;
-    float opacity;
+    vec4 opacityParams;
   };
 
   vec4 frag () {
     vec4 col = mainColor;
     vec4 local_verts = inverse_mat4(cc_matWorld) * vec4(v_position, 1.0);
-    float mask = 1.0 - (local_verts.y + 0.5);
-    col *= mask;
-    
-    float sin_wave_x = local_verts.y + sin((local_verts.x + local_verts.z) * waveParams.x + cc_time.x * waveParams.a) * waveParams.y + waveParams.z;
-    sin_wave_x = 1.0 - smoothstep(.5, .51, sin_wave_x);
-    
-    col += sin_wave_x * .2;
-    col *= opacity;
+
+    if(local_verts.y < 0.0) {
+      discard;
+    }
+
+    col *= 1.0 - (local_verts.y + 0.5);
+    float wave_value = (local_verts.x + local_verts.z) * waveParams.x + cc_time.x * waveParams.a;
+
+    // part one, local_verts.y = 0 ~ 0.5
+    // part two, (sin(wave_value) + 1.0) * 0.5 = 0 ~ 0.5
+
+    float wave_position = local_verts.y + waveParams.z;
+    float wave_height = (sin(wave_value) + 1.0) * 0.25 * waveParams.y;
+    float sin_wave = wave_position + wave_height;
+    sin_wave = 1.0 - smoothstep(.5, .51, sin_wave);
+    col += sin_wave * opacityParams.y;
+    col *= opacityParams.x;
 
     return CCFragOutput(col);
   }

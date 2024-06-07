@@ -56,11 +56,11 @@ export class BuildingController extends Component implements IEnviromentChanger 
     @property(Light)
     light: Light;
 
-    private currentState: EquipmentState[] = [EquipmentState.NORMAL];
-    private currentType: EquipmentType[] = [EquipmentType.AIR];
-    private currentFloor: EquipmentFloor = EquipmentFloor.B1F;
-    private currentTag: Tag;
-    private currentLevel: Level;
+    currentState: EquipmentState[] = [EquipmentState.NORMAL];
+    currentType: EquipmentType[] = [EquipmentType.AIR];
+    currentFloor: EquipmentFloor = EquipmentFloor.B1F;
+    currentTag: Tag;
+    currentLevel: Level;
 
     currentBelong: EquipmentBelong = EquipmentBelong.TAIBO;
 
