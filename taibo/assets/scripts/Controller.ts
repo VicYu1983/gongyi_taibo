@@ -64,6 +64,7 @@ export class Controller extends Component {
         const self = this;
         window["cocos"] = {
             openFloor(id = 0) {
+                console.log("cocos openFloor:" + id);
                 switch (id) {
                     case -2: self.building.openBuilding(EquipmentFloor.B2F); break;
                     case -1: self.building.openBuilding(EquipmentFloor.B1F); break;
@@ -80,12 +81,15 @@ export class Controller extends Component {
 
             },
             backToInit() {
+                console.log("cocos backToInit");
                 self.onBackCameraClick();
             },
             zoomToEquipment(code: string) {
+                console.log("cocos zoomToEquipment:" + code);
                 self.zoomToEquipment(code);
             },
             showAll(onlyAlarm = false) {
+                console.log("cocos showAll:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToALLAlarm();
                 } else {
@@ -93,6 +97,7 @@ export class Controller extends Component {
                 }
             },
             showAir(onlyAlarm = false) {
+                console.log("cocos showAir:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToAirAlarm();
                 } else {
@@ -100,6 +105,7 @@ export class Controller extends Component {
                 }
             },
             showAirConditioner(onlyAlarm = false) {
+                console.log("cocos showAirConditioner:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToAirConditionAlarm();
                 } else {
@@ -107,6 +113,7 @@ export class Controller extends Component {
                 }
             },
             showEnvironment(onlyAlarm = false) {
+                console.log("cocos showEnvironment:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToEnviromentAlarm();
                 } else {
@@ -114,6 +121,7 @@ export class Controller extends Component {
                 }
             },
             showSecurity(onlyAlarm = false) {
+                console.log("cocos showSecurity:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToSecurityAlarm();
                 } else {
@@ -121,6 +129,7 @@ export class Controller extends Component {
                 }
             },
             showCCTV(onlyAlarm = false) {
+                console.log("cocos showCCTV:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToCCTVAlarm();
                 } else {
@@ -128,6 +137,7 @@ export class Controller extends Component {
                 }
             },
             showWeb(onlyAlarm = false) {
+                console.log("cocos showWeb:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToWebAlarm();
                 } else {
@@ -135,6 +145,7 @@ export class Controller extends Component {
                 }
             },
             showOther(onlyAlarm = false) {
+                console.log("cocos showOther:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToOtherAlarm();
                 } else {
@@ -142,9 +153,11 @@ export class Controller extends Component {
                 }
             },
             showEarthquake() {
+                console.log("cocos showEarthquake");
                 self.changeToEarthquake();
             },
             showEarthquakeAlarm(level = 50) {
+                console.log("cocos showEarthquakeAlarm");
                 switch (level) {
                     case 50:
                         self.changeToEarthquakeAlarm5A();
@@ -166,6 +179,7 @@ export class Controller extends Component {
                 }
             },
             showElectric(onlyAlarm = false) {
+                console.log("cocos showElectric:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToElectricAlarm();
                 } else {
@@ -173,6 +187,7 @@ export class Controller extends Component {
                 }
             },
             showFire(onlyAlarm = false) {
+                console.log("cocos showFire:" + onlyAlarm);
                 if (onlyAlarm) {
                     self.changeToFireAlarm();
                 } else {
@@ -180,12 +195,15 @@ export class Controller extends Component {
                 }
             },
             changeToTaibo() {
+                console.log("cocos changeToTaibo");
                 self.changeToTaibo();
             },
             changeToXuku() {
+                console.log("cocos changeToXuku");
                 self.changeToXuku();
             },
             toggleScifi() {
+                console.log("cocos toggleScifi");
                 self.toggleScifi();
             },
             syncData(data: any) {
@@ -208,10 +226,28 @@ export class Controller extends Component {
                 this.buildingTaibo.closeBuilding();
                 this.buildingXuku.closeBuilding();
 
-                this.callWeb("cocosReady", null);
+                // 延遲一下，以防初始化的問題。我感覺應該不用才對。
+                const sid = setTimeout(() => {
+                    this.callWeb("cocosReady", null);
+                    clearTimeout(sid);
+                }, 100);
+
                 break;
 
         }
+
+        // debug
+        // this.changeToTaibo();
+        // setTimeout(() => {
+        //     self.changeToTaibo();
+
+        //     this.onBackCameraClick();
+        //     this.changeToSecurityAlarm();
+        //     self.changeFloorN1F();
+        //     this.onBackCameraClick();
+        //     this.zoomToEquipment("319350");
+        // }, 100);
+
     }
 
     testSyncEquipment() {
@@ -525,7 +561,8 @@ export class Controller extends Component {
     }
 
     onEquipmentClick() {
-        this.zoomToEquipment("B1F_CH_10008");
+        this.zoomToEquipment("319350");
+        // this.zoomToEquipment("005");
     }
 
     onNormalClick() {

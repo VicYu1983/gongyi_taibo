@@ -217,13 +217,15 @@ export class BuildingController extends Component implements IEnviromentChanger 
         // cctv 點擊不要zoom
         if (model.type === EquipmentType.CCTV) return;
 
+        console.log("onBtnEquipmentIconClick:" + model.code);
+
         const equipment = model.node;
 
         const pos = equipment.getPosition();
         const rot = new Vec3();
 
         const cameraPos = this.navigation.node.getPosition();
-        const zoomTo = cameraPos.clone().subtract(pos).normalize().multiplyScalar(.5).add(pos);
+        const zoomTo = cameraPos.clone().subtract(pos).normalize().multiplyScalar(.3).add(pos);
 
         this.navigation.node.getRotation().getEulerAngles(rot);
         this.navigation.setTargetPositionAndRotation(zoomTo, rot);
@@ -368,7 +370,8 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.equipments.forEach((equipment, id, ary) => {
             if (equipment.getModel().code === code) {
                 targetEquipment = equipment;
-                return;
+                console.log("find:" + equipment.getModel().code)
+                // return;
             }
         });
         return targetEquipment;
