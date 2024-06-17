@@ -85,7 +85,7 @@
       "name": "2FMesh.mesh",
       "userData": {
         "gltfIndex": 4,
-        "triangleCount": 7525
+        "triangleCount": 7509
       },
       "ver": "1.1.1",
       "imported": true,
@@ -203,7 +203,30 @@
       ],
       "skeletons": [],
       "textures": [],
-      "materials": [],
+      "materials": [
+        "b74320fb-9241-48ee-9498-5a0f28e34167",
+        "db68363a-cc98-4fde-883c-73719b030985",
+        "904b7806-8a96-48f7-be54-9b0560accfc3",
+        "07fbedd4-e4f7-4d14-a8e1-c1c8f6e9d3c6",
+        "0b549dc6-68b1-4918-a35f-e2918c98adcf",
+        "2b4e62d5-a2ec-4c6b-9dd6-bf127c1cd391",
+        "b81ca377-d5df-437b-9fa8-b5ea2b199c16",
+        "f195a34f-c080-4206-90be-f4d45632825f",
+        "c22c7d7f-81ae-4ae5-830a-7a0372ce14ae",
+        "da76db9e-9702-4ff4-9ef9-8470377756e2",
+        "481ef602-11bd-471a-874d-6191a5c0edc4",
+        "4758d07b-9734-42be-b7df-b48d836442c9",
+        "a6343a7b-221b-4214-9b68-affb6be20664",
+        "2d777633-759b-471a-8fb0-8e1e99207572",
+        "6f7b4306-ab14-4df8-b62a-55f6c310b9fd",
+        "2c30d3af-08c9-4068-bde8-3d58fc4ce3ce",
+        "52df94fd-a5c9-4dc5-a017-42444b6e796d",
+        "4f03a9e2-b8b0-4812-8548-7e4bc1468b0e",
+        "bb62a2c8-e68d-4095-9467-97f446cd7da8",
+        "74749400-4988-43de-b68a-8ccb9e989617",
+        "a0d98a7b-06ea-4b24-9072-f5dd13e89e0f",
+        "7321597d-7ef8-49fa-ba2c-d8f49eef7070"
+      ],
       "scenes": [
         "5936a478-ef87-46fd-9b12-3d572fc8e3eb@2a4ce"
       ]
@@ -219,6 +242,7 @@
       "enable": true,
       "encode": true,
       "compress": true
-    }
+    },
+    "materialDumpDir": "db://assets/models/Materials_XuKu"
   }
 }
