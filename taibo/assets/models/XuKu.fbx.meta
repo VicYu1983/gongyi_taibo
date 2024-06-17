@@ -243,6 +243,6 @@
       "encode": true,
       "compress": true
     },
-    "materialDumpDir": "db://assets/models/Materials_XuKu"
+    "materialDumpDir": "db://assets/materials/xuku"
   }
 }
