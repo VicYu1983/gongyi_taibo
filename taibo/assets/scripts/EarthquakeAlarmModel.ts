@@ -1,4 +1,4 @@
-import { _decorator, CCFloat, Color, Component, director, Enum, game, MeshRenderer, Node } from 'cc';
+import { _decorator, CCFloat, Color, Component, director, Enum, game, Material, MeshRenderer, Node } from 'cc';
 import { EquipmentBelong, EquipmentFloor, EquipmentType } from './EquipmentModel';
 const { ccclass, property } = _decorator;
 
@@ -29,13 +29,8 @@ export class EarthquakeAlarmModel extends Component {
     @property([Node])
     links: Node[] = [];
 
-    @property(Color)
-    lightColor: Color = new Color(0, 224, 255, 255);
-
-    @property(Color)
-    heavyColor: Color = new Color(255, 55, 55, 255);
-
-    currentColor: Color = this.lightColor;
+    @property(Material)
+    materials: Material[] = [];
 
     @property(CCFloat)
     private maxPower: number[] = [];
@@ -73,9 +68,11 @@ export class EarthquakeAlarmModel extends Component {
 
     private changeColor() {
         switch (this._currentMaxPower) {
-            case 1: this.alarmIcon.material.setProperty("mainColor", this.lightColor);
+            case 1:
+                this.alarmIcon.material = this.materials[0];
                 break;
-            case 2: this.alarmIcon.material.setProperty("mainColor", this.heavyColor);
+            case 2:
+                this.alarmIcon.material = this.materials[1];
                 break;
         }
     }

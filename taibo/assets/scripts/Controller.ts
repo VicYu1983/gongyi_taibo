@@ -219,6 +219,23 @@ export class Controller extends Component {
                 break;
             case BUILDTYPE.PREVIEW:
                 this.uiNode.active = false;
+
+                this.buildingTaibo.closeBuilding();
+                this.buildingXuku.closeBuilding();
+
+
+
+                // 延遲一下，以防初始化的問題。我感覺應該不用才對。
+                const sid2 = setTimeout(() => {
+                    this.callWeb("cocosReady", null);
+                    clearTimeout(sid2);
+
+                    this.changeToTaibo();
+                    // this.changeFloorB1F();
+                    this.changeFloorALL();
+                    this.changeToEarthquakeAlarm7A();
+                    
+                }, 100);
                 break;
             case BUILDTYPE.RELEASE:
                 this.uiNode.active = false;

@@ -68,7 +68,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Mesh",
+    "_name": "Sphere",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -99,9 +99,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.03,
-      "y": 0.03,
-      "z": 0.03
+      "x": 0.01,
+      "y": 0.01,
+      "z": 0.01
     },
     "_mobility": 0,
     "_layer": 1073741824,
@@ -152,7 +152,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "f4gz+8mDVCs6G3OJ60oxxh"
+    "fileId": "98IFq6T2JIbq7ImWTBrG8u"
   },
   {
     "__type__": "cc.ModelBakeSettings",
@@ -182,7 +182,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "3ekpj5QIVNsKuRYx7q2FwH",
+    "fileId": "fbyJDCZ8BIqZjICO/H87Pi",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
@@ -321,6 +321,7 @@
       "__id__": 13
     },
     "id": 1,
+    "codePrefix": "{0}",
     "belong": 0,
     "floor": 1,
     "state": 0,
@@ -393,6 +394,32 @@
       "b": 255,
       "a": 255
     },
+    "materials": [
+      {
+        "__uuid__": "279da4d9-59e4-4942-b79b-41b4bc86cb97",
+        "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "4a632f45-8b71-4b53-8d7e-83fea98ad18b",
+        "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "923fd59a-57df-4912-8a61-4e1c52057ab1",
+        "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "049323c0-383a-4048-8356-44431fd7ba5a",
+        "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "d1ca4b85-4753-4696-a327-83fe1dcf1b01",
+        "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "be2b7230-49a0-4bff-90c5-d8caf7cd67f8",
+        "__expectedType__": "cc.Material"
+      }
+    ],
     "_id": ""
   },
   {

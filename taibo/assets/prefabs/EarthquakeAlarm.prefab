@@ -340,6 +340,16 @@
       "b": 55,
       "a": 255
     },
+    "materials": [
+      {
+        "__uuid__": "279da4d9-59e4-4942-b79b-41b4bc86cb97",
+        "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "923fd59a-57df-4912-8a61-4e1c52057ab1",
+        "__expectedType__": "cc.Material"
+      }
+    ],
     "maxPower": [],
     "maxPowerLevel": [
       0,

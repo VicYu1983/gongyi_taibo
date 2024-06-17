@@ -1,4 +1,4 @@
-import { _decorator, CCBoolean, Color, Component, Enum, error, log, MeshRenderer, Node, Vec4 } from 'cc';
+import { _decorator, CCBoolean, Color, Component, Enum, error, log, Material, MeshRenderer, Node, Vec4 } from 'cc';
 import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Area } from './Area';
 const { ccclass, property } = _decorator;
@@ -17,39 +17,14 @@ export class Equipment extends Component {
     @property([Node])
     links: Node[] = [];
 
-    @property(Color)
-    normalColor: Color = new Color(0, 224, 255, 255);
-
-    @property(Color)
-    notActiveColor: Color = new Color(144, 144, 144, 255);
-
-    @property(Color)
-    alarm1Color: Color = new Color(255, 55, 55, 255);
-
-    @property(Color)
-    alarm2Color: Color = new Color(245, 166, 47, 255);
-
-    @property(Color)
-    alarm3Color: Color = new Color(70, 249, 88, 255);
-
-    @property(Color)
-    alarm4Color: Color = new Color(22, 94, 255, 255);
-
-    normalSize = new Vec4(0.025, 0.025, 0, 0);
-    notActiveSize = new Vec4(0.025, 0.025, 0, 0);
-    alarm1Size = new Vec4(0.05, 0.05, 0, 0);
-    alarm2Size = new Vec4(0.05, 0.05, 0, 0);
-    alarm3Size = new Vec4(0.05, 0.05, 0, 0);
-    alarm4Size = new Vec4(0.05, 0.05, 0, 0);
-
-    currentColor: Color = this.normalColor;
+    @property(Material)
+    materials: Material[] = [];
 
     protected onLoad(): void {
         this.getModel().node.on(EquipmentModel.ON_CHANGE, this.onModelStateChange, this);
     }
 
     start() {
-        this.currentColor = this.normalColor.clone();
         this.onModelStateChange(this.getModel());
         this.centerSphere.node.active = false;
     }
@@ -88,33 +63,28 @@ export class Equipment extends Component {
     }
 
     changeToAlarm1() {
-        this.alarmIcon.material.setProperty("mainColor", this.alarm1Color);
-        this.alarmIcon.material.setProperty("alarmParams", this.alarm1Size);
+        this.alarmIcon.material = this.materials[2];
     }
 
     changeToAlarm2() {
-        this.alarmIcon.material.setProperty("mainColor", this.alarm2Color);
-        this.alarmIcon.material.setProperty("alarmParams", this.alarm2Size);
+        this.alarmIcon.material = this.materials[3];
     }
 
     changeToAlarm3() {
-        this.alarmIcon.material.setProperty("mainColor", this.alarm3Color);
-        this.alarmIcon.material.setProperty("alarmParams", this.alarm3Size);
+        this.alarmIcon.material = this.materials[4];
     }
 
     changeToAlarm4() {
-        this.alarmIcon.material.setProperty("mainColor", this.alarm4Color);
-        this.alarmIcon.material.setProperty("alarmParams", this.alarm4Size);
+        // this.alarmIcon.ma
+        this.alarmIcon.material = this.materials[5];
     }
 
     changeToNotActive() {
-        this.alarmIcon.material.setProperty("mainColor", this.notActiveColor);
-        this.alarmIcon.material.setProperty("alarmParams", this.notActiveSize);
+        this.alarmIcon.material = this.materials[1];
     }
 
     changeToNormal() {
-        this.alarmIcon.material.setProperty("mainColor", this.normalColor);
-        this.alarmIcon.material.setProperty("alarmParams", this.normalSize);
+        this.alarmIcon.material = this.materials[0];
     }
 
     update(deltaTime: number) {
