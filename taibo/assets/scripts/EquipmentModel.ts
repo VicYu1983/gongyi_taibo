@@ -71,6 +71,9 @@ export class EquipmentModel extends Component {
     CNCode:string;
 
     @property(CCString)
+    locationName:string;
+
+    @property(CCString)
     codePrefix: string = "{0}";
 
     @property({ type: Enum(EquipmentBelong) })

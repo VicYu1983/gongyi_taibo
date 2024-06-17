@@ -234,8 +234,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         const pos = equipment.getPosition();
         const rot = new Vec3();
 
-        const cameraPos = this.navigation.node.getPosition();
-        const zoomTo = cameraPos.clone().subtract(pos).normalize().multiplyScalar(.9).add(pos);
+        const zoomTo = pos.clone().add(new Vec3(-.9, .8, 0.));
 
         this.navigation.node.getRotation().getEulerAngles(rot);
         this.navigation.setTargetPositionAndRotation(zoomTo, rot);

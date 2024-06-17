@@ -148,6 +148,8 @@ export class EquipmentIcon extends Component {
             this.txtName.string = this.model.code;
         }
 
+        this.txtLocation.string = this.model.locationName;
+
         switch (this.model.type) {
             case EquipmentType.AIR:
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[0];
