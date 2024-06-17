@@ -10,7 +10,9 @@
   },
   "_techIdx": 1,
   "_defines": [
-    {}
+    {
+      "USE_INSTANCING": true
+    }
   ],
   "_states": [
     {
