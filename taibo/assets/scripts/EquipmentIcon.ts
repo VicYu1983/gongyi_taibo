@@ -141,7 +141,13 @@ export class EquipmentIcon extends Component {
 
         this.node.active = show;
 
-        this.txtName.string = this.model.code;
+        // 微環境的名稱顯示中文
+        if (this.model.type === EquipmentType.ENVIROMENT) {
+            this.txtName.string = this.model.CNCode;
+        } else {
+            this.txtName.string = this.model.code;
+        }
+
         switch (this.model.type) {
             case EquipmentType.AIR:
                 this.iconSprite.spriteFrame = this.iconSpriteFrame[0];
