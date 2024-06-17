@@ -224,27 +224,32 @@ export class Controller extends Component {
                 this.buildingXuku.closeBuilding();
 
                 // 延遲一下，以防初始化的問題。我感覺應該不用才對。
-                const sid2 = setTimeout(() => {
+                const previewSid = setTimeout(() => {
                     this.callWeb("cocosReady", null);
-                    clearTimeout(sid2);
+                    clearTimeout(previewSid);
 
                     this.changeToTaibo();
                     // this.changeFloorB1F();
                     this.changeFloorALL();
                     this.changeToEarthquakeAlarm7A();
-                    
+
                 }, 100);
                 break;
             case BUILDTYPE.RELEASE:
                 this.uiNode.active = false;
 
-                this.buildingTaibo.closeBuilding();
-                this.buildingXuku.closeBuilding();
+                // 延遲一下，以防初始化的問題。我感覺應該不用才對。
+                const releaseSid = setTimeout(() => {
+                    clearTimeout(releaseSid);
+
+                    this.buildingTaibo.closeBuilding();
+                    this.buildingXuku.closeBuilding();
+                }, 10);
 
                 // 延遲一下，以防初始化的問題。我感覺應該不用才對。
-                const sid = setTimeout(() => {
+                const releaseSid2 = setTimeout(() => {
                     this.callWeb("cocosReady", null);
-                    clearTimeout(sid);
+                    clearTimeout(releaseSid2);
                 }, 100);
 
                 break;
