@@ -37,6 +37,9 @@
     "hasAlpha": false,
     "type": "texture",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "aeab5296-7352-4903-aecb-b4a48ad572b3@6c48a"
+    "redirect": "aeab5296-7352-4903-aecb-b4a48ad572b3@6c48a",
+    "compressSettings": {
+      "useCompressTexture": true
+    }
   }
 }

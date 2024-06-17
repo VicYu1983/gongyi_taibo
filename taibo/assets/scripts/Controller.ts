@@ -223,8 +223,6 @@ export class Controller extends Component {
                 this.buildingTaibo.closeBuilding();
                 this.buildingXuku.closeBuilding();
 
-
-
                 // 延遲一下，以防初始化的問題。我感覺應該不用才對。
                 const sid2 = setTimeout(() => {
                     this.callWeb("cocosReady", null);
