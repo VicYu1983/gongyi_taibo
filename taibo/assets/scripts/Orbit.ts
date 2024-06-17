@@ -81,6 +81,10 @@ export class Orbit extends Component implements ICamera {
 
         this.setTarget(position);
         this.distance = .0;
+
+        // reset rotation
+        this.yaw = this.initYaw;
+        this.pitch = this.initPitch;
     }
 
     onKeyDown(e: EventKeyboard) {

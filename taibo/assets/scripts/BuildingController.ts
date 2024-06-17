@@ -1,4 +1,4 @@
-import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3, Camera, error, Vec4 } from 'cc';
+import { _decorator, BatchingUtility, CCFloat, postProcess, Component, game, log, MeshRenderer, Node, view, ParticleSystem, Enum, Mesh, instantiate, Button, Light, CCBoolean, Vec3, Camera, error, Vec4, Quat } from 'cc';
 import { PathMeshBuilder } from './PathMeshBuilder';
 import { Equipment } from './Equipment';
 import { FloorController } from './FloorController';
@@ -223,11 +223,8 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
         const pos = equipment.getPosition();
         const rot = new Vec3();
+        const zoomTo = pos.clone().add(new Vec3(-.5, .4, 0.));
 
-        const cameraPos = this.navigation.node.getPosition();
-        const zoomTo = cameraPos.clone().subtract(pos).normalize().multiplyScalar(.3).add(pos);
-
-        this.navigation.node.getRotation().getEulerAngles(rot);
         this.navigation.setTargetPositionAndRotation(zoomTo, rot);
     }
 
