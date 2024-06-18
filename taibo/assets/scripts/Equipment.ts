@@ -1,4 +1,4 @@
-import { _decorator, CCBoolean, Color, Component, Enum, error, log, Material, MeshRenderer, Node, Vec4 } from 'cc';
+import { _decorator, CCBoolean, CCInteger, Color, Component, Enum, error, log, Material, MeshRenderer, Node, Vec4 } from 'cc';
 import { EquipmentBelong, EquipmentFloor, EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Area } from './Area';
 const { ccclass, property } = _decorator;
@@ -22,11 +22,12 @@ export class Equipment extends Component {
 
     protected onLoad(): void {
         this.getModel().node.on(EquipmentModel.ON_CHANGE, this.onModelStateChange, this);
+        this.centerSphere.node.active = false;
     }
 
     start() {
         this.onModelStateChange(this.getModel());
-        // this.centerSphere.node.active = false;
+
     }
 
     onModelStateChange(data: EquipmentModel) {
@@ -75,7 +76,6 @@ export class Equipment extends Component {
     }
 
     changeToAlarm4() {
-        // this.alarmIcon.ma
         this.alarmIcon.material = this.materials[5];
     }
 

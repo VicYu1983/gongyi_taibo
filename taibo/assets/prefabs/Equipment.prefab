@@ -326,12 +326,6 @@
     "floor": 1,
     "state": 0,
     "type": 0,
-    "meshs": [
-      {
-        "__uuid__": "907770d3-2eed-4ce1-898d-275c3da5ab1b@4be68",
-        "__expectedType__": "cc.Mesh"
-      }
-    ],
     "tags": [],
     "_id": ""
   },

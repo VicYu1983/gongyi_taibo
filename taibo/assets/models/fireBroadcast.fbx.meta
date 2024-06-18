@@ -82,6 +82,17 @@
       ]
     },
     "dumpMaterials": true,
-    "materialDumpDir": "db://assets/materials"
+    "materialDumpDir": "db://assets/materials",
+    "meshOptimize": {
+      "enable": true,
+      "vertexCache": true,
+      "vertexFetch": true,
+      "overdraw": true
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": true,
+      "compress": true
+    }
   }
 }

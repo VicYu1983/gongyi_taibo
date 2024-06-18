@@ -5,7 +5,7 @@ export interface ICamera {
 
     backToInit(): void;
 
-    setTargetPositionAndRotation(position: Vec3, rotation: Vec3): void;
+    setTargetPositionAndRotation(position: Vec3, rotation?: Vec3): void;
 }
 
 

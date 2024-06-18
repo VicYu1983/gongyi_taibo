@@ -33,6 +33,7 @@ export class Orbit extends Component implements ICamera {
     private rollMat = new Mat4();
     private offsetMat = new Mat4();
     private cameraMat = new Mat4();
+    private finalMat = new Mat4();
 
     private targetMat = new Mat4();
     private currentMat = new Mat4();
@@ -56,7 +57,7 @@ export class Orbit extends Component implements ICamera {
         input.on(Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this);
 
         this.setTarget(this.lookAt.getWorldPosition());
-        this.cameraMat.rotate(Math.PI * 0.5, new Vec3(0, 1, 0));
+        this.cameraMat.rotate(-Math.PI * 0.5, new Vec3(0, 1, 0));
 
         this.currentMat = this.calculateMatrix();
         this.targetMat = this.currentMat.clone();
@@ -77,14 +78,10 @@ export class Orbit extends Component implements ICamera {
         this.setTarget(this.initLootAtPosition);
     }
 
-    setTargetPositionAndRotation(position: Vec3, rotation: Vec3): void {
+    setTargetPositionAndRotation(position: Vec3, rotation?: Vec3): void {
 
         this.setTarget(position);
-        this.distance = .0;
-
-        // reset rotation
-        this.yaw = this.initYaw;
-        this.pitch = this.initPitch;
+        this.distance = .8;
     }
 
     onKeyDown(e: EventKeyboard) {
@@ -125,7 +122,7 @@ export class Orbit extends Component implements ICamera {
             this.setTarget(pos);
         } else {
             this.yaw += e.getDeltaX() * -.003;
-            this.pitch += e.getDeltaY() * -.003;
+            this.pitch += e.getDeltaY() * .003;
         }
     }
 
@@ -158,12 +155,18 @@ export class Orbit extends Component implements ICamera {
         this.yawMat.rotate(this.yaw, new Vec3(0, 1, 0));
 
         this.rollMat.identity();
-        this.rollMat.rotate(this.pitch, new Vec3(0, 0, 1));
+        this.rollMat.rotate(this.pitch, new Vec3(1, 0, 0));
 
         this.offsetMat.identity();
-        this.offsetMat.transform(new Vec3(this.distance, 0, 0));
+        this.offsetMat.transform(new Vec3(0, 0, this.distance));
 
-        return this.lookAtMat.clone().multiply(this.yawMat).multiply(this.rollMat).multiply(this.offsetMat).multiply(this.cameraMat);
+        this.finalMat.identity();
+        this.finalMat.multiply(this.lookAtMat);
+        this.finalMat.multiply(this.cameraMat);
+        this.finalMat.multiply(this.yawMat);
+        this.finalMat.multiply(this.rollMat);
+        this.finalMat.multiply(this.offsetMat);
+        return this.finalMat;
     }
 
     update(deltaTime: number) {

@@ -223,27 +223,15 @@ export class BuildingController extends Component implements IEnviromentChanger 
         console.log("onBtnEquipmentIconClick:" + model.code);
 
         const equipment = model.node;
-
         const pos = equipment.getPosition();
-        const rot = new Vec3();
-        const zoomTo = pos.clone().add(new Vec3(-.5, .4, 0.));
-
-        this.navigation.setTargetPositionAndRotation(zoomTo, rot);
+        this.navigation.setTargetPositionAndRotation(pos);
     }
 
     onBtnEquipmentGroupIconClick(model: EquipmentGroupModel) {
         const equipment = model.node;
 
         const pos = equipment.getPosition();
-        const rot = new Vec3();
-
-        const zoomTo = pos.clone().add(new Vec3(-.9, .8, 0.));
-
-        this.navigation.node.getRotation().getEulerAngles(rot);
-        this.navigation.setTargetPositionAndRotation(zoomTo, rot);
-
-        // model.setShow(false);
-        // this.updateEquipmentShow();
+        this.navigation.setTargetPositionAndRotation(pos);
     }
 
     openBuilding(floor?: EquipmentFloor) {

@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, CCString, Component, Enum, error, log, Mesh, Node } from 'cc';
+import { _decorator, CCInteger, CCString, Component, Enum, error, log, Mesh, MeshRenderer, Node } from 'cc';
 import { Controller } from './Controller';
 const { ccclass, property } = _decorator;
 
@@ -57,8 +57,6 @@ export enum Tag {
 @ccclass('EquipmentModel')
 export class EquipmentModel extends Component {
 
-    // static ON_STATE_CHANGE = "ON_STATE_CHANGE";
-    // static ON_VISIBLE_CHANGE = "ON_VISIBLE_CHANGE";
     static ON_CHANGE = "ON_CHANGE";
 
     @property(CCInteger)
@@ -88,9 +86,6 @@ export class EquipmentModel extends Component {
     @property({ type: Enum(EquipmentType) })
     type: EquipmentType = EquipmentType.AIR;
 
-    @property(Mesh)
-    meshs: Mesh[] = [];
-
     @property({ type: Enum(Tag) })
     tags: Tag[] = [];
 
@@ -108,14 +103,6 @@ export class EquipmentModel extends Component {
         pm: 10
     }
 
-    // private alarmable = [
-    //     EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.CCTV, EquipmentType.ELECTRIC
-    // ];
-
-    // private electable = [
-    //     EquipmentType.AIRCONDITION, EquipmentType.FIRE, EquipmentType.SECURITY, EquipmentType.EARTHQUAKE, EquipmentType.ELECTRIC
-    // ];
-
     protected showOnScreen = true;
 
     private formatString(template: string, ...args: any[]): string {
@@ -125,6 +112,7 @@ export class EquipmentModel extends Component {
     }
 
     protected onLoad(): void {
+
         const modelData = this.node.name.split("_");
         const belong = modelData[1];
         const floor = modelData[2];
@@ -216,29 +204,11 @@ export class EquipmentModel extends Component {
             case "Other": this.type = EquipmentType.OTHER; break;
             default: error("should not be here!", this.node.name, type);
         }
-
-        if(this.code == "10001"){
-            console.log(this.type);
-            console.log(this.floor);
-        }
-
-        // if(this.type === EquipmentType.AIRCONDITION){
-        //     console.log(this.code);
-        //     console.log(this.floor);
-        // }
     }
 
     start() {
 
     }
-
-    // isAlarmable() {
-    //     return this.alarmable.indexOf(this.type) >= 0;
-    // }
-
-    // isElectable() {
-    //     return this.electable.indexOf(this.type) >= 0;
-    // }
 
     setShow(show: boolean) {
         this.showOnScreen = show;
@@ -301,10 +271,6 @@ export class EquipmentModel extends Component {
             this.node.emit(EquipmentModel.ON_CHANGE, this);
         }
     }
-
-    // isAlarm() {
-    //     return this.state == EquipmentState.ALARM1 || this.state == EquipmentState.ALARM2 || this.state == EquipmentState.ALARM3 || this.state == EquipmentState.ALARM4;
-    // }
 
     update(deltaTime: number) {
 
