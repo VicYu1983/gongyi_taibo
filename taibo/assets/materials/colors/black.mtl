@@ -76,7 +76,8 @@
       "emissiveScale": 0,
       "shininessExponent": 25,
       "specularFactor": 0.25,
-      "transparencyFactor": 0
+      "transparencyFactor": 0,
+      "metallic": 0.673
     },
     {},
     {},

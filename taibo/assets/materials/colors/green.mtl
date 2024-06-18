@@ -61,8 +61,8 @@
     {
       "mainColor": {
         "__type__": "cc.Color",
-        "r": 44,
-        "g": 94,
+        "r": 33,
+        "g": 70,
         "b": 0,
         "a": 255
       },
@@ -76,7 +76,8 @@
       "emissiveScale": 0,
       "shininessExponent": 25,
       "specularFactor": 0.25,
-      "transparencyFactor": 0
+      "transparencyFactor": 0,
+      "metallic": 0.471
     },
     {},
     {},
