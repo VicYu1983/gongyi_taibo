@@ -1,6 +1,6 @@
 {
   "__type__": "cc.Material",
-  "_name": "yellow",
+  "_name": "",
   "_objFlags": 0,
   "__editorExtras__": {},
   "_native": "",
@@ -11,19 +11,50 @@
   "_techIdx": 0,
   "_defines": [
     {
+      "USE_INSTANCING": true,
       "DCC_APP_NAME": 2,
       "HAS_EXPORTED_METALLIC": true
-    }
+    },
+    {},
+    {},
+    {}
   ],
   "_states": [
     {
       "rasterizerState": {},
+      "depthStencilState": {},
       "blendState": {
         "targets": [
           {}
         ]
-      },
-      "depthStencilState": {}
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
     }
   ],
   "_props": [
@@ -35,8 +66,6 @@
         "b": 0,
         "a": 255
       },
-      "shininessExponent": 25,
-      "emissiveScale": 0,
       "emissive": {
         "__type__": "cc.Color",
         "r": 255,
@@ -44,9 +73,13 @@
         "b": 255,
         "a": 255
       },
-      "metallic": 0,
+      "emissiveScale": 0,
+      "shininessExponent": 25,
       "specularFactor": 0.25,
       "transparencyFactor": 0
-    }
+    },
+    {},
+    {},
+    {}
   ]
 }

@@ -1,0 +1,83 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "7d94f71b-344f-452d-85e0-02130494671b",
+  "files": [],
+  "subMetas": {
+    "52a27": {
+      "importer": "gltf-mesh",
+      "uuid": "7d94f71b-344f-452d-85e0-02130494671b@52a27",
+      "displayName": "",
+      "id": "52a27",
+      "name": "waterPump.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 92
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4ac20": {
+      "importer": "gltf-scene",
+      "uuid": "7d94f71b-344f-452d-85e0-02130494671b@4ac20",
+      "displayName": "",
+      "id": "4ac20",
+      "name": "waterPump.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "7d94f71b-344f-452d-85e0-02130494671b@4ac20",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "7d94f71b-344f-452d-85e0-02130494671b@52a27"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "2f5cb6ac-910e-46c5-94f6-2d450d7475e2"
+      ],
+      "scenes": [
+        "7d94f71b-344f-452d-85e0-02130494671b@4ac20"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/materials/colors"
+  }
+}
