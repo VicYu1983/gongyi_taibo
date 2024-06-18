@@ -1,0 +1,87 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "907770d3-2eed-4ce1-898d-275c3da5ab1b",
+  "files": [],
+  "subMetas": {
+    "4be68": {
+      "importer": "gltf-mesh",
+      "uuid": "907770d3-2eed-4ce1-898d-275c3da5ab1b@4be68",
+      "displayName": "",
+      "id": "4be68",
+      "name": "fireBroadcast.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 62
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "067ca": {
+      "importer": "gltf-scene",
+      "uuid": "907770d3-2eed-4ce1-898d-275c3da5ab1b@067ca",
+      "displayName": "",
+      "id": "067ca",
+      "name": "fireBroadcast.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "907770d3-2eed-4ce1-898d-275c3da5ab1b@067ca",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "907770d3-2eed-4ce1-898d-275c3da5ab1b@4be68"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "2f5cb6ac-910e-46c5-94f6-2d450d7475e2",
+        "82c120c7-a4fd-4407-9279-0da09e4b5ed5",
+        "a142bca5-fffb-4fc6-9b66-716e80a8cbe8",
+        "6249c07a-7eda-4c04-add7-f312baf984f9",
+        "274f0a50-2d81-4886-9d78-ae90369ddfa4"
+      ],
+      "scenes": [
+        "907770d3-2eed-4ce1-898d-275c3da5ab1b@067ca"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/materials"
+  }
+}

@@ -68,7 +68,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Sphere",
+    "_name": "Mesh",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -127,7 +127,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "620b6bf3-0369-4560-837f-2a2c00b73c26",
+        "__uuid__": "d3c7820c-2a98-4429-8bc7-b8453bc9ac41",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -326,6 +326,12 @@
     "floor": 1,
     "state": 0,
     "type": 0,
+    "meshs": [
+      {
+        "__uuid__": "907770d3-2eed-4ce1-898d-275c3da5ab1b@4be68",
+        "__expectedType__": "cc.Mesh"
+      }
+    ],
     "tags": [],
     "_id": ""
   },
@@ -352,48 +358,6 @@
       "__id__": 3
     },
     "links": [],
-    "normalColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 224,
-      "b": 255,
-      "a": 255
-    },
-    "notActiveColor": {
-      "__type__": "cc.Color",
-      "r": 144,
-      "g": 144,
-      "b": 144,
-      "a": 255
-    },
-    "alarm1Color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 55,
-      "b": 55,
-      "a": 255
-    },
-    "alarm2Color": {
-      "__type__": "cc.Color",
-      "r": 245,
-      "g": 166,
-      "b": 47,
-      "a": 255
-    },
-    "alarm3Color": {
-      "__type__": "cc.Color",
-      "r": 70,
-      "g": 249,
-      "b": 88,
-      "a": 255
-    },
-    "alarm4Color": {
-      "__type__": "cc.Color",
-      "r": 22,
-      "g": 94,
-      "b": 255,
-      "a": 255
-    },
     "materials": [
       {
         "__uuid__": "279da4d9-59e4-4942-b79b-41b4bc86cb97",

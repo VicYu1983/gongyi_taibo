@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, CCString, Component, Enum, error, log, Node } from 'cc';
+import { _decorator, CCInteger, CCString, Component, Enum, error, log, Mesh, Node } from 'cc';
 import { Controller } from './Controller';
 const { ccclass, property } = _decorator;
 
@@ -68,10 +68,10 @@ export class EquipmentModel extends Component {
     code: string;
 
     @property(CCString)
-    CNCode:string;
+    CNCode: string;
 
     @property(CCString)
-    locationName:string;
+    locationName: string;
 
     @property(CCString)
     codePrefix: string = "{0}";
@@ -87,6 +87,9 @@ export class EquipmentModel extends Component {
 
     @property({ type: Enum(EquipmentType) })
     type: EquipmentType = EquipmentType.AIR;
+
+    @property(Mesh)
+    meshs: Mesh[] = [];
 
     @property({ type: Enum(Tag) })
     tags: Tag[] = [];
@@ -213,6 +216,16 @@ export class EquipmentModel extends Component {
             case "Other": this.type = EquipmentType.OTHER; break;
             default: error("should not be here!", this.node.name, type);
         }
+
+        if(this.code == "10001"){
+            console.log(this.type);
+            console.log(this.floor);
+        }
+
+        // if(this.type === EquipmentType.AIRCONDITION){
+        //     console.log(this.code);
+        //     console.log(this.floor);
+        // }
     }
 
     start() {
