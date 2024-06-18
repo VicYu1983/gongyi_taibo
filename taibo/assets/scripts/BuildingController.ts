@@ -33,6 +33,9 @@ export class BuildingController extends Component implements IEnviromentChanger 
     buildingFloorEnum: EquipmentFloor[] = [];
 
     @property(Node)
+    items: Node[] = [];
+
+    @property(Node)
     prefabEquipmentIcon: Node;
 
     @property(Node)
@@ -381,41 +384,6 @@ export class BuildingController extends Component implements IEnviromentChanger 
         return material.effectName == "../shaders/standard-dither";
     }
 
-    // private earthquakeMaterials = ["earthquake", "external-pillar", "1F_pillar"];
-    // private earthquakeMaterials = ["earthquake"];
-
-    private updateMaterialParams() {
-        // const earthquakes = this.earthquakeAlarms.map((quake, id, ary) => {
-        //     const p = quake.node.getWorldPosition();
-        //     return new Vec4(p.x, p.y, p.z, quake.power);
-        // });
-
-        this.buildingFloorMesh.forEach((mesh, fid, ary) => {
-            mesh.materials.forEach((material, id, matAry) => {
-
-                if (this.checkIsDither(material)) {
-
-                    let scaleBlend = 1.0;
-
-                    // 台博舘的屋頂很高，這個參數不能公用
-                    const isTaiboRoof = this.currentBelong == EquipmentBelong.TAIBO && fid == 4;
-                    if (isTaiboRoof) {
-                        scaleBlend = 3;
-                    } else {
-                        // const isEarthquake = this.earthquakeMaterials.indexOf(material["_parent"]._name) > -1;
-                        // if (isEarthquake) {
-                        //     scaleBlend = .1;
-                        // }
-                    }
-                    material.setProperty("blendValue", this.bulidingBlendValue * scaleBlend);
-                }
-                // if (this.checkIsEarthquake(material)) {
-                //     material.setProperty("earthquakePoints", earthquakes);
-                // }
-            });
-        });
-    }
-
     private updateEquipmentShow() {
         this.equipments.forEach((equipment, id, ary) => {
             const isBelong = equipment.getModel().belong === this.currentBelong;
@@ -512,17 +480,28 @@ export class BuildingController extends Component implements IEnviromentChanger 
 
     update(deltaTime: number) {
 
-        this.buildingFloorMesh.forEach((mesh, id, ary) => {
+        this.bulidingBlendValue += (this.bulidingTargetBlendValue - this.bulidingBlendValue) * deltaTime * this.speed;
+        this.buildingFloorMesh.forEach((mesh, fid, ary) => {
 
-            const current = this.buildingFloorCurrentOpacity[id];
-            const target = this.buildingFloorTargetOpacity[id];
+            const current = this.buildingFloorCurrentOpacity[fid];
+            const target = this.buildingFloorTargetOpacity[fid];
 
-            this.buildingFloorCurrentOpacity[id] = current + (target - current) * deltaTime * this.speed * 1.5;
+            this.buildingFloorCurrentOpacity[fid] = current + (target - current) * deltaTime * this.speed * 1.5;
 
             mesh.materials.forEach((material, id, ary) => {
                 if (this.checkIsDither(material)) {
                     material.setProperty("opacity", current);
                 }
+
+                // blending...
+                let scaleBlend = 1.0;
+
+                // 台博舘的屋頂很高，這個參數不能公用
+                const isTaiboRoof = this.currentBelong == EquipmentBelong.TAIBO && fid == 4;
+                if (isTaiboRoof) {
+                    scaleBlend = 3;
+                }
+                material.setProperty("blendValue", this.bulidingBlendValue * scaleBlend);
             });
 
             // 正在消失的目標。消失到盡頭時隱藏
@@ -531,8 +510,6 @@ export class BuildingController extends Component implements IEnviromentChanger 
             }
         });
 
-        this.bulidingBlendValue += (this.bulidingTargetBlendValue - this.bulidingBlendValue) * deltaTime * this.speed;
-        this.updateMaterialParams();
 
     }
 }

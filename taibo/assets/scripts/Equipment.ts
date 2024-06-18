@@ -26,7 +26,7 @@ export class Equipment extends Component {
 
     start() {
         this.onModelStateChange(this.getModel());
-        this.centerSphere.node.active = false;
+        // this.centerSphere.node.active = false;
     }
 
     onModelStateChange(data: EquipmentModel) {
