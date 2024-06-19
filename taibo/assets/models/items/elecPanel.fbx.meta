@@ -1,0 +1,97 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "db3b0d48-8682-44b3-a367-db5f1761ff94",
+  "files": [],
+  "subMetas": {
+    "af483": {
+      "importer": "gltf-mesh",
+      "uuid": "db3b0d48-8682-44b3-a367-db5f1761ff94@af483",
+      "displayName": "",
+      "id": "af483",
+      "name": "elecPanel.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 26
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "aad59": {
+      "importer": "gltf-scene",
+      "uuid": "db3b0d48-8682-44b3-a367-db5f1761ff94@aad59",
+      "displayName": "",
+      "id": "aad59",
+      "name": "elecPanel.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "db3b0d48-8682-44b3-a367-db5f1761ff94@aad59",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "db3b0d48-8682-44b3-a367-db5f1761ff94@af483"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "82c120c7-a4fd-4407-9279-0da09e4b5ed5",
+        "781eab02-366e-44cf-b777-daff34ab2dca",
+        "2f5cb6ac-910e-46c5-94f6-2d450d7475e2",
+        "75699fb3-bfc6-429a-b5ee-115015dea64f"
+      ],
+      "scenes": [
+        "db3b0d48-8682-44b3-a367-db5f1761ff94@aad59"
+      ]
+    },
+    "meshOptimize": {
+      "enable": true,
+      "vertexCache": true,
+      "vertexFetch": true,
+      "overdraw": true
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": true,
+      "compress": true
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/materials/colors"
+  }
+}
