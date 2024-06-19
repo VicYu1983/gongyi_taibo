@@ -1,0 +1,97 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "2512e231-c6ad-4fa7-b7fb-22986ca52220",
+  "files": [],
+  "subMetas": {
+    "6fba2": {
+      "importer": "gltf-mesh",
+      "uuid": "2512e231-c6ad-4fa7-b7fb-22986ca52220@6fba2",
+      "displayName": "",
+      "id": "6fba2",
+      "name": "overserBox.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 138
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "abc82": {
+      "importer": "gltf-scene",
+      "uuid": "2512e231-c6ad-4fa7-b7fb-22986ca52220@abc82",
+      "displayName": "",
+      "id": "abc82",
+      "name": "observeBox.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "2512e231-c6ad-4fa7-b7fb-22986ca52220@abc82",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "2512e231-c6ad-4fa7-b7fb-22986ca52220@6fba2"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "2f5cb6ac-910e-46c5-94f6-2d450d7475e2",
+        "82c120c7-a4fd-4407-9279-0da09e4b5ed5",
+        "6249c07a-7eda-4c04-add7-f312baf984f9",
+        "781eab02-366e-44cf-b777-daff34ab2dca"
+      ],
+      "scenes": [
+        "2512e231-c6ad-4fa7-b7fb-22986ca52220@abc82"
+      ]
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/materials/colors",
+    "meshOptimize": {
+      "enable": true,
+      "vertexCache": true,
+      "vertexFetch": true,
+      "overdraw": true
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": true,
+      "compress": true
+    }
+  }
+}

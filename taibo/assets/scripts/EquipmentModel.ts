@@ -204,6 +204,8 @@ export class EquipmentModel extends Component {
             case "Other": this.type = EquipmentType.OTHER; break;
             default: error("should not be here!", this.node.name, type);
         }
+
+        this.locationName = this.locationName.replace(/_/gm, " ");
     }
 
     start() {

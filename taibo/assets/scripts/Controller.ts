@@ -381,6 +381,7 @@ export class Controller extends Component {
     changeToSecurityAlarm() {
         this.building.changeEquipmentType([EquipmentType.SECURITY_ALARM]);
         this.building.changeEquipmentState(this.onlyAlarmState);
+        this.building.toScifi();
     }
 
     changeToCCTV() {

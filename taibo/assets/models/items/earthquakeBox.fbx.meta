@@ -1,0 +1,95 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "0f94b458-a306-46a9-928a-fc12c939b554",
+  "files": [],
+  "subMetas": {
+    "8290a": {
+      "importer": "gltf-mesh",
+      "uuid": "0f94b458-a306-46a9-928a-fc12c939b554@8290a",
+      "displayName": "",
+      "id": "8290a",
+      "name": "earthquakeBox.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 36
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3c80a": {
+      "importer": "gltf-scene",
+      "uuid": "0f94b458-a306-46a9-928a-fc12c939b554@3c80a",
+      "displayName": "",
+      "id": "3c80a",
+      "name": "earthquakeBox.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "0f94b458-a306-46a9-928a-fc12c939b554@3c80a",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "0f94b458-a306-46a9-928a-fc12c939b554@8290a"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "781eab02-366e-44cf-b777-daff34ab2dca",
+        "bc0b646d-9ff7-43a3-8129-2d65e4a868b8"
+      ],
+      "scenes": [
+        "0f94b458-a306-46a9-928a-fc12c939b554@3c80a"
+      ]
+    },
+    "meshOptimize": {
+      "enable": true,
+      "vertexCache": true,
+      "vertexFetch": true,
+      "overdraw": true
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": true,
+      "compress": true
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/materials/colors"
+  }
+}

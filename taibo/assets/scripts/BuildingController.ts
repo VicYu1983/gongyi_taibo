@@ -380,7 +380,11 @@ export class BuildingController extends Component implements IEnviromentChanger 
             let isState = this.currentState.indexOf(equipment.getModel().state) >= 0;
 
             let isFloor = equipment.getModel().floor === this.currentFloor;
-            if (this.currentFloor === EquipmentFloor.ALL) {
+
+            // 如果是保全告警就顯示全部樓層
+            const isSecurityAlarm = this.currentType.indexOf(EquipmentType.SECURITY_ALARM) > -1;
+            const isAll = this.currentFloor === EquipmentFloor.ALL;
+            if (isSecurityAlarm || isAll) {
                 isFloor = true;
             }
 
@@ -452,7 +456,7 @@ export class BuildingController extends Component implements IEnviromentChanger 
         })
     }
     toScifi() {
-        this.bulidingTargetBlendValue = .5;
+        this.bulidingTargetBlendValue = 0.5;
         this.postProcess.targetBloom = 1;
         this.floor.targetFloorEmissive = 1;
         this.particle.play();
@@ -472,7 +476,14 @@ export class BuildingController extends Component implements IEnviromentChanger 
         this.buildingFloorMesh.forEach((mesh, fid, ary) => {
 
             const current = this.buildingFloorCurrentOpacity[fid];
-            const target = this.buildingFloorTargetOpacity[fid];
+            let target = this.buildingFloorTargetOpacity[fid];
+
+            // 如果是保全的alarm，因爲要顯示全部樓層，所以透明度調高
+            const isSecurityAlarm = this.currentType.indexOf(EquipmentType.SECURITY_ALARM) > -1;
+            if (isSecurityAlarm) {
+                mesh.node.active = true;
+                target = 0.3;
+            }
 
             this.buildingFloorCurrentOpacity[fid] = current + (target - current) * deltaTime * this.speed * 1.5;
 
