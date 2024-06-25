@@ -1,0 +1,96 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "2c718b84-58b1-4979-9820-5427fb64ff2f",
+  "files": [],
+  "subMetas": {
+    "d414e": {
+      "importer": "gltf-mesh",
+      "uuid": "2c718b84-58b1-4979-9820-5427fb64ff2f@d414e",
+      "displayName": "",
+      "id": "d414e",
+      "name": "elecPlate.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 20
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a8da4": {
+      "importer": "gltf-scene",
+      "uuid": "2c718b84-58b1-4979-9820-5427fb64ff2f@a8da4",
+      "displayName": "",
+      "id": "a8da4",
+      "name": "elecPlate.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "2c718b84-58b1-4979-9820-5427fb64ff2f@a8da4",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "2c718b84-58b1-4979-9820-5427fb64ff2f@d414e"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "82c120c7-a4fd-4407-9279-0da09e4b5ed5",
+        "781eab02-366e-44cf-b777-daff34ab2dca",
+        "6249c07a-7eda-4c04-add7-f312baf984f9"
+      ],
+      "scenes": [
+        "2c718b84-58b1-4979-9820-5427fb64ff2f@a8da4"
+      ]
+    },
+    "meshOptimize": {
+      "enable": true,
+      "vertexCache": true,
+      "vertexFetch": true,
+      "overdraw": true
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": true,
+      "compress": true
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/materials/colors"
+  }
+}

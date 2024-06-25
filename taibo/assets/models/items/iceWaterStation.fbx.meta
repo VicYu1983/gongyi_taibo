@@ -1,0 +1,97 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "7c935d24-78d4-471a-8f6f-6f9447e49c24",
+  "files": [],
+  "subMetas": {
+    "8b33b": {
+      "importer": "gltf-mesh",
+      "uuid": "7c935d24-78d4-471a-8f6f-6f9447e49c24@8b33b",
+      "displayName": "",
+      "id": "8b33b",
+      "name": "iceWaterStation.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 142
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a4586": {
+      "importer": "gltf-scene",
+      "uuid": "7c935d24-78d4-471a-8f6f-6f9447e49c24@a4586",
+      "displayName": "",
+      "id": "a4586",
+      "name": "iceWaterStation.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "7c935d24-78d4-471a-8f6f-6f9447e49c24@a4586",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "7c935d24-78d4-471a-8f6f-6f9447e49c24@8b33b"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "781eab02-366e-44cf-b777-daff34ab2dca",
+        "2f5cb6ac-910e-46c5-94f6-2d450d7475e2",
+        "1a8d6b41-99d9-4cc7-9e39-b34bb0dd1452",
+        "82c120c7-a4fd-4407-9279-0da09e4b5ed5"
+      ],
+      "scenes": [
+        "7c935d24-78d4-471a-8f6f-6f9447e49c24@a4586"
+      ]
+    },
+    "meshOptimize": {
+      "enable": true,
+      "vertexCache": true,
+      "vertexFetch": true,
+      "overdraw": true
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": true,
+      "compress": true
+    },
+    "dumpMaterials": true,
+    "materialDumpDir": "db://assets/materials/colors"
+  }
+}
