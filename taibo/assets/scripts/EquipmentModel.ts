@@ -113,6 +113,11 @@ export class EquipmentModel extends Component {
 
     protected onLoad(): void {
 
+
+        if (this.locationName == null) {
+            console.log("請補上地點資料", this.node.name);
+        }
+
         const modelData = this.node.name.split("_");
         const belong = modelData[1];
         const floor = modelData[2];
@@ -205,7 +210,11 @@ export class EquipmentModel extends Component {
             default: error("should not be here!", this.node.name, type);
         }
 
-        this.locationName = this.locationName.replace(/_/gm, " ");
+        // 把地點中的所有[_]換成[ ]，統一格式
+        if (this.locationName != null) {
+            this.locationName = this.locationName.replace(/_/gm, " ");
+        }
+
     }
 
     start() {
