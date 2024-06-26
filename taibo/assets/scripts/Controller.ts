@@ -330,6 +330,7 @@ export class Controller extends Component {
     changeToALLAlarm() {
         this.building.changeEquipmentType([EquipmentType.AIR, EquipmentType.AIRCONDITION, EquipmentType.CCTV, EquipmentType.ELECTRIC, EquipmentType.ENVIROMENT, EquipmentType.FIRE, EquipmentType.SECURITY_ALARM, EquipmentType.WEB]);
         this.building.changeEquipmentState(this.onlyAlarmState);
+        this.onScifiClick();
     }
 
     changeToAir() {
@@ -381,7 +382,7 @@ export class Controller extends Component {
     changeToSecurityAlarm() {
         this.building.changeEquipmentType([EquipmentType.SECURITY_ALARM]);
         this.building.changeEquipmentState(this.onlyAlarmState);
-        this.building.toScifi();
+        this.onScifiClick();
     }
 
     changeToCCTV() {
