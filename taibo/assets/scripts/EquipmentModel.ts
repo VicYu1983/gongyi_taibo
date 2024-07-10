@@ -114,7 +114,7 @@ export class EquipmentModel extends Component {
     protected onLoad(): void {
 
 
-        if (this.locationName == null) {
+        if (this.locationName == null && this.node.name.indexOf("Grp") == -1) {
             console.log("請補上地點資料", this.node.name);
         }
 

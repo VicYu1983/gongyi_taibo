@@ -1,4 +1,4 @@
-import { _decorator, animation, Animation, Button, Camera, Color, Component, Label, log, Node, NodeEventType, Size, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
+import { _decorator, animation, Animation, Button, Camera, Color, Component, Label, log, Node, NodeEventType, Quat, Size, Sprite, SpriteFrame, UITransform, Vec3 } from 'cc';
 import { EquipmentModel, EquipmentState, EquipmentType } from './EquipmentModel';
 import { Navigation } from './Navigation';
 import { Orbit } from './Orbit';
@@ -121,14 +121,36 @@ export class EquipmentIcon extends Component {
     //     this.node.off(NodeEventType.MOUSE_LEAVE, this.onBtnRelease, this);
     // }
 
+    private cameraForward = new Vec3();
+
+    private checkBehindCamera() {
+        const dirFromCamera = this.model.node.getPosition().subtract(this.navigation.node.getPosition()).normalize();
+
+        this.cameraForward.x = this.navigation.node.getWorldMatrix().m08;
+        this.cameraForward.y = this.navigation.node.getWorldMatrix().m09;
+        this.cameraForward.z = this.navigation.node.getWorldMatrix().m10;
+        this.cameraForward.multiplyScalar(-1);
+
+        return dirFromCamera.clone().dot(this.cameraForward) > 0;
+    }
+
     onModelChange() {
 
+
+        // 某些情況下只會顯示點點，不顯示icon
         if (this.model.getOnlyDot()) {
             this.node.active = false;
             return;
         }
 
-        const show = this.model.getShow() && !this.model.getGroupMode();
+        // 以下是顯示icon的流程
+
+        let show = this.model.getShow() && !this.model.getGroupMode();
+
+        const sameDir = this.checkBehindCamera();
+        if (!sameDir) {
+            show = false;
+        }
 
         // 播放出現動畫
         if (!this.node.active && show) {

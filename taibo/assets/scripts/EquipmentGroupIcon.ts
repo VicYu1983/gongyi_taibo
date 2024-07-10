@@ -1,12 +1,16 @@
-import { _decorator, Component, Animation, Label, log, Node, NodeEventType } from 'cc';
+import { _decorator, Component, Animation, Label, log, Node, NodeEventType, Vec3 } from 'cc';
 import { EquipmentGroupModel } from './EquipmentGroupModel';
 import { EquipmentModel } from './EquipmentModel';
+import { Orbit } from './Orbit';
 const { ccclass, property } = _decorator;
 
 @ccclass('EquipmentGroupIcon')
 export class EquipmentGroupIcon extends Component {
 
     static ON_CLICK = "ON_CLICK";
+
+    @property(Orbit)
+    navigation: Orbit;
 
     @property(EquipmentGroupModel)
     model: EquipmentGroupModel;
@@ -27,6 +31,19 @@ export class EquipmentGroupIcon extends Component {
         this.node.emit(EquipmentGroupIcon.ON_CLICK, this.model);
     }
 
+    private cameraForward = new Vec3();
+
+    private checkBehindCamera() {
+        const dirFromCamera = this.model.node.getPosition().subtract(this.navigation.node.getPosition()).normalize();
+
+        this.cameraForward.x = this.navigation.node.getWorldMatrix().m08;
+        this.cameraForward.y = this.navigation.node.getWorldMatrix().m09;
+        this.cameraForward.z = this.navigation.node.getWorldMatrix().m10;
+        this.cameraForward.multiplyScalar(-1);
+
+        return dirFromCamera.clone().dot(this.cameraForward) > 0;
+    }
+
     onModelChange(model: EquipmentGroupModel) {
         
         if (model.getOnlyDot()) {
@@ -34,7 +51,12 @@ export class EquipmentGroupIcon extends Component {
             return;
         }
 
-        const show = this.model.getShow() && this.model.getGroupMode();
+        let show = this.model.getShow() && this.model.getGroupMode();
+
+        const sameDir = this.checkBehindCamera();
+        if (!sameDir) {
+            show = false;
+        }
 
         // 播放出現動畫
         if (!this.node.active && show) {
